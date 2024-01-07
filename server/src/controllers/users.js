@@ -4,6 +4,7 @@ const router = require("express").Router();
 
 // Internal modules
 const { User } = require("../models");
+const { userFinder } = require("../utils/middleware/");
 
 router.get("/", async (_req, res) => {
     const users = await User.findAll();
@@ -20,6 +21,10 @@ router.post("/", async (req, res) => {
         password: passwordHash,
     });
     res.status(201).json(savedUser);
+});
+
+router.get("/:id", userFinder, async (req, res) => {
+    res.json(req.user);
 });
 
 module.exports = router;
