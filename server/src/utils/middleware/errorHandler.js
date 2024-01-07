@@ -6,6 +6,8 @@ const errorHandler = (error, _req, res, _next) => {
         return res.status(400).json({ error: "Malformatted id" });
     } else if (error.name === "SequelizeConnectionError") {
         return res.status(400).json({ error: "Database Connection Error" });
+    } else if (error.name === "SequelizeUniqueConstraintError") {
+        return res.status(400).json({ error: "Duplicate Entry" });
     } else if (error.name === "SequelizeValidationError") {
         return res.status(400).json({ error: error.message });
     } else {

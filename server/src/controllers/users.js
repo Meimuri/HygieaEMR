@@ -4,14 +4,14 @@ const router = require("express").Router();
 
 // Internal modules
 const { User } = require("../models");
-const { userFinder } = require("../utils/middleware/");
+const { userFinder, validateUser } = require("../utils/middleware/");
 
 router.get("/", async (_req, res) => {
     const users = await User.findAll();
     res.json(users);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validateUser, async (req, res) => {
     const { username, password } = req.body;
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
