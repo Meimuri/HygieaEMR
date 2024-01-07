@@ -1,7 +1,3 @@
-const unknownEndpoint = (_req, res, _next) => {
-    return res.status(404).send({ error: "Unknown endpoint" });
-};
-
 const errorHandler = (error, _req, res, _next) => {
     console.error(error.message);
     if (error.name === "JsonWebTokenError") {
@@ -19,7 +15,4 @@ const errorHandler = (error, _req, res, _next) => {
     }
 };
 
-module.exports = {
-    unknownEndpoint,
-    errorHandler,
-};
+module.exports = errorHandler;
