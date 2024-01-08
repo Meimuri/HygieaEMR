@@ -5,12 +5,14 @@ const { Umzug, SequelizeStorage } = require("umzug");
 // Internal modules
 const { DATABASE_URL } = require("./config");
 
-const sequelize = new Sequelize(DATABASE_URL);
+const sequelize = new Sequelize(DATABASE_URL, {
+    logging: process.env.NODE_ENV !== "test" ? console.log : false,
+});
 
 const runMigrations = async () => {
     const migrator = new Umzug({
         migrations: {
-            glob: "src/migrations/*.ts",
+            glob: "src/migrations/*.js",
         },
         storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
         context: sequelize.getQueryInterface(),
