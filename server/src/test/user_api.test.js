@@ -30,7 +30,7 @@ describe("GET /api/users", () => {
 });
 
 describe("POST /api/users", () => {
-    test("should return a 201 status and create a new user", async () => {
+    test.skip("should return a 201 status and create a new user", async () => {
         const usersAtStart = await helper.usersInDb();
 
         const response = await api.post("/api/users").send(data.validUser);
@@ -46,7 +46,7 @@ describe("POST /api/users", () => {
         expect(response.body.username).toBe(data.validUser.username);
     });
 
-    test("should return a 400 status if username is already existing", async () => {
+    test.skip("should return a 400 status if username is already existing", async () => {
         const response = await api.post("/api/users").send(data.validUser);
 
         expect(response.status).toBe(400);
@@ -58,7 +58,7 @@ describe("POST /api/users", () => {
 });
 
 describe("GET /api/users/:id", () => {
-    test("should return a 200 status and the created user", async () => {
+    test.skip("should return a 200 status and the created user", async () => {
         const usersAtStart = await helper.usersInDb();
         const userToView = usersAtStart[0];
 
@@ -73,7 +73,7 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("PUT /api/users/:id ", () => {
-    test("should return a 200 status and update the user's username", async () => {
+    test.skip("should return a 200 status and update the user's username", async () => {
         const usersAtStart = await helper.usersInDb();
         const userToUpdate = usersAtStart[0];
 

@@ -18,7 +18,7 @@ module.exports = async () => {
     });
 
     // Remove previous migrations
-    await umzug.down();
+    await umzug.down({ to: 0 });
 
     // Migrate up
     const migrations = await umzug.up();

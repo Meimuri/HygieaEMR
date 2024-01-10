@@ -22,6 +22,10 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        userType: {
+            type: DataTypes.ENUM("Doctor", "Secretary"),
+            allowNull: false,
+        },
     },
     {
         sequelize,

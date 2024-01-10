@@ -1,7 +1,16 @@
 // Internal modules
-const { createUserSchema, updateUserSchema } = require("./user");
+const {
+    createDoctorUserSchema,
+    updateDoctorUserSchema,
+} = require("./doctorUser");
+const {
+    createSecretaryUserSchema,
+    updateSecretaryUserSchema,
+} = require("./secretaryUser");
 
 module.exports = {
-    createUserSchema,
-    updateUserSchema,
+    createDoctorUserSchema,
+    createSecretaryUserSchema,
+    updateDoctorUserSchema,
+    updateSecretaryUserSchema,
 };

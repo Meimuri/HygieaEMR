@@ -17,6 +17,10 @@ module.exports = {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            user_type: {
+                type: DataTypes.ENUM("Doctor", "Secretary"),
+                allowNull: false,
+            },
             created_at: {
                 type: DataTypes.DATE,
                 allowNull: false,
