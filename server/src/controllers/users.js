@@ -137,32 +137,6 @@ router.put("/:id", validateUpdateUser, async (req, res) => {
     }
 });
 
-// router.put("/:id", async (req, res) => {
-//     const { username } = req.body;
-
-//     if (!username || typeof username !== "string") {
-//         return res
-//             .status(400)
-//             .json({ error: "Username is required and must be a string" });
-//     }
-
-//     const [rowsUpdate, [updatedUser]] = await User.update(
-//         { username: req.body.username },
-//         {
-//             where: {
-//                 id: req.params.id,
-//             },
-//             returning: true,
-//         }
-//     );
-
-//     if (rowsUpdate > 0) {
-//         return res.json(updatedUser);
-//     } else {
-//         return res.status(404).json({ error: "User not found" });
-//     }
-// });
-
 router.delete("/:id", async (req, res) => {
     const user = await User.findByPk(req.params.id);
 
