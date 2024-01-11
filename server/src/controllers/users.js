@@ -5,7 +5,11 @@ const router = require("express").Router();
 // Internal modules
 const { sequelize } = require("../utils/db");
 const { User, Secretary, Doctor } = require("../models");
-const { userFinder, validateUser } = require("../utils/middleware/");
+const {
+    userFinder,
+    validateCreateUser,
+    validateUpdateUser,
+} = require("../utils/middleware/");
 
 router.get("/", async (_req, res) => {
     const users = await User.findAll({
@@ -41,7 +45,7 @@ router.get("/", async (_req, res) => {
     res.json(usersWithDetails);
 });
 
-router.post("/", validateUser, async (req, res) => {
+router.post("/", validateCreateUser, async (req, res) => {
     const { username, password, userType, ...details } = req.body;
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
