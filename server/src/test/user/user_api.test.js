@@ -30,12 +30,10 @@ describe("GET /api/users", () => {
 });
 
 describe("POST /api/users", () => {
-    test("should return a 201 status and create a new secretary type user", async () => {
+    const testUserCreation = async (userData) => {
         const usersAtStart = await helper.usersInDb();
 
-        const response = await api
-            .post("/api/users")
-            .send(data.validSecretaryUser);
+        const response = await api.post("/api/users").send(userData);
 
         expect(response.status).toBe(201);
         expect(response.headers["content-type"]).toEqual(
@@ -45,25 +43,15 @@ describe("POST /api/users", () => {
         const usersAtEnd = await helper.usersInDb();
 
         expect(usersAtEnd).toHaveLength(usersAtStart.length + 1);
-        expect(response.body.username).toBe(data.validSecretaryUser.username);
+        expect(response.body.username).toBe(userData.username);
+    };
+
+    test("should return a 201 status and create a new secretary type user", async () => {
+        await testUserCreation(data.validSecretaryUser);
     });
 
     test("should return a 201 status and create a new doctor type user", async () => {
-        const usersAtStart = await helper.usersInDb();
-
-        const response = await api
-            .post("/api/users")
-            .send(data.validDoctorUser);
-
-        expect(response.status).toBe(201);
-        expect(response.headers["content-type"]).toEqual(
-            expect.stringContaining("json")
-        );
-
-        const usersAtEnd = await helper.usersInDb();
-
-        expect(usersAtEnd).toHaveLength(usersAtStart.length + 1);
-        expect(response.body.username).toBe(data.validDoctorUser.username);
+        await testUserCreation(data.validDoctorUser);
     });
 
     test("should return a 400 status if username is already existing", async () => {
@@ -95,37 +83,26 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("PUT /api/users/:id ", () => {
-    test("should return a 200 status and update the secretary's data", async () => {
+    const testUserUpdate = async (userIndex, userData) => {
         const usersAtStart = await helper.usersInDb();
-        const userToUpdate = usersAtStart[0];
+        const userToUpdate = usersAtStart[userIndex];
 
         const response = await api
             .put(`/api/users/${userToUpdate.id}`)
-            .send(data.validSecretaryUserUpdate);
+            .send(userData);
 
         expect(response.status).toBe(200);
         expect(response.headers["content-type"]).toEqual(
             expect.stringContaining("json")
         );
-        expect(response.body.firstName).toBe(
-            data.validSecretaryUserUpdate.firstName
-        );
+        expect(response.body.firstName).toBe(userData.firstName);
+    };
+
+    test("should return a 200 status and update the secretary's data", async () => {
+        await testUserUpdate(0, data.validSecretaryUserUpdate);
     });
 
     test("should return a 200 status and update the doctor's data", async () => {
-        const usersAtStart = await helper.usersInDb();
-        const userToUpdate = usersAtStart[1];
-
-        const response = await api
-            .put(`/api/users/${userToUpdate.id}`)
-            .send(data.validDoctorUserUpdate);
-
-        expect(response.status).toBe(200);
-        expect(response.headers["content-type"]).toEqual(
-            expect.stringContaining("json")
-        );
-        expect(response.body.firstName).toBe(
-            data.validDoctorUserUpdate.firstName
-        );
+        await testUserUpdate(1, data.validDoctorUserUpdate);
     });
 });
