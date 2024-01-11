@@ -32,14 +32,6 @@ const createSecretaryUserSchema = Joi.object({
 
 // Schema for updating a user
 const updateSecretaryUserSchema = Joi.object({
-    username: Joi.string().trim().optional().messages({
-        "any.required": "Username is required",
-        "string.base": "Username must be a string",
-    }),
-    password: Joi.string().trim().min(3).optional().messages({
-        "string.base": "Password must be a string",
-        "string.min": "Password should have 3 or more characters",
-    }),
     userType: Joi.string()
         .trim()
         .valid("Doctor", "Secretary")
