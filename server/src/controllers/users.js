@@ -46,7 +46,7 @@ router.get("/", async (_req, res) => {
 });
 
 router.post("/", validateCreateUser, async (req, res) => {
-    const { username, password, userType, ...details } = req.body;
+    const { username, password, userType, ...otherDetails } = req.body;
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
@@ -69,15 +69,32 @@ router.post("/", validateCreateUser, async (req, res) => {
             { transaction: t }
         );
 
-        const modelInstance = await Model.create(
+        const details = await Model.create(
             {
-                ...details,
+                ...otherDetails,
                 userId: user.id,
             },
             { transaction: t }
         );
 
-        return { user, modelInstance };
+        return {
+            id: user.id,
+            username: user.username,
+            userType: user.userType,
+            details: {
+                id: details.id,
+                firstName: details.firstName,
+                lastName: details.lastName,
+                ...(userType === "Doctor" && {
+                    middleName: details.middleName,
+                    gender: details.gender,
+                    specialization: details.specialization,
+                    licenseNo: details.licenseNo,
+                    ptrNo: details.ptrNo,
+                    s2No: details.s2No,
+                }),
+            },
+        };
     });
 
     res.status(201).json(result);
