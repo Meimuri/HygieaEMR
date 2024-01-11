@@ -35,7 +35,7 @@ const updateSecretaryUserSchema = Joi.object({
     userType: Joi.string()
         .trim()
         .valid("Doctor", "Secretary")
-        .optional()
+        .required()
         .messages({
             "any.only": "User type must be either Doctor or Secretary",
         }),

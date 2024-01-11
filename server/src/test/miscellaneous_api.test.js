@@ -16,7 +16,7 @@ describe("Accessing unknown endpoints", () => {
 
 describe("Accessing endpoints with malformatted id", () => {
     test("should return a 400 error with 'Malformatted id' message", async () => {
-        const response = await api.get("/api/users/21131a");
+        const response = await api.get("/api/users/12 123asd");
 
         expect(response.status).toBe(400);
         expect(response.headers["content-type"]).toEqual(

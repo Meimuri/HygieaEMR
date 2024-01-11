@@ -59,11 +59,11 @@ const updateDoctorUserSchema = Joi.object({
     userType: Joi.string()
         .trim()
         .valid("Doctor", "Secretary")
-        .optional()
+        .required()
         .messages({
             "any.only": "User type must be either Doctor or Secretary",
         }),
-    firstName: Joi.string().trim().min(3).optional().messages({
+    firstName: Joi.string().trim().min(3).required().messages({
         "any.required": "First Name is required",
         "string.base": "First Name must be a string",
         "string.min": "First Name should have 3 or more characters",

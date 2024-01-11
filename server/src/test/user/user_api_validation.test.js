@@ -1,9 +1,12 @@
-const { createUserSchema, updateUserSchema } = require("../../utils/schema");
+const {
+    createSecretaryUserSchema,
+    createDoctorUserSchema,
+    updateSecretaryUserSchema,
+    updateDoctorUserSchema,
+} = require("../../utils/schema");
 const data = require("../../utils/test/data");
 
-function generateTests(schema, validUser, invalidUsers, missingFields) {
-    // Add "test.concurrent.each(Array(100).fill(null))" best test to run it multiple times
-
+function generateTest(schema, validUser, invalidUsers, missingFields) {
     test("should validate a correct user", () => {
         const result = schema.validate(validUser);
         expect(result.error).toBeUndefined();
@@ -11,7 +14,10 @@ function generateTests(schema, validUser, invalidUsers, missingFields) {
 
     Object.keys(invalidUsers).forEach((field) => {
         test(`should invalidate a user with an invalid ${field}`, () => {
-            const user = { ...validUser, ...invalidUsers[field] };
+            const user = {
+                ...validUser,
+                ...invalidUsers[field],
+            };
             const result = schema.validate(user);
             expect(result.error).toBeDefined();
         });
@@ -27,26 +33,55 @@ function generateTests(schema, validUser, invalidUsers, missingFields) {
     });
 }
 
-describe("User Schema", () => {
-    describe("Create User Schema", () => {
-        const missingFields = ["username", "password"]; // required fields
+const generateSchemaTests = (
+    schemaName,
+    createSchema,
+    updateSchema,
+    validUser,
+    validUserUpdate,
+    invalidUsers,
+    createMissingFields,
+    updateMissingFields
+) => {
+    describe(`${schemaName} User Schema`, () => {
+        describe(`Create ${schemaName} User Schema`, () => {
+            generateTest(
+                createSchema,
+                validUser,
+                invalidUsers,
+                createMissingFields
+            );
+        });
 
-        generateTests(
-            createUserSchema,
-            data.validUser,
-            data.invalidUsers,
-            missingFields
-        );
+        describe(`Update ${schemaName} User Schema`, () => {
+            generateTest(
+                updateSchema,
+                validUserUpdate,
+                invalidUsers,
+                updateMissingFields
+            );
+        });
     });
+};
 
-    describe("Update User Schema", () => {
-        const missingFields = ["username"]; // required fields
+generateSchemaTests(
+    "Secretary",
+    createSecretaryUserSchema,
+    updateSecretaryUserSchema,
+    data.validSecretaryUser,
+    data.validSecretaryUserUpdate,
+    data.invalidSecretaryUsers,
+    ["username", "password", "userType"],
+    ["userType"]
+);
 
-        generateTests(
-            updateUserSchema,
-            data.validUser,
-            data.invalidUsers,
-            missingFields
-        );
-    });
-});
+generateSchemaTests(
+    "Doctor",
+    createDoctorUserSchema,
+    updateDoctorUserSchema,
+    data.validDoctorUser,
+    data.validDoctorUserUpdate,
+    data.invalidDoctorUsers,
+    ["username", "password", "userType", "gender", "firstName"],
+    ["userType", "gender", "firstName"]
+);

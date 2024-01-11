@@ -1,13 +1,19 @@
 const {
-    validUser,
-    validUsername,
-    invalidUsers,
+    validSecretaryUser,
+    validDoctorUser,
+    validSecretaryUserUpdate,
+    validDoctorUserUpdate,
+    invalidSecretaryUsers,
+    invalidDoctorUsers,
     nonExistentUserId,
 } = require("./user/user_data");
 
 module.exports = {
-    validUser,
-    validUsername,
-    invalidUsers,
+    validSecretaryUser,
+    validDoctorUser,
+    validSecretaryUserUpdate,
+    validDoctorUserUpdate,
+    invalidSecretaryUsers,
+    invalidDoctorUsers,
     nonExistentUserId,
 };
