@@ -2,7 +2,7 @@
 const { Model, DataTypes } = require("sequelize");
 
 // Internal modules
-const { sequelize } = require("../utils/db");
+const { sequelize } = require("../../utils/db");
 
 class Doctor extends Model {}
 

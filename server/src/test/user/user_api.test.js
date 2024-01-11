@@ -1,8 +1,8 @@
 const supertest = require("supertest");
-const app = require("../index");
+const app = require("../../index");
 const api = supertest(app);
-const helper = require("../utils/test/user_helper");
-const data = require("../utils/test/data");
+const helper = require("../../utils/test/user_helper");
+const data = require("../../utils/test/data");
 
 describe("GET /api/users", () => {
     test("should return a 200 status and users as json", async () => {

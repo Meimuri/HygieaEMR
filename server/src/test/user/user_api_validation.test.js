@@ -1,5 +1,5 @@
-const { createUserSchema, updateUserSchema } = require("../utils/schema/");
-const data = require("../utils/test/data");
+const { createUserSchema, updateUserSchema } = require("../../utils/schema");
+const data = require("../../utils/test/data");
 
 function generateTests(schema, validUser, invalidUsers, missingFields) {
     // Add "test.concurrent.each(Array(100).fill(null))" best test to run it multiple times

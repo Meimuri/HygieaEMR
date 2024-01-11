@@ -2,7 +2,7 @@
 const {
     createSecretaryUserSchema,
     createDoctorUserSchema,
-} = require("../schema");
+} = require("../../schema");
 
 const validateUser = (req, res, next) => {
     let schema;
@@ -19,7 +19,7 @@ const validateUser = (req, res, next) => {
         return res.status(400).json({ error: error.details[0].message });
     }
 
-    req.body = value; // Update the request body with the sanitized data
+    req.body = value;
     next();
 };
 

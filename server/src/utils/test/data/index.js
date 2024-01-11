@@ -3,7 +3,7 @@ const {
     validUsername,
     invalidUsers,
     nonExistentUserId,
-} = require("./user_data");
+} = require("./user/user_data");
 
 module.exports = {
     validUser,

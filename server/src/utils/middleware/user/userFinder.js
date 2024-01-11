@@ -1,5 +1,5 @@
 // Internal modules
-const { User, Secretary, Doctor } = require("../../models/");
+const { User, Secretary, Doctor } = require("../../../models");
 
 const userFinder = async (req, res, next) => {
     const user = await User.findByPk(req.params.id, {

@@ -2,11 +2,11 @@
 const {
     createDoctorUserSchema,
     updateDoctorUserSchema,
-} = require("./doctorUser");
+} = require("./user/doctor");
 const {
     createSecretaryUserSchema,
     updateSecretaryUserSchema,
-} = require("./secretaryUser");
+} = require("./user/secretary");
 
 module.exports = {
     createDoctorUserSchema,
