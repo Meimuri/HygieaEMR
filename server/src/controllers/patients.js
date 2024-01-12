@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 // Internal modules
 const { sequelize } = require("../utils/db");
-const { Patient, PatientAddress } = require("../models");
+const { Patient, PatientAddress, PatientContactInfo } = require("../models");
 
 const {
     patientFinder,
@@ -21,14 +21,31 @@ router.get("/", async (_req, res) => {
                     exclude: ["createdAt", "updatedAt", "patientId"],
                 },
             },
+            {
+                model: PatientContactInfo,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "patientId"],
+                },
+            },
         ],
     });
     res.json(patients);
 });
 
 router.post("/", validateCreatePatient, async (req, res) => {
-    const { address, address2, city, province, zipCode, ...patientInfo } =
-        req.body;
+    const {
+        address,
+        address2,
+        city,
+        province,
+        zipCode,
+        homePhone,
+        workPhone,
+        mobilePhonePrimary,
+        mobilePhoneSecondary,
+        emailAddress,
+        ...patientInfo
+    } = req.body;
 
     const result = await sequelize.transaction(async (t) => {
         const patient = await Patient.create(patientInfo, { transaction: t });
@@ -52,6 +69,30 @@ router.post("/", validateCreatePatient, async (req, res) => {
             patientPlain.address = patientAddressPlain;
         }
 
+        if (
+            homePhone ||
+            workPhone ||
+            mobilePhonePrimary ||
+            mobilePhoneSecondary ||
+            emailAddress
+        ) {
+            const patientContactInfo = await PatientContactInfo.create(
+                {
+                    homePhone,
+                    workPhone,
+                    mobilePhonePrimary,
+                    mobilePhoneSecondary,
+                    emailAddress,
+                    patientId: patient.id,
+                },
+                { transaction: t }
+            );
+
+            const patientContactInfoPlain = patientContactInfo.toJSON();
+
+            patientPlain.contact = patientContactInfoPlain;
+        }
+
         return { patient: patientPlain };
     });
 
@@ -63,8 +104,19 @@ router.get("/:id", patientFinder, async (req, res) => {
 });
 
 router.put("/:id", validateUpdatePatient, async (req, res) => {
-    const { address, address2, city, province, zipCode, ...patientInfo } =
-        req.body;
+    const {
+        address,
+        address2,
+        city,
+        province,
+        zipCode,
+        homePhone,
+        workPhone,
+        mobilePhonePrimary,
+        mobilePhoneSecondary,
+        emailAddress,
+        ...patientInfo
+    } = req.body;
 
     const result = await sequelize.transaction(async (t) => {
         const [rowsUpdate, [updatedPatient]] = await Patient.update(
@@ -108,6 +160,39 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
                 const updatedPatientAddressPlain =
                     updatedPatientAddress.toJSON();
                 updatedPatientPlain.address = updatedPatientAddressPlain;
+            }
+        }
+
+        if (
+            homePhone ||
+            workPhone ||
+            mobilePhonePrimary ||
+            mobilePhoneSecondary ||
+            emailAddress
+        ) {
+            const [rowsUpdateContactInfo, [updatePatientContactInfo]] =
+                await PatientContactInfo.update(
+                    {
+                        homePhone,
+                        workPhone,
+                        mobilePhonePrimary,
+                        mobilePhoneSecondary,
+                        emailAddress,
+                        patientId: updatedPatient.id,
+                    },
+                    {
+                        where: {
+                            patientId: updatedPatient.id,
+                        },
+                        returning: true,
+                        transaction: t,
+                    }
+                );
+
+            if (rowsUpdateContactInfo > 0) {
+                const updatePatientContactInfoPlain =
+                    updatePatientContactInfo.toJSON();
+                updatedPatientPlain.contact = updatePatientContactInfoPlain;
             }
         }
 

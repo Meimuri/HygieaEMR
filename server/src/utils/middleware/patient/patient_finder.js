@@ -1,5 +1,9 @@
 // Internal modules
-const { Patient, PatientAddress } = require("../../../models");
+const {
+    Patient,
+    PatientAddress,
+    PatientContactInfo,
+} = require("../../../models");
 
 const patientFinder = async (req, res, next) => {
     // const patient = await Patient.findByPk(req.params.id);
@@ -9,6 +13,12 @@ const patientFinder = async (req, res, next) => {
         include: [
             {
                 model: PatientAddress,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "patientId"],
+                },
+            },
+            {
+                model: PatientContactInfo,
                 attributes: {
                     exclude: ["createdAt", "updatedAt", "patientId"],
                 },
