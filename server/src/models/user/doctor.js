@@ -17,7 +17,6 @@ Doctor.init(
         },
         lastName: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         gender: {
             type: DataTypes.ENUM("Male", "Female"),
@@ -25,19 +24,15 @@ Doctor.init(
         },
         specialization: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         licenseNo: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         ptrNo: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
         s2No: {
             type: DataTypes.STRING,
-            allowNull: false,
         },
     },
     {

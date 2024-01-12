@@ -52,7 +52,6 @@ module.exports = {
             },
             last_name: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             gender: {
                 type: DataTypes.ENUM("Male", "Female"),
@@ -60,19 +59,15 @@ module.exports = {
             },
             specialization: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             license_no: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             ptr_no: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             s2_no: {
                 type: DataTypes.STRING,
-                allowNull: false,
             },
             created_at: {
                 type: DataTypes.DATE,
