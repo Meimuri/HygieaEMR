@@ -7,7 +7,10 @@ const {
     createSecretaryUserSchema,
     updateSecretaryUserSchema,
 } = require("./user/secretary");
-const { createPatientSchema } = require("./patient/patient");
+const {
+    createPatientSchema,
+    updatePatientSchema,
+} = require("./patient/patient");
 
 module.exports = {
     createDoctorUserSchema,
@@ -15,4 +18,5 @@ module.exports = {
     updateDoctorUserSchema,
     updateSecretaryUserSchema,
     createPatientSchema,
+    updatePatientSchema,
 };

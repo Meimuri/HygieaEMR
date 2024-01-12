@@ -1,9 +1,9 @@
 // Internal modules
-const { createPatientSchema } = require("../../schema");
+const { createPatientSchema, updatePatientSchema } = require("../../schema");
 
 const schemas = {
     create: createPatientSchema,
-    // update: updatePatientSchema,
+    update: updatePatientSchema,
 };
 
 const validatePatient = (type) => (req, res, next) => {

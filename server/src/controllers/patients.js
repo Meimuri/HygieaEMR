@@ -25,4 +25,18 @@ router.get("/:id", patientFinder, async (req, res) => {
     res.json(req.patient);
 });
 
+router.put("/:id", validateUpdatePatient, async (req, res) => {
+    const [rowsUpdate, [updatedPatient]] = await Patient.update(req.body, {
+        where: {
+            id: req.params.id,
+        },
+        returning: true,
+    });
+    if (rowsUpdate > 0) {
+        return res.json(updatedPatient);
+    } else {
+        return res.status(404).json({ error: "Patient not found" });
+    }
+});
+
 module.exports = router;
