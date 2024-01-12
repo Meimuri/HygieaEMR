@@ -3,7 +3,12 @@ const router = require("express").Router();
 
 // Internal modules
 const { sequelize } = require("../utils/db");
-const { Patient, PatientAddress, PatientContactInfo } = require("../models");
+const {
+    Patient,
+    PatientAddress,
+    PatientContactInfo,
+    PatientEmergencyContact,
+} = require("../models");
 
 const {
     patientFinder,
@@ -27,6 +32,12 @@ router.get("/", async (_req, res) => {
                     exclude: ["createdAt", "updatedAt", "patientId"],
                 },
             },
+            {
+                model: PatientEmergencyContact,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "patientId"],
+                },
+            },
         ],
     });
     res.json(patients);
@@ -44,6 +55,11 @@ router.post("/", validateCreatePatient, async (req, res) => {
         mobilePhonePrimary,
         mobilePhoneSecondary,
         emailAddress,
+        emergencyContactFirstName,
+        emergencyContactLastName,
+        emergencyContactHomePhone,
+        emergencyContactMobilePrimary,
+        emergencyContactRelationship,
         ...patientInfo
     } = req.body;
 
@@ -93,6 +109,32 @@ router.post("/", validateCreatePatient, async (req, res) => {
             patientPlain.contact = patientContactInfoPlain;
         }
 
+        if (
+            emergencyContactFirstName ||
+            emergencyContactLastName ||
+            emergencyContactHomePhone ||
+            emergencyContactMobilePrimary ||
+            emergencyContactRelationship
+        ) {
+            const patientEmergencyContact =
+                await PatientEmergencyContact.create(
+                    {
+                        firstName: emergencyContactFirstName,
+                        lastName: emergencyContactLastName,
+                        homePhone: emergencyContactHomePhone,
+                        mobilePrimary: emergencyContactMobilePrimary,
+                        relationship: emergencyContactRelationship,
+                        patientId: patient.id,
+                    },
+                    { transaction: t }
+                );
+
+            const patientEmergencyContactPlain =
+                patientEmergencyContact.toJSON();
+
+            patientPlain.emergencyContact = patientEmergencyContactPlain;
+        }
+
         return { patient: patientPlain };
     });
 
@@ -115,6 +157,11 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
         mobilePhonePrimary,
         mobilePhoneSecondary,
         emailAddress,
+        emergencyContactFirstName,
+        emergencyContactLastName,
+        emergencyContactHomePhone,
+        emergencyContactMobilePrimary,
+        emergencyContactRelationship,
         ...patientInfo
     } = req.body;
 
@@ -193,6 +240,42 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
                 const updatePatientContactInfoPlain =
                     updatePatientContactInfo.toJSON();
                 updatedPatientPlain.contact = updatePatientContactInfoPlain;
+            }
+        }
+
+        if (
+            emergencyContactFirstName ||
+            emergencyContactLastName ||
+            emergencyContactHomePhone ||
+            emergencyContactMobilePrimary ||
+            emergencyContactRelationship
+        ) {
+            const [
+                rowsUpdateEmergencyContact,
+                [updatePatientEmergencyContact],
+            ] = await PatientEmergencyContact.update(
+                {
+                    firstName: emergencyContactFirstName,
+                    lastName: emergencyContactLastName,
+                    homePhone: emergencyContactHomePhone,
+                    mobilePrimary: emergencyContactMobilePrimary,
+                    relationship: emergencyContactRelationship,
+                    patientId: updatedPatient.id,
+                },
+                {
+                    where: {
+                        patientId: updatedPatient.id,
+                    },
+                    returning: true,
+                    transaction: t,
+                }
+            );
+
+            if (rowsUpdateEmergencyContact > 0) {
+                const updatePatientEmergencyContactPlain =
+                    updatePatientEmergencyContact.toJSON();
+                updatedPatientPlain.emergencyContact =
+                    updatePatientEmergencyContactPlain;
             }
         }
 

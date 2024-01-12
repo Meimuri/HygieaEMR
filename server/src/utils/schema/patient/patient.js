@@ -89,6 +89,21 @@ const createPatientSchema = Joi.object({
         "string.base": "Email Address must be a string",
         "string.email": "Email Address must be a valid email",
     }),
+    emergencyContactFirstName: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact First Name must be a string",
+    }),
+    emergencyContactLastName: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Last Name must be a string",
+    }),
+    emergencyContactHomePhone: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Home Phone must be a string",
+    }),
+    emergencyContactMobilePrimary: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Mobile Primary must be a string",
+    }),
+    emergencyContactRelationship: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Relationship must be a string",
+    }),
 });
 
 const updatePatientSchema = Joi.object({
@@ -178,6 +193,21 @@ const updatePatientSchema = Joi.object({
     emailAddress: Joi.string().trim().email().optional().messages({
         "string.base": "Email Address must be a string",
         "string.email": "Email Address must be a valid email",
+    }),
+    emergencyContactFirstName: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact First Name must be a string",
+    }),
+    emergencyContactLastName: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Last Name must be a string",
+    }),
+    emergencyContactHomePhone: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Home Phone must be a string",
+    }),
+    emergencyContactMobilePrimary: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Mobile Primary must be a string",
+    }),
+    emergencyContactRelationship: Joi.string().trim().optional().messages({
+        "string.base": "Emergency Contact Relationship must be a string",
     }),
 });
 

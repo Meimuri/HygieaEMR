@@ -6,6 +6,7 @@ const Doctor = require("./user/doctor");
 const Patient = require("./patient/patient");
 const PatientAddress = require("./patient/patient_address");
 const PatientContactInfo = require("./patient/patient_contact_info");
+const PatientEmergencyContact = require("./patient/patient_emergency_contact");
 
 User.hasOne(Secretary);
 User.hasOne(Doctor);
@@ -19,6 +20,9 @@ PatientAddress.belongsTo(Patient);
 Patient.hasOne(PatientContactInfo);
 PatientContactInfo.belongsTo(Patient);
 
+Patient.hasOne(PatientEmergencyContact);
+PatientEmergencyContact.belongsTo(Patient);
+
 module.exports = {
     User,
     Secretary,
@@ -26,4 +30,5 @@ module.exports = {
     Patient,
     PatientAddress,
     PatientContactInfo,
+    PatientEmergencyContact,
 };

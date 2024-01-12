@@ -3,6 +3,7 @@ const {
     Patient,
     PatientAddress,
     PatientContactInfo,
+    PatientEmergencyContact,
 } = require("../../../models");
 
 const patientFinder = async (req, res, next) => {
@@ -19,6 +20,12 @@ const patientFinder = async (req, res, next) => {
             },
             {
                 model: PatientContactInfo,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "patientId"],
+                },
+            },
+            {
+                model: PatientEmergencyContact,
                 attributes: {
                     exclude: ["createdAt", "updatedAt", "patientId"],
                 },
