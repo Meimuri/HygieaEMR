@@ -6,6 +6,10 @@ const {
     validateCreateUser,
     validateUpdateUser,
 } = require("./user/user_validator");
+const {
+    validateCreatePatient,
+    validateUpdatePatient,
+} = require("./patient/patient_validator");
 
 module.exports = {
     unknownEndpoint,
@@ -13,4 +17,6 @@ module.exports = {
     userFinder,
     validateCreateUser,
     validateUpdateUser,
+    validateCreatePatient,
+    validateUpdatePatient,
 };

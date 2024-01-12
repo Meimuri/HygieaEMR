@@ -5,16 +5,19 @@ const router = require("express").Router();
 const { sequelize } = require("../utils/db");
 const { Patient } = require("../models");
 
-// Add Patient Middleware
-// const {
-//     userFinder,
-//     validateCreateUser,
-//     validateUpdateUser,
-// } = require("../utils/middleware/");
+const {
+    validateCreatePatient,
+    validateUpdatePatient,
+} = require("../utils/middleware/");
 
 router.get("/", async (_req, res) => {
     const patients = await Patient.findAll();
     res.json(patients);
+});
+
+router.post("/", validateCreatePatient, async (req, res) => {
+    const patient = await Patient.create(req.body);
+    res.status(201).json(patient);
 });
 
 module.exports = router;
