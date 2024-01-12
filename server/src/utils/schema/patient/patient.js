@@ -57,6 +57,22 @@ const createPatientSchema = Joi.object({
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
     }),
+    address: Joi.string().trim().optional().messages({
+        "string.base": "Address must be a string",
+    }),
+    address2: Joi.string().trim().optional().messages({
+        "string.base": "Address2 must be a string",
+    }),
+    city: Joi.string().trim().optional().messages({
+        "string.base": "City must be a string",
+    }),
+    province: Joi.string().trim().optional().messages({
+        "string.base": "Province must be a string",
+    }),
+    zipCode: Joi.number().integer().optional().messages({
+        "number.base": "Zip Code must be a number",
+        "number.integer": "Zip Code must be an integer",
+    }),
 });
 
 const updatePatientSchema = Joi.object({
@@ -114,6 +130,22 @@ const updatePatientSchema = Joi.object({
     }),
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
+    }),
+    address: Joi.string().trim().optional().messages({
+        "string.base": "Address must be a string",
+    }),
+    address2: Joi.string().trim().optional().messages({
+        "string.base": "Address2 must be a string",
+    }),
+    city: Joi.string().trim().optional().messages({
+        "string.base": "City must be a string",
+    }),
+    province: Joi.string().trim().optional().messages({
+        "string.base": "Province must be a string",
+    }),
+    zipCode: Joi.number().integer().optional().messages({
+        "number.base": "Zip Code must be a number",
+        "number.integer": "Zip Code must be an integer",
     }),
 });
 

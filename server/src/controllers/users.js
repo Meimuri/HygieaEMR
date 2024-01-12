@@ -77,24 +77,31 @@ router.post("/", validateCreateUser, async (req, res) => {
             { transaction: t }
         );
 
-        return {
-            id: user.id,
-            username: user.username,
-            userType: user.userType,
-            details: {
-                id: details.id,
-                firstName: details.firstName,
-                lastName: details.lastName,
-                ...(userType === "Doctor" && {
-                    middleName: details.middleName,
-                    gender: details.gender,
-                    specialization: details.specialization,
-                    licenseNo: details.licenseNo,
-                    ptrNo: details.ptrNo,
-                    s2No: details.s2No,
-                }),
-            },
-        };
+        const userPlain = user.toJSON();
+        const detailsPlain = details.toJSON();
+
+        userPlain.details = detailsPlain;
+
+        return { user: userPlain };
+
+        // return {
+        //     id: user.id,
+        //     username: user.username,
+        //     userType: user.userType,
+        //     details: {
+        //         id: details.id,
+        //         firstName: details.firstName,
+        //         lastName: details.lastName,
+        //         ...(userType === "Doctor" && {
+        //             middleName: details.middleName,
+        //             gender: details.gender,
+        //             specialization: details.specialization,
+        //             licenseNo: details.licenseNo,
+        //             ptrNo: details.ptrNo,
+        //             s2No: details.s2No,
+        //         }),
+        //     },
+        // };
     });
 
     res.status(201).json(result);
