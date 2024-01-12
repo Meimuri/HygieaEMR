@@ -3,6 +3,8 @@ const User = require("./user/user");
 const Secretary = require("./user/secretary");
 const Doctor = require("./user/doctor");
 
+const Patient = require("./patient/patient");
+
 User.hasOne(Secretary);
 User.hasOne(Doctor, { onDelete: "CASCADE" });
 
@@ -13,4 +15,5 @@ module.exports = {
     User,
     Secretary,
     Doctor,
+    Patient,
 };
