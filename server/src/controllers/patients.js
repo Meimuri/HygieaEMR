@@ -63,17 +63,58 @@ router.get("/:id", patientFinder, async (req, res) => {
 });
 
 router.put("/:id", validateUpdatePatient, async (req, res) => {
-    const [rowsUpdate, [updatedPatient]] = await Patient.update(req.body, {
-        where: {
-            id: req.params.id,
-        },
-        returning: true,
+    const { address, address2, city, province, zipCode, ...patientInfo } =
+        req.body;
+
+    const result = await sequelize.transaction(async (t) => {
+        const [rowsUpdate, [updatedPatient]] = await Patient.update(
+            patientInfo,
+            {
+                where: {
+                    id: req.params.id,
+                },
+                returning: true,
+                transaction: t,
+            }
+        );
+
+        if (rowsUpdate <= 0) {
+            return res.status(404).json({ error: "Patient not found" });
+        }
+
+        let updatedPatientPlain = updatedPatient.toJSON();
+
+        if (address || address2 || city || province || zipCode) {
+            const [rowsUpdateAddress, [updatedPatientAddress]] =
+                await PatientAddress.update(
+                    {
+                        address,
+                        address2,
+                        city,
+                        province,
+                        zipCode,
+                        patientId: updatedPatient.id,
+                    },
+                    {
+                        where: {
+                            patientId: updatedPatient.id,
+                        },
+                        returning: true,
+                        transaction: t,
+                    }
+                );
+
+            if (rowsUpdateAddress > 0) {
+                const updatedPatientAddressPlain =
+                    updatedPatientAddress.toJSON();
+                updatedPatientPlain.address = updatedPatientAddressPlain;
+            }
+        }
+
+        return { patient: updatedPatientPlain };
     });
-    if (rowsUpdate > 0) {
-        return res.json(updatedPatient);
-    } else {
-        return res.status(404).json({ error: "Patient not found" });
-    }
+
+    res.status(200).json(result);
 });
 
 module.exports = router;
