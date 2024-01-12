@@ -73,6 +73,22 @@ const createPatientSchema = Joi.object({
         "number.base": "Zip Code must be a number",
         "number.integer": "Zip Code must be an integer",
     }),
+    homePhone: Joi.string().trim().optional().messages({
+        "string.base": "Home Phone must be a string",
+    }),
+    workPhone: Joi.string().trim().optional().messages({
+        "string.base": "Work Phone must be a string",
+    }),
+    mobilePhonePrimary: Joi.string().trim().optional().messages({
+        "string.base": "Mobile Phone Primary must be a string",
+    }),
+    mobilePhoneSecondary: Joi.string().trim().optional().messages({
+        "string.base": "Mobile Phone Secondary must be a string",
+    }),
+    emailAddress: Joi.string().trim().email().optional().messages({
+        "string.base": "Email Address must be a string",
+        "string.email": "Email Address must be a valid email",
+    }),
 });
 
 const updatePatientSchema = Joi.object({
@@ -146,6 +162,22 @@ const updatePatientSchema = Joi.object({
     zipCode: Joi.number().integer().optional().messages({
         "number.base": "Zip Code must be a number",
         "number.integer": "Zip Code must be an integer",
+    }),
+    homePhone: Joi.string().trim().optional().messages({
+        "string.base": "Home Phone must be a string",
+    }),
+    workPhone: Joi.string().trim().optional().messages({
+        "string.base": "Work Phone must be a string",
+    }),
+    mobilePhonePrimary: Joi.string().trim().optional().messages({
+        "string.base": "Mobile Phone Primary must be a string",
+    }),
+    mobilePhoneSecondary: Joi.string().trim().optional().messages({
+        "string.base": "Mobile Phone Secondary must be a string",
+    }),
+    emailAddress: Joi.string().trim().email().optional().messages({
+        "string.base": "Email Address must be a string",
+        "string.email": "Email Address must be a valid email",
     }),
 });
 
