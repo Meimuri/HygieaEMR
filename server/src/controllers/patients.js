@@ -44,95 +44,51 @@ router.get("/", async (_req, res) => {
 });
 
 router.post("/", validateCreatePatient, async (req, res) => {
-    const {
-        address,
-        address2,
-        city,
-        province,
-        zipCode,
-        homePhone,
-        workPhone,
-        mobilePhonePrimary,
-        mobilePhoneSecondary,
-        emailAddress,
-        emergencyContactFirstName,
-        emergencyContactLastName,
-        emergencyContactHomePhone,
-        emergencyContactMobilePrimary,
-        emergencyContactRelationship,
-        ...patientInfo
-    } = req.body;
+    const { patientInfo, addressInfo, contactInfo, emergencyContactInfo } =
+        req.body;
 
     const result = await sequelize.transaction(async (t) => {
         const patient = await Patient.create(patientInfo, { transaction: t });
         let patientPlain = patient.toJSON();
 
-        if (address || address2 || city || province || zipCode) {
+        if (addressInfo && Object.values(addressInfo).some(Boolean)) {
             const patientAddress = await PatientAddress.create(
                 {
-                    address,
-                    address2,
-                    city,
-                    province,
-                    zipCode,
+                    ...addressInfo,
                     patientId: patient.id,
                 },
                 { transaction: t }
             );
 
-            const patientAddressPlain = patientAddress.toJSON();
-
-            patientPlain.address = patientAddressPlain;
+            patientPlain.address = patientAddress.toJSON();
         }
 
-        if (
-            homePhone ||
-            workPhone ||
-            mobilePhonePrimary ||
-            mobilePhoneSecondary ||
-            emailAddress
-        ) {
+        if (contactInfo && Object.values(contactInfo).some(Boolean)) {
             const patientContactInfo = await PatientContactInfo.create(
                 {
-                    homePhone,
-                    workPhone,
-                    mobilePhonePrimary,
-                    mobilePhoneSecondary,
-                    emailAddress,
+                    ...contactInfo,
                     patientId: patient.id,
                 },
                 { transaction: t }
             );
 
-            const patientContactInfoPlain = patientContactInfo.toJSON();
-
-            patientPlain.contact = patientContactInfoPlain;
+            patientPlain.contact = patientContactInfo.toJSON();
         }
 
         if (
-            emergencyContactFirstName ||
-            emergencyContactLastName ||
-            emergencyContactHomePhone ||
-            emergencyContactMobilePrimary ||
-            emergencyContactRelationship
+            emergencyContactInfo &&
+            Object.values(emergencyContactInfo).some(Boolean)
         ) {
             const patientEmergencyContact =
                 await PatientEmergencyContact.create(
                     {
-                        firstName: emergencyContactFirstName,
-                        lastName: emergencyContactLastName,
-                        homePhone: emergencyContactHomePhone,
-                        mobilePrimary: emergencyContactMobilePrimary,
-                        relationship: emergencyContactRelationship,
+                        ...emergencyContactInfo,
                         patientId: patient.id,
                     },
                     { transaction: t }
                 );
 
-            const patientEmergencyContactPlain =
-                patientEmergencyContact.toJSON();
-
-            patientPlain.emergencyContact = patientEmergencyContactPlain;
+            patientPlain.emergencyContact = patientEmergencyContact.toJSON();
         }
 
         return { patient: patientPlain };
@@ -146,136 +102,73 @@ router.get("/:id", patientFinder, async (req, res) => {
 });
 
 router.put("/:id", validateUpdatePatient, async (req, res) => {
-    const {
-        address,
-        address2,
-        city,
-        province,
-        zipCode,
-        homePhone,
-        workPhone,
-        mobilePhonePrimary,
-        mobilePhoneSecondary,
-        emailAddress,
-        emergencyContactFirstName,
-        emergencyContactLastName,
-        emergencyContactHomePhone,
-        emergencyContactMobilePrimary,
-        emergencyContactRelationship,
-        ...patientInfo
-    } = req.body;
+    const { patientInfo, addressInfo, contactInfo, emergencyContactInfo } =
+        req.body;
 
     const result = await sequelize.transaction(async (t) => {
         const [rowsUpdate, [updatedPatient]] = await Patient.update(
             patientInfo,
             {
-                where: {
-                    id: req.params.id,
-                },
+                where: { id: req.params.id },
                 returning: true,
                 transaction: t,
             }
         );
 
-        if (rowsUpdate <= 0) {
-            return res.status(404).json({ error: "Patient not found" });
-        }
-
         let updatedPatientPlain = updatedPatient.toJSON();
 
-        if (address || address2 || city || province || zipCode) {
+        if (addressInfo && Object.values(addressInfo).some(Boolean)) {
             const [rowsUpdateAddress, [updatedPatientAddress]] =
                 await PatientAddress.update(
+                    { ...addressInfo, patientId: updatedPatient.id },
                     {
-                        address,
-                        address2,
-                        city,
-                        province,
-                        zipCode,
-                        patientId: updatedPatient.id,
-                    },
-                    {
-                        where: {
-                            patientId: updatedPatient.id,
-                        },
+                        where: { patientId: updatedPatient.id },
                         returning: true,
                         transaction: t,
                     }
                 );
 
             if (rowsUpdateAddress > 0) {
-                const updatedPatientAddressPlain =
-                    updatedPatientAddress.toJSON();
-                updatedPatientPlain.address = updatedPatientAddressPlain;
+                updatedPatientPlain.address = updatedPatientAddress.toJSON();
             }
         }
 
-        if (
-            homePhone ||
-            workPhone ||
-            mobilePhonePrimary ||
-            mobilePhoneSecondary ||
-            emailAddress
-        ) {
-            const [rowsUpdateContactInfo, [updatePatientContactInfo]] =
+        if (contactInfo && Object.values(contactInfo).some(Boolean)) {
+            const [rowsUpdateContactInfo, [updatedPatientContactInfo]] =
                 await PatientContactInfo.update(
+                    { ...contactInfo, patientId: updatedPatient.id },
                     {
-                        homePhone,
-                        workPhone,
-                        mobilePhonePrimary,
-                        mobilePhoneSecondary,
-                        emailAddress,
-                        patientId: updatedPatient.id,
-                    },
-                    {
-                        where: {
-                            patientId: updatedPatient.id,
-                        },
+                        where: { patientId: updatedPatient.id },
                         returning: true,
                         transaction: t,
                     }
                 );
 
             if (rowsUpdateContactInfo > 0) {
-                const updatePatientContactInfoPlain =
-                    updatePatientContactInfo.toJSON();
-                updatedPatientPlain.contact = updatePatientContactInfoPlain;
+                updatedPatientPlain.contact =
+                    updatedPatientContactInfo.toJSON();
             }
         }
 
         if (
-            emergencyContactFirstName ||
-            emergencyContactLastName ||
-            emergencyContactHomePhone ||
-            emergencyContactMobilePrimary ||
-            emergencyContactRelationship
+            emergencyContactInfo &&
+            Object.values(emergencyContactInfo).some(Boolean)
         ) {
             const [
                 rowsUpdateEmergencyContact,
-                [updatePatientEmergencyContact],
+                [updatedPatientEmergencyContact],
             ] = await PatientEmergencyContact.update(
+                { ...emergencyContactInfo, patientId: updatedPatient.id },
                 {
-                    firstName: emergencyContactFirstName,
-                    lastName: emergencyContactLastName,
-                    homePhone: emergencyContactHomePhone,
-                    mobilePrimary: emergencyContactMobilePrimary,
-                    relationship: emergencyContactRelationship,
-                    patientId: updatedPatient.id,
-                },
-                {
-                    where: {
-                        patientId: updatedPatient.id,
-                    },
+                    where: { patientId: updatedPatient.id },
                     returning: true,
                     transaction: t,
                 }
             );
 
             if (rowsUpdateEmergencyContact > 0) {
-                const updatePatientEmergencyContactPlain =
-                    updatePatientEmergencyContact.toJSON();
                 updatedPatientPlain.emergencyContact =
-                    updatePatientEmergencyContactPlain;
+                    updatedPatientEmergencyContact.toJSON();
             }
         }
 
