@@ -11,6 +11,7 @@ const {
 const {
     validPatient,
     validPatientUpdate,
+    invalidPatient,
     nonExistentPatientId,
 } = require("./patient/patient_data");
 
@@ -24,5 +25,6 @@ module.exports = {
     nonExistentUserId,
     validPatient,
     validPatientUpdate,
+    invalidPatient,
     nonExistentPatientId,
 };
