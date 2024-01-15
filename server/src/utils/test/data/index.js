@@ -8,6 +8,16 @@ const {
     nonExistentUserId,
 } = require("./user/user_data");
 
+const {
+    // validSecretaryUser,
+    // validDoctorUser,
+    // validSecretaryUserUpdate,
+    // validDoctorUserUpdate,
+    // invalidSecretaryUsers,
+    // invalidDoctorUsers,
+    nonExistentPatientId,
+} = require("./patient/patient_data");
+
 module.exports = {
     validSecretaryUser,
     validDoctorUser,
@@ -16,4 +26,5 @@ module.exports = {
     invalidSecretaryUsers,
     invalidDoctorUsers,
     nonExistentUserId,
+    nonExistentPatientId,
 };

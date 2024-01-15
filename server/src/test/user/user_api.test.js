@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const app = require("../../index");
 const api = supertest(app);
-const helper = require("../../utils/test/user_helper");
+const helper = require("../../utils/test/helper/user_helper");
 const data = require("../../utils/test/data");
 
 describe("GET /api/users", () => {
