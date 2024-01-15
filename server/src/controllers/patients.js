@@ -118,35 +118,68 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
         let updatedPatientPlain = updatedPatient.toJSON();
 
         if (addressInfo && Object.values(addressInfo).some(Boolean)) {
-            const [rowsUpdateAddress, [updatedPatientAddress]] =
-                await PatientAddress.update(
-                    { ...addressInfo, patientId: updatedPatient.id },
+            const address = await PatientAddress.findOne({
+                where: { patientId: updatedPatient.id },
+                transaction: t,
+            });
+            if (address === null) {
+                const patientAddress = await PatientAddress.create(
                     {
-                        where: { patientId: updatedPatient.id },
-                        returning: true,
-                        transaction: t,
-                    }
+                        ...addressInfo,
+                        patientId: updatedPatient.id,
+                    },
+                    { transaction: t }
                 );
 
-            if (rowsUpdateAddress > 0) {
-                updatedPatientPlain.address = updatedPatientAddress.toJSON();
+                updatedPatientPlain.address = patientAddress.toJSON();
+            } else {
+                const [rowsUpdateAddress, [updatedPatientAddress]] =
+                    await PatientAddress.update(
+                        { ...addressInfo, patientId: updatedPatient.id },
+                        {
+                            where: { patientId: updatedPatient.id },
+                            returning: true,
+                            transaction: t,
+                        }
+                    );
+
+                if (rowsUpdateAddress > 0) {
+                    updatedPatientPlain.address =
+                        updatedPatientAddress.toJSON();
+                }
             }
         }
 
         if (contactInfo && Object.values(contactInfo).some(Boolean)) {
-            const [rowsUpdateContactInfo, [updatedPatientContactInfo]] =
-                await PatientContactInfo.update(
-                    { ...contactInfo, patientId: updatedPatient.id },
+            const contact = await PatientContactInfo.findOne({
+                where: { patientId: updatedPatient.id },
+                transaction: t,
+            });
+            if (contact === null) {
+                const patientContactInfo = await PatientContactInfo.create(
                     {
-                        where: { patientId: updatedPatient.id },
-                        returning: true,
-                        transaction: t,
-                    }
+                        ...contactInfo,
+                        patientId: updatedPatient.id,
+                    },
+                    { transaction: t }
                 );
 
-            if (rowsUpdateContactInfo > 0) {
-                updatedPatientPlain.contact =
-                    updatedPatientContactInfo.toJSON();
+                updatedPatientPlain.contact = patientContactInfo.toJSON();
+            } else {
+                const [rowsUpdateContactInfo, [updatedPatientContactInfo]] =
+                    await PatientContactInfo.update(
+                        { ...contactInfo, patientId: updatedPatient.id },
+                        {
+                            where: { patientId: updatedPatient.id },
+                            returning: true,
+                            transaction: t,
+                        }
+                    );
+
+                if (rowsUpdateContactInfo > 0) {
+                    updatedPatientPlain.contact =
+                        updatedPatientContactInfo.toJSON();
+                }
             }
         }
 
@@ -154,21 +187,39 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
             emergencyContactInfo &&
             Object.values(emergencyContactInfo).some(Boolean)
         ) {
-            const [
-                rowsUpdateEmergencyContact,
-                [updatedPatientEmergencyContact],
-            ] = await PatientEmergencyContact.update(
-                { ...emergencyContactInfo, patientId: updatedPatient.id },
-                {
-                    where: { patientId: updatedPatient.id },
-                    returning: true,
-                    transaction: t,
-                }
-            );
+            const emergency = await PatientEmergencyContact.findOne({
+                where: { patientId: updatedPatient.id },
+                transaction: t,
+            });
+            if (emergency === null) {
+                const patientEmergencyContact =
+                    await PatientEmergencyContact.create(
+                        {
+                            ...emergencyContactInfo,
+                            patientId: updatedPatient.id,
+                        },
+                        { transaction: t }
+                    );
 
-            if (rowsUpdateEmergencyContact > 0) {
                 updatedPatientPlain.emergencyContact =
-                    updatedPatientEmergencyContact.toJSON();
+                    patientEmergencyContact.toJSON();
+            } else {
+                const [
+                    rowsUpdateEmergencyContact,
+                    [updatedPatientEmergencyContact],
+                ] = await PatientEmergencyContact.update(
+                    { ...emergencyContactInfo, patientId: updatedPatient.id },
+                    {
+                        where: { patientId: updatedPatient.id },
+                        returning: true,
+                        transaction: t,
+                    }
+                );
+
+                if (rowsUpdateEmergencyContact > 0) {
+                    updatedPatientPlain.emergencyContact =
+                        updatedPatientEmergencyContact.toJSON();
+                }
             }
         }
 
