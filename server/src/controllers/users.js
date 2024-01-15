@@ -82,7 +82,7 @@ router.post("/", validateCreateUser, async (req, res) => {
 
         userPlain.details = detailsPlain;
 
-        return { user: userPlain };
+        return userPlain;
     });
 
     res.status(201).json(result);
