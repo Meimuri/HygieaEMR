@@ -33,9 +33,45 @@ const validPatient = {
     },
 };
 
+const validPatientUpdate = {
+    patientInfo: {
+        firstName: "Pedro",
+        middleName: "Mendoza",
+        lastName: "Santos",
+        birthDate: "1975-10-20",
+        gender: "Male",
+        maritalStatus: "Single",
+        bloodType: "A+",
+        referrerName: "Dr. Jose Rizal",
+        notes: "Patient is diabetic.",
+    },
+    addressInfo: {
+        address: "4567 Bonifacio Ave",
+        address2: "Barangay 123",
+        city: "Quezon City",
+        province: "Metro Manila",
+        zipCode: 1100,
+    },
+    contactInfo: {
+        homePhone: "(02) 234-5678",
+        workPhone: "(02) 345-6789",
+        mobilePhonePrimary: "09181234567",
+        mobilePhoneSecondary: "09291234567",
+        emailAddress: "pedro.santos@example.com",
+    },
+    emergencyContactInfo: {
+        firstName: "Jose",
+        lastName: "Rizal",
+        homePhone: "(02) 345-6789",
+        mobilePrimary: "09191234567",
+        relationship: "Doctor",
+    },
+};
+
 const nonExistentPatientId = "21";
 
 module.exports = {
     validPatient,
+    validPatientUpdate,
     nonExistentPatientId,
 };

@@ -67,3 +67,24 @@ describe("GET /api/patients/:id", () => {
         expect(response.body.firstName).toEqual(patientToView.firstName);
     });
 });
+
+describe("PUT /api/patients/:id ", () => {
+    const testPatientUpdate = async (patientIndex, patientData) => {
+        const patientsAtStart = await helper.patientsInDb();
+        const patientToUpdate = patientsAtStart[patientIndex];
+
+        const response = await api
+            .put(`/api/patients/${patientToUpdate.id}`)
+            .send(patientData);
+
+        expect(response.status).toBe(200);
+        expect(response.headers["content-type"]).toEqual(
+            expect.stringContaining("json")
+        );
+        expect(response.body.firstName).toBe(patientData.firstName);
+    };
+
+    test("should return a 200 status and update the patients's data", async () => {
+        await testPatientUpdate(0, data.validPatientUpdate);
+    });
+});
