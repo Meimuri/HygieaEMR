@@ -68,7 +68,7 @@ describe("POST /api/users", () => {
 });
 
 describe("GET /api/users/:id", () => {
-    test("should return a 200 status and the created user", async () => {
+    test("should return a 200 status and the selected user", async () => {
         const usersAtStart = await helper.usersInDb();
         const userToView = usersAtStart[0];
 

@@ -9,7 +9,7 @@ const {
 } = require("./user/user_data");
 
 const {
-    // validSecretaryUser,
+    validPatient,
     // validDoctorUser,
     // validSecretaryUserUpdate,
     // validDoctorUserUpdate,
@@ -26,5 +26,6 @@ module.exports = {
     invalidSecretaryUsers,
     invalidDoctorUsers,
     nonExistentUserId,
+    validPatient,
     nonExistentPatientId,
 };
