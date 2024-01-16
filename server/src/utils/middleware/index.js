@@ -1,11 +1,17 @@
 // Internal modules
 const unknownEndpoint = require("./api/unknown_endpoint");
 const errorHandler = require("./api/error_handler");
+const laboratoryFinder = require("./miscellaneous/laboratory/laboratory_finder");
 const locationFinder = require("./miscellaneous/location/location_finder");
 const userFinder = require("./user/user_finder");
 const patientFinder = require("./patient/patient_finder");
 const encounterFinder = require("./encounter/encounter_finder");
 const examinationFinder = require("./examination/examination_finder");
+
+const {
+    validateCreateLaboratory,
+    validateUpdateLaboratory,
+} = require("./miscellaneous/laboratory/laboratory_validator");
 
 const {
     validateCreateLocation,
@@ -35,11 +41,14 @@ const {
 module.exports = {
     unknownEndpoint,
     errorHandler,
+    laboratoryFinder,
     locationFinder,
     userFinder,
     patientFinder,
     encounterFinder,
     examinationFinder,
+    validateCreateLaboratory,
+    validateUpdateLaboratory,
     validateCreateLocation,
     validateUpdateLocation,
     validateCreateUser,
