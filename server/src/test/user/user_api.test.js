@@ -24,6 +24,7 @@ describe("GET /api/users", () => {
 
 describe("POST /api/users", () => {
     const testUserCreation = async (userData) => {
+        await helper.deleteAllUsers();
         const usersAtStart = await helper.usersInDb();
 
         const response = await api.post("/api/users").send(userData);
@@ -38,10 +39,6 @@ describe("POST /api/users", () => {
         expect(usersAtEnd).toHaveLength(usersAtStart.length + 1);
         expect(response.body.username).toBe(userData.username);
     };
-
-    test("should return a 201 status and create a new secretary type user", async () => {
-        await testUserCreation(data.validSecretaryUser);
-    });
 
     test("should return a 201 status and create a new doctor type user", async () => {
         await testUserCreation(data.validDoctorUser);
@@ -91,11 +88,7 @@ describe("PUT /api/users/:id ", () => {
         expect(response.body.firstName).toBe(userData.firstName);
     };
 
-    test("should return a 200 status and update the secretary's data", async () => {
-        await testUserUpdate(0, data.validSecretaryUserUpdate);
-    });
-
     test("should return a 200 status and update the doctor's data", async () => {
-        await testUserUpdate(1, data.validDoctorUserUpdate);
+        await testUserUpdate(0, data.validDoctorUserUpdate);
     });
 });

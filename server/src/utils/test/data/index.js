@@ -37,6 +37,13 @@ const {
     nonExistentEncounterId,
 } = require("./encounter/encounter_data");
 
+const {
+    validExamination,
+    validExaminationUpdate,
+    invalidExamination,
+    nonExistentExaminationId,
+} = require("./examination/examination_data");
+
 module.exports = {
     validLaboratory,
     validLaboratoryUpdate,
@@ -62,4 +69,8 @@ module.exports = {
     validEncounterUpdate,
     invalidEncounter,
     nonExistentEncounterId,
+    validExamination,
+    validExaminationUpdate,
+    invalidExamination,
+    nonExistentExaminationId,
 };

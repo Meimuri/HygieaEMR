@@ -6,11 +6,6 @@ const createExaminationSchema = Joi.object({
         "number.base": "Encounter ID must be a number",
         "number.integer": "Encounter ID must be an integer",
     }),
-    encounterId: Joi.number().integer().required().messages({
-        "any.required": "Encounter ID is required",
-        "number.base": "Encounter ID must be a number",
-        "number.integer": "Encounter ID must be an integer",
-    }),
     date: Joi.date().required().messages({
         "any.required": "Date is required",
         "date.base": "Date must be a valid date",
@@ -46,11 +41,6 @@ const createExaminationSchema = Joi.object({
 });
 
 const updateExaminationSchema = Joi.object({
-    encounterId: Joi.number().integer().required().messages({
-        "any.required": "Encounter ID is required",
-        "number.base": "Encounter ID must be a number",
-        "number.integer": "Encounter ID must be an integer",
-    }),
     encounterId: Joi.number().integer().required().messages({
         "any.required": "Encounter ID is required",
         "number.base": "Encounter ID must be a number",
