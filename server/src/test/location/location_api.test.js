@@ -32,7 +32,7 @@ describe("GET /api/locations", () => {
 });
 
 describe("POST /api/locations", () => {
-    const testPatientCreation = async (locationData) => {
+    const testLocationCreation = async (locationData) => {
         const locationsAtStart = await helper.locationsInDb();
 
         const response = await api.post("/api/locations").send(locationData);
@@ -42,13 +42,28 @@ describe("POST /api/locations", () => {
             expect.stringContaining("json")
         );
 
-        const locationsAtEnd = await helper.patientsInDb();
+        const locationsAtEnd = await helper.locationsInDb();
 
         expect(locationsAtEnd).toHaveLength(locationsAtStart.length + 1);
         expect(response.body.code).toBe(locationData.code);
     };
 
     test("should return a 201 status and create a new location", async () => {
-        await testPatientCreation(data.validLocation);
+        await testLocationCreation(data.validLocation);
+    });
+});
+
+describe("GET /api/locations/:id", () => {
+    test("should return a 200 status and the selected locations", async () => {
+        const locationsAtStart = await helper.locationsInDb();
+        const locationToView = locationsAtStart[0];
+
+        const response = await api.get(`/api/locations/${locationToView.id}`);
+
+        expect(response.status).toBe(200);
+        expect(response.headers["content-type"]).toEqual(
+            expect.stringContaining("json")
+        );
+        expect(response.body.code).toEqual(locationToView.code);
     });
 });
