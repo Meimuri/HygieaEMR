@@ -29,4 +29,20 @@ router.get("/:id", laboratoryFinder, async (req, res) => {
     res.json(req.laboratory);
 });
 
+router.put("/:id", validateUpdateLaboratory, async (req, res) => {
+    const [rowsUpdate, [updatedLaboratory]] = await Laboratory.update(
+        req.body,
+        {
+            where: { id: req.params.id },
+            returning: true,
+        }
+    );
+
+    if (rowsUpdate > 0) {
+        return res.json(updatedLaboratory);
+    } else {
+        return res.status(404).json({ error: "Laboratory not found" });
+    }
+});
+
 module.exports = router;
