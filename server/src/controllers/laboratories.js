@@ -25,4 +25,8 @@ router.post("/", validateCreateLaboratory, async (req, res) => {
     res.status(201).json(laboratory);
 });
 
+router.get("/:id", laboratoryFinder, async (req, res) => {
+    res.json(req.laboratory);
+});
+
 module.exports = router;
