@@ -1,4 +1,10 @@
 const {
+    validLocation,
+    validLocationUpdate,
+    nonExistentLocationId,
+} = require("./location/location_data");
+
+const {
     validSecretaryUser,
     validDoctorUser,
     validSecretaryUserUpdate,
@@ -16,6 +22,9 @@ const {
 } = require("./patient/patient_data");
 
 module.exports = {
+    validLocation,
+    validLocationUpdate,
+    nonExistentLocationId,
     validSecretaryUser,
     validDoctorUser,
     validSecretaryUserUpdate,
