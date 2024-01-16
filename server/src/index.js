@@ -7,6 +7,7 @@ const { PORT } = require("./utils/config");
 const { connectToDatabase } = require("./utils/db");
 const usersRouter = require("./controllers/users");
 const patientsRouter = require("./controllers/patients");
+const encountersRouter = require("./controllers/encounters");
 const middleware = require("./utils/middleware/");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/users", usersRouter);
 app.use("/api/patients", patientsRouter);
+app.use("/api/encounters", encountersRouter);
 
 const start = async () => {
     await connectToDatabase();

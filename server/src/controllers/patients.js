@@ -8,6 +8,7 @@ const {
     PatientAddress,
     PatientContactInfo,
     PatientEmergencyContact,
+    Encounter,
 } = require("../models");
 
 const {
@@ -34,6 +35,12 @@ router.get("/", async (_req, res) => {
             },
             {
                 model: PatientEmergencyContact,
+                attributes: {
+                    exclude: ["createdAt", "updatedAt", "patientId"],
+                },
+            },
+            {
+                model: Encounter,
                 attributes: {
                     exclude: ["createdAt", "updatedAt", "patientId"],
                 },

@@ -11,7 +11,7 @@ module.exports = {
             patient_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                references: { model: "users", key: "id" },
+                references: { model: "patients", key: "id" },
             },
             home_phone: {
                 type: DataTypes.STRING,
