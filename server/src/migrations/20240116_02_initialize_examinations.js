@@ -8,6 +8,11 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
             },
+            encounter_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: { model: "encounters", key: "id" },
+            },
             date: {
                 type: DataTypes.DATE,
                 allowNull: false,

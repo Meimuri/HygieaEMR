@@ -13,6 +13,10 @@ Examination.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        encounterId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
         date: {
             type: DataTypes.DATE,
             allowNull: false,
