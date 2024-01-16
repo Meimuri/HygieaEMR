@@ -4,8 +4,8 @@ const errorHandler = (error, _req, res, _next) => {
         return res.status(401).json({ error: "Invalid token" });
     } else if (error.name === "SequelizeDatabaseError") {
         return res.status(400).json({
-            error: "Malformatted id",
-            // error: error,
+            // error: "Malformatted id",
+            error: error,
         });
     } else if (error.name === "SequelizeConnectionError") {
         return res.status(400).json({ error: "Database Connection Error" });

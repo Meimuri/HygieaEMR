@@ -29,6 +29,8 @@ PatientEmergencyContact.belongsTo(Patient);
 Patient.hasMany(Encounter);
 Encounter.belongsTo(Patient);
 
+Encounter.belongsTo(Location);
+
 module.exports = {
     Location,
     User,

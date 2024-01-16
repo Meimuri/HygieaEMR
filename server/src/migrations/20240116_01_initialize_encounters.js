@@ -49,6 +49,11 @@ module.exports = {
             notes: {
                 type: DataTypes.TEXT,
             },
+            location_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: { model: "locations", key: "id" },
+            },
             created_at: {
                 type: DataTypes.DATE,
                 allowNull: false,

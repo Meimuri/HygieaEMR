@@ -46,6 +46,11 @@ const createEncounterSchema = Joi.object({
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
     }),
+    locationId: Joi.number().integer().required().messages({
+        "any.required": "Location ID is required",
+        "number.base": "Location ID must be a number",
+        "number.integer": "Location ID must be an integer",
+    }),
 });
 
 const updateEncounterSchema = Joi.object({
@@ -93,6 +98,11 @@ const updateEncounterSchema = Joi.object({
     }),
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
+    }),
+    locationId: Joi.number().integer().required().messages({
+        "any.required": "Location ID is required",
+        "number.base": "Location ID must be a number",
+        "number.integer": "Location ID must be an integer",
     }),
 });
 

@@ -53,6 +53,10 @@ Encounter.init(
         notes: {
             type: DataTypes.TEXT,
         },
+        locationId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
     {
         sequelize,
