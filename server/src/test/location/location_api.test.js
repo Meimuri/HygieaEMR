@@ -67,3 +67,24 @@ describe("GET /api/locations/:id", () => {
         expect(response.body.code).toEqual(locationToView.code);
     });
 });
+
+describe("PUT /api/locations/:id ", () => {
+    const testLocationUpdate = async (locationIndex, locationData) => {
+        const locationsAtStart = await helper.locationsInDb();
+        const locationToUpdate = locationsAtStart[locationIndex];
+
+        const response = await api
+            .put(`/api/locations/${locationToUpdate.id}`)
+            .send(locationData);
+
+        expect(response.status).toBe(200);
+        expect(response.headers["content-type"]).toEqual(
+            expect.stringContaining("json")
+        );
+        expect(response.body.code).toBe(locationData.code);
+    };
+
+    test("should return a 200 status and update the location's data", async () => {
+        await testLocationUpdate(0, data.validLocationUpdate);
+    });
+});
