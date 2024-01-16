@@ -10,6 +10,7 @@ const PatientContactInfo = require("./patient/patient_contact_info");
 const PatientEmergencyContact = require("./patient/patient_emergency_contact");
 
 const Encounter = require("./encounter/encounter");
+const Examination = require("./examination/examination");
 
 User.hasOne(Secretary);
 User.hasOne(Doctor);
@@ -32,6 +33,10 @@ Encounter.belongsTo(Patient);
 Encounter.belongsTo(Location);
 Encounter.belongsTo(Doctor);
 
+Encounter.hasMany(Examination);
+Examination.belongsTo(Encounter);
+Examination.belongsTo(Location);
+
 module.exports = {
     Location,
     User,
@@ -42,4 +47,5 @@ module.exports = {
     PatientContactInfo,
     PatientEmergencyContact,
     Encounter,
+    Examination,
 };
