@@ -29,7 +29,7 @@ const validDoctorUser = {
 };
 
 const validDoctorUserForUpdate = {
-    username: "doctor2",
+    username: "doctor3",
     password: "Qweasd!2",
     userType: "Doctor",
     firstName: "John",
