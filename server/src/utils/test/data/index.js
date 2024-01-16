@@ -8,6 +8,7 @@ const {
 const {
     validSecretaryUser,
     validDoctorUser,
+    validDoctorUserForEncounter,
     validSecretaryUserUpdate,
     validDoctorUserUpdate,
     invalidSecretaryUsers,
@@ -36,6 +37,7 @@ module.exports = {
     nonExistentLocationId,
     validSecretaryUser,
     validDoctorUser,
+    validDoctorUserForEncounter,
     validSecretaryUserUpdate,
     validDoctorUserUpdate,
     invalidSecretaryUsers,

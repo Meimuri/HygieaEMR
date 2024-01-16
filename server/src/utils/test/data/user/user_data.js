@@ -20,6 +20,20 @@ const validDoctorUser = {
     s2No: "345678",
 };
 
+const validDoctorUserForEncounter = {
+    username: "doctor2",
+    password: "Qweasd!2",
+    userType: "Doctor",
+    firstName: "John",
+    middleName: "Doe",
+    lastName: "Smith",
+    gender: "Male",
+    specialization: "Cardiology",
+    licenseNo: "123456",
+    ptrNo: "789012",
+    s2No: "345678",
+};
+
 const validSecretaryUserUpdate = {
     firstName: "Jarvis",
     userType: "Secretary",
@@ -146,6 +160,7 @@ const nonExistentUserId = "21";
 module.exports = {
     validSecretaryUser,
     validDoctorUser,
+    validDoctorUserForEncounter,
     validSecretaryUserUpdate,
     validDoctorUserUpdate,
     invalidSecretaryUsers,

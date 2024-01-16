@@ -26,12 +26,14 @@ describe("GET /api/encounters", () => {
 
 describe("POST /api/encounters", () => {
     const testEncounterCreation = async (
+        userData,
         patientData,
         locationData,
         encounterData
     ) => {
         const encountersAtStart = await helper.encountersInDb();
 
+        await api.post("/api/users").send(userData);
         await api.post("/api/patients").send(patientData);
         await api.post("/api/locations").send(locationData);
 
@@ -50,6 +52,7 @@ describe("POST /api/encounters", () => {
 
     test("should return a 201 status and create a new encounters", async () => {
         await testEncounterCreation(
+            data.validDoctorUserForEncounter,
             data.validPatient,
             data.validLocation,
             data.validEncounter
