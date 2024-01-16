@@ -1,6 +1,7 @@
 const {
     validLocation,
     validLocationUpdate,
+    invalidLocation,
     nonExistentLocationId,
 } = require("./location/location_data");
 
@@ -24,6 +25,7 @@ const {
 module.exports = {
     validLocation,
     validLocationUpdate,
+    invalidLocation,
     nonExistentLocationId,
     validSecretaryUser,
     validDoctorUser,
