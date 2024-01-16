@@ -10,6 +10,7 @@ const {
     PatientEmergencyContact,
     Encounter,
     Location,
+    Laboratory,
     Doctor,
     Examination,
 } = require("../models");
@@ -79,6 +80,15 @@ router.get("/", async (_req, res) => {
                                 model: Location,
                                 attributes: {
                                     exclude: ["createdAt", "updatedAt"],
+                                },
+                            },
+                            {
+                                model: Laboratory,
+                                attributes: {
+                                    exclude: ["createdAt", "updatedAt"],
+                                },
+                                through: {
+                                    attributes: [],
                                 },
                             },
                         ],

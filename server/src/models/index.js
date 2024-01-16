@@ -13,6 +13,7 @@ const PatientEmergencyContact = require("./patient/patient_emergency_contact");
 
 const Encounter = require("./encounter/encounter");
 const Examination = require("./examination/examination");
+const ExaminationLaboratory = require("./examination/examination_laboratory");
 
 User.hasOne(Secretary);
 User.hasOne(Doctor);
@@ -39,6 +40,9 @@ Encounter.hasOne(Examination);
 Examination.belongsTo(Encounter);
 Examination.belongsTo(Location);
 
+Examination.belongsToMany(Laboratory, { through: ExaminationLaboratory });
+Laboratory.belongsToMany(Examination, { through: ExaminationLaboratory });
+
 module.exports = {
     Laboratory,
     Location,
@@ -51,4 +55,5 @@ module.exports = {
     PatientEmergencyContact,
     Encounter,
     Examination,
+    ExaminationLaboratory,
 };

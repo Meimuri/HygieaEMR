@@ -1,5 +1,5 @@
 // Internal modules
-const { Examination, Location } = require("../../../models");
+const { Examination, Location, Laboratory } = require("../../../models");
 
 const examinationFinder = async (req, res, next) => {
     const examination = await Examination.findByPk(req.params.id, {
@@ -10,6 +10,13 @@ const examinationFinder = async (req, res, next) => {
             {
                 model: Location,
                 attributes: { exclude: ["createdAt", "updatedAt"] },
+            },
+            {
+                model: Laboratory,
+                attributes: { exclude: ["createdAt", "updatedAt"] },
+                through: {
+                    attributes: [],
+                },
             },
         ],
     });

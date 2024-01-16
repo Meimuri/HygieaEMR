@@ -3,7 +3,12 @@ const router = require("express").Router();
 
 // Internal modules
 const { sequelize } = require("../utils/db");
-const { Examination, Location } = require("../models");
+const {
+    Examination,
+    Location,
+    Laboratory,
+    ExaminationLaboratory,
+} = require("../models");
 
 const {
     examinationFinder,
@@ -21,14 +26,43 @@ router.get("/", async (_req, res) => {
                 model: Location,
                 attributes: { exclude: ["createdAt", "updatedAt"] },
             },
+            {
+                model: Laboratory,
+                attributes: { exclude: ["createdAt", "updatedAt"] },
+                through: {
+                    attributes: [],
+                },
+            },
         ],
     });
     res.json(examinations);
 });
 
 router.post("/", validateCreateExamination, async (req, res) => {
-    const examination = await Examination.create(req.body);
-    res.status(201).json(examination);
+    const result = await sequelize.transaction(async (t) => {
+        const examination = await Examination.create(req.body, {
+            transaction: t,
+        });
+        // Hard Code Adding Laboratory to Examination for now
+        await ExaminationLaboratory.create(
+            {
+                examinationId: examination.id,
+                laboratoryId: 1,
+            },
+            { transaction: t }
+        );
+
+        await ExaminationLaboratory.create(
+            {
+                examinationId: examination.id,
+                laboratoryId: 2,
+            },
+            { transaction: t }
+        );
+
+        return examination;
+    });
+    res.status(201).json(result);
 });
 
 router.get("/:id", examinationFinder, async (req, res) => {

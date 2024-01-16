@@ -3,7 +3,13 @@ const router = require("express").Router();
 
 // Internal modules
 const { sequelize } = require("../utils/db");
-const { Encounter, Location, Doctor, Examination } = require("../models");
+const {
+    Encounter,
+    Location,
+    Doctor,
+    Examination,
+    Laboratory,
+} = require("../models");
 
 const {
     encounterFinder,
@@ -45,6 +51,13 @@ router.get("/", async (_req, res) => {
                     {
                         model: Location,
                         attributes: { exclude: ["createdAt", "updatedAt"] },
+                    },
+                    {
+                        model: Laboratory,
+                        attributes: { exclude: ["createdAt", "updatedAt"] },
+                        through: {
+                            attributes: [],
+                        },
                     },
                 ],
             },

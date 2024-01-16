@@ -8,6 +8,7 @@ const {
     Location,
     Doctor,
     Examination,
+    Laboratory,
 } = require("../../../models");
 
 const patientFinder = async (req, res, next) => {
@@ -69,6 +70,15 @@ const patientFinder = async (req, res, next) => {
                                 model: Location,
                                 attributes: {
                                     exclude: ["createdAt", "updatedAt"],
+                                },
+                            },
+                            {
+                                model: Laboratory,
+                                attributes: {
+                                    exclude: ["createdAt", "updatedAt"],
+                                },
+                                through: {
+                                    attributes: [],
                                 },
                             },
                         ],

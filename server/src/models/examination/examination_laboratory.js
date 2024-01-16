@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 
-const { sequelize } = require("../util/db");
+const { sequelize } = require("../../utils/db");
 
 class ExaminationLaboratory extends Model {}
 
@@ -11,7 +11,7 @@ ExaminationLaboratory.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        encounterId: {
+        examinationId: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },

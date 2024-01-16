@@ -18,10 +18,6 @@ module.exports = {
                 allowNull: false,
                 references: { model: "laboratories", key: "id" },
             },
-            read: {
-                type: DataTypes.BOOLEAN,
-                defaultValue: false,
-            },
         });
     },
     down: async ({ context: queryInterface }) => {
