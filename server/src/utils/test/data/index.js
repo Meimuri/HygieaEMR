@@ -22,6 +22,13 @@ const {
     nonExistentPatientId,
 } = require("./patient/patient_data");
 
+const {
+    validEncounter,
+    validEncounterUpdate,
+    invalidEncounter,
+    nonExistentEncounterId,
+} = require("./encounter/encounter_data");
+
 module.exports = {
     validLocation,
     validLocationUpdate,
@@ -38,4 +45,8 @@ module.exports = {
     validPatientUpdate,
     invalidPatient,
     nonExistentPatientId,
+    validEncounter,
+    validEncounterUpdate,
+    invalidEncounter,
+    nonExistentEncounterId,
 };
