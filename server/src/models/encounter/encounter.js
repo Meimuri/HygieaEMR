@@ -57,6 +57,10 @@ Encounter.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
+        doctorId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
     {
         sequelize,

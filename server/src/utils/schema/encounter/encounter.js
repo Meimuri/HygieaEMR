@@ -51,6 +51,11 @@ const createEncounterSchema = Joi.object({
         "number.base": "Location ID must be a number",
         "number.integer": "Location ID must be an integer",
     }),
+    doctorId: Joi.number().integer().required().messages({
+        "any.required": "Doctor ID is required",
+        "number.base": "Doctor ID must be a number",
+        "number.integer": "Doctor ID must be an integer",
+    }),
 });
 
 const updateEncounterSchema = Joi.object({
@@ -103,6 +108,11 @@ const updateEncounterSchema = Joi.object({
         "any.required": "Location ID is required",
         "number.base": "Location ID must be a number",
         "number.integer": "Location ID must be an integer",
+    }),
+    doctorId: Joi.number().integer().required().messages({
+        "any.required": "Doctor ID is required",
+        "number.base": "Doctor ID must be a number",
+        "number.integer": "Doctor ID must be an integer",
     }),
 });
 

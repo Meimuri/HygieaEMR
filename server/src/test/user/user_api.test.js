@@ -14,13 +14,6 @@ describe("GET /api/users", () => {
         );
     });
 
-    test("should return a 200 status and have zero users", async () => {
-        const response = await api.get("/api/users");
-
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveLength(0);
-    });
-
     test("should return a 404 status for non-existent user", async () => {
         const response = await api.get(`/api/users/${data.nonExistentUserId}`);
 

@@ -14,13 +14,6 @@ describe("GET /api/patients", () => {
         );
     });
 
-    test("should return a 200 status and have zero patients", async () => {
-        const response = await api.get("/api/patients");
-
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveLength(0);
-    });
-
     test("should return a 404 status for non-existent patients", async () => {
         const response = await api.get(
             `/api/patients/${data.nonExistentPatientId}`

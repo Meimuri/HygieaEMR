@@ -79,6 +79,6 @@ generateSchemaTests(
     data.validEncounter,
     data.validEncounterUpdate,
     data.invalidEncounter,
-    ["patientId", "date", "class", "status", "locationId"],
-    ["patientId", "date", "class", "status", "locationId"]
+    ["patientId", "date", "class", "status", "locationId", "doctorId"],
+    ["patientId", "date", "class", "status", "locationId", "doctorId"]
 );

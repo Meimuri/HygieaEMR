@@ -7,6 +7,7 @@ const validEncounter = {
     chiefComplaint: "Headache",
     notes: "Patient has been experiencing headaches for the past week",
     locationId: 1,
+    doctorId: 1,
 };
 
 const validEncounterUpdate = {
@@ -18,6 +19,7 @@ const validEncounterUpdate = {
     chiefComplaint: "Migraine",
     notes: "Patient's headaches have been worsening",
     locationId: 1,
+    doctorId: 1,
 };
 
 const invalidEncounter = {
@@ -54,6 +56,10 @@ const invalidEncounter = {
     locationId: {
         locationId1: "abc",
         locationId2: 123.45,
+    },
+    doctorId: {
+        doctorId1: "abc",
+        doctorId2: 123.45,
     },
 };
 

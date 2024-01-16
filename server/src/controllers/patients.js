@@ -10,6 +10,7 @@ const {
     PatientEmergencyContact,
     Encounter,
     Location,
+    Doctor,
 } = require("../models");
 
 const {
@@ -48,12 +49,19 @@ router.get("/", async (_req, res) => {
                         "updatedAt",
                         "patientId",
                         "locationId",
+                        "doctorId",
                     ],
                 },
                 include: [
                     {
                         model: Location,
                         attributes: { exclude: ["createdAt", "updatedAt"] },
+                    },
+                    {
+                        model: Doctor,
+                        attributes: {
+                            exclude: ["createdAt", "updatedAt", "userId"],
+                        },
                     },
                 ],
             },

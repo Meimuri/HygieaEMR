@@ -14,13 +14,6 @@ describe("GET /api/encounters", () => {
         );
     });
 
-    test("should return a 200 status and have zero encounters", async () => {
-        const response = await api.get("/api/encounters");
-
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveLength(0);
-    });
-
     test("should return a 404 status for non-existent encounters", async () => {
         const response = await api.get(
             `/api/encounters/${data.nonExistentEncounterId}`

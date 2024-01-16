@@ -30,6 +30,7 @@ Patient.hasMany(Encounter);
 Encounter.belongsTo(Patient);
 
 Encounter.belongsTo(Location);
+Encounter.belongsTo(Doctor);
 
 module.exports = {
     Location,

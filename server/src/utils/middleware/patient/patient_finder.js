@@ -6,11 +6,10 @@ const {
     PatientEmergencyContact,
     Encounter,
     Location,
+    Doctor,
 } = require("../../../models");
 
 const patientFinder = async (req, res, next) => {
-    // const patient = await Patient.findByPk(req.params.id);
-
     const patient = await Patient.findByPk(req.params.id, {
         attributes: { exclude: ["createdAt", "updatedAt"] },
         include: [
@@ -40,12 +39,19 @@ const patientFinder = async (req, res, next) => {
                         "updatedAt",
                         "patientId",
                         "locationId",
+                        "doctorId",
                     ],
                 },
                 include: [
                     {
                         model: Location,
                         attributes: { exclude: ["createdAt", "updatedAt"] },
+                    },
+                    {
+                        model: Doctor,
+                        attributes: {
+                            exclude: ["createdAt", "updatedAt", "userId"],
+                        },
                     },
                 ],
             },

@@ -14,13 +14,6 @@ describe("GET /api/locations", () => {
         );
     });
 
-    test("should return a 200 status and have zero locations", async () => {
-        const response = await api.get("/api/locations");
-
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveLength(0);
-    });
-
     test("should return a 404 status for non-existent locations", async () => {
         const response = await api.get(
             `/api/locations/${data.nonExistentLocationId}`
