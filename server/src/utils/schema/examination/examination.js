@@ -38,6 +38,11 @@ const createExaminationSchema = Joi.object({
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
     }),
+    laboratory: Joi.array().items(Joi.number().integer()).optional().messages({
+        "array.base": "Laboratory IDs must be an array",
+        "number.base": "Each Laboratory ID must be a number",
+        "number.integer": "Each Laboratory ID must be an integer",
+    }),
 });
 
 const updateExaminationSchema = Joi.object({
@@ -77,6 +82,11 @@ const updateExaminationSchema = Joi.object({
     }),
     notes: Joi.string().trim().optional().messages({
         "string.base": "Notes must be a string",
+    }),
+    laboratory: Joi.array().items(Joi.number().integer()).optional().messages({
+        "array.base": "Laboratory IDs must be an array",
+        "number.base": "Each Laboratory ID must be a number",
+        "number.integer": "Each Laboratory ID must be an integer",
     }),
 });
 

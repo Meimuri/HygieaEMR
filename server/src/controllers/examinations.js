@@ -39,26 +39,24 @@ router.get("/", async (_req, res) => {
 });
 
 router.post("/", validateCreateExamination, async (req, res) => {
+    const { laboratory, ...examinationData } = req.body;
+
     const result = await sequelize.transaction(async (t) => {
-        const examination = await Examination.create(req.body, {
+        const examination = await Examination.create(examinationData, {
             transaction: t,
         });
-        // Hard Code Adding Laboratory to Examination for now
-        await ExaminationLaboratory.create(
-            {
-                examinationId: examination.id,
-                laboratoryId: 1,
-            },
-            { transaction: t }
-        );
 
-        await ExaminationLaboratory.create(
-            {
-                examinationId: examination.id,
-                laboratoryId: 2,
-            },
-            { transaction: t }
-        );
+        if (laboratory) {
+            for (let i = 0; i < laboratory.length; i++) {
+                await ExaminationLaboratory.create(
+                    {
+                        examinationId: examination.id,
+                        laboratoryId: laboratory[i],
+                    },
+                    { transaction: t }
+                );
+            }
+        }
 
         return examination;
     });
@@ -70,16 +68,44 @@ router.get("/:id", examinationFinder, async (req, res) => {
 });
 
 router.put("/:id", validateUpdateExamination, async (req, res) => {
-    const [rowsUpdate, [updatedExamination]] = await Examination.update(
-        req.body,
-        {
-            where: { id: req.params.id },
-            returning: true,
-        }
-    );
+    const { laboratory, ...examinationData } = req.body;
 
-    if (rowsUpdate > 0) {
-        return res.json(updatedExamination);
+    const result = await sequelize.transaction(async (t) => {
+        const [rowsUpdate, [updatedExamination]] = await Examination.update(
+            examinationData,
+            {
+                where: { id: req.params.id },
+                returning: true,
+                transaction: t,
+            }
+        );
+
+        if (rowsUpdate > 0) {
+            await ExaminationLaboratory.destroy({
+                where: { examinationId: req.params.id },
+                transaction: t,
+            });
+
+            if (laboratory) {
+                for (let i = 0; i < laboratory.length; i++) {
+                    await ExaminationLaboratory.create(
+                        {
+                            examinationId: req.params.id,
+                            laboratoryId: laboratory[i],
+                        },
+                        { transaction: t }
+                    );
+                }
+            }
+
+            return updatedExamination;
+        } else {
+            return res.status(404).json({ error: "Examination not found" });
+        }
+    });
+
+    if (result) {
+        return res.json(result);
     } else {
         return res.status(404).json({ error: "Examination not found" });
     }

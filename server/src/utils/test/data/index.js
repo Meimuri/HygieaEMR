@@ -1,4 +1,11 @@
 const {
+    validLaboratory,
+    validLaboratoryUpdate,
+    invalidLaboratory,
+    nonExistentLaboratoryId,
+} = require("./laboratory/laboratory_data");
+
+const {
     validLocation,
     validLocationUpdate,
     invalidLocation,
@@ -31,6 +38,10 @@ const {
 } = require("./encounter/encounter_data");
 
 module.exports = {
+    validLaboratory,
+    validLaboratoryUpdate,
+    invalidLaboratory,
+    nonExistentLaboratoryId,
     validLocation,
     validLocationUpdate,
     invalidLocation,
