@@ -33,7 +33,7 @@ Encounter.belongsTo(Patient);
 Encounter.belongsTo(Location);
 Encounter.belongsTo(Doctor);
 
-Encounter.hasMany(Examination);
+Encounter.hasOne(Examination);
 Examination.belongsTo(Encounter);
 Examination.belongsTo(Location);
 
