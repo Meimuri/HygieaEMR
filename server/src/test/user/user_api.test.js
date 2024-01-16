@@ -24,7 +24,6 @@ describe("GET /api/users", () => {
 
 describe("POST /api/users", () => {
     const testUserCreation = async (userData) => {
-        await helper.deleteAllUsers();
         const usersAtStart = await helper.usersInDb();
 
         const response = await api.post("/api/users").send(userData);
@@ -73,12 +72,11 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("PUT /api/users/:id ", () => {
-    const testUserUpdate = async (userIndex, userData) => {
-        const usersAtStart = await helper.usersInDb();
-        const userToUpdate = usersAtStart[userIndex];
+    const testUserUpdate = async (userCreateData, userData) => {
+        const userToUpdate = await api.post("/api/users").send(userCreateData);
 
         const response = await api
-            .put(`/api/users/${userToUpdate.id}`)
+            .put(`/api/users/${userToUpdate.body.id}`)
             .send(userData);
 
         expect(response.status).toBe(200);
@@ -89,6 +87,16 @@ describe("PUT /api/users/:id ", () => {
     };
 
     test("should return a 200 status and update the doctor's data", async () => {
-        await testUserUpdate(0, data.validDoctorUserUpdate);
+        await testUserUpdate(
+            data.validDoctorUserForUpdate,
+            data.validDoctorUserUpdate
+        );
+    });
+
+    test("should return a 200 status and update the secretary's data", async () => {
+        await testUserUpdate(
+            data.validSecretaryUserForUpdate,
+            data.validSecretaryUserUpdate
+        );
     });
 });
