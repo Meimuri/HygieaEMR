@@ -8,11 +8,11 @@ module.exports = {
                 primaryKey: true,
                 autoIncrement: true,
             },
-            subjective: {
+            name: {
                 type: DataTypes.TEXT,
                 allowNull: false,
             },
-            objective: {
+            category: {
                 type: DataTypes.TEXT,
             },
             created_at: {

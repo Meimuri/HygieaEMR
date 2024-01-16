@@ -1,5 +1,7 @@
 // Internal modules
+const Laboratory = require("./miscellaneous/laboratory");
 const Location = require("./miscellaneous/location");
+
 const User = require("./user/user");
 const Secretary = require("./user/secretary");
 const Doctor = require("./user/doctor");
@@ -38,6 +40,7 @@ Examination.belongsTo(Encounter);
 Examination.belongsTo(Location);
 
 module.exports = {
+    Laboratory,
     Location,
     User,
     Secretary,

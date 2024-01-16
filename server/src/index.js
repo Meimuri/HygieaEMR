@@ -6,6 +6,7 @@ require("express-async-errors");
 const { PORT } = require("./utils/config");
 const { connectToDatabase } = require("./utils/db");
 
+const laboratoriesRouter = require("./controllers/laboratories");
 const locationsRouter = require("./controllers/locations");
 const usersRouter = require("./controllers/users");
 const patientsRouter = require("./controllers/patients");
@@ -16,6 +17,7 @@ const middleware = require("./utils/middleware/");
 const app = express();
 app.use(express.json());
 
+app.use("/api/laboratories", laboratoriesRouter);
 app.use("/api/locations", locationsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/patients", patientsRouter);
