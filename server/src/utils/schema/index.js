@@ -24,6 +24,11 @@ const {
     updateEncounterSchema,
 } = require("./encounter/encounter");
 
+const {
+    createExaminationSchema,
+    updateExaminationSchema,
+} = require("./examination/examination");
+
 module.exports = {
     createLocationSchema,
     updateLocationSchema,
@@ -35,4 +40,6 @@ module.exports = {
     updatePatientSchema,
     createEncounterSchema,
     updateEncounterSchema,
+    createExaminationSchema,
+    updateExaminationSchema,
 };

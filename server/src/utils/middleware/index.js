@@ -5,6 +5,7 @@ const locationFinder = require("./miscellaneous/location/location_finder");
 const userFinder = require("./user/user_finder");
 const patientFinder = require("./patient/patient_finder");
 const encounterFinder = require("./encounter/encounter_finder");
+const examinationFinder = require("./examination/examination_finder");
 
 const {
     validateCreateLocation,
@@ -26,6 +27,11 @@ const {
     validateUpdateEncounter,
 } = require("./encounter/encounter_validator");
 
+const {
+    validateCreateExamination,
+    validateUpdateExamination,
+} = require("./examination/examination_validator");
+
 module.exports = {
     unknownEndpoint,
     errorHandler,
@@ -33,6 +39,7 @@ module.exports = {
     userFinder,
     patientFinder,
     encounterFinder,
+    examinationFinder,
     validateCreateLocation,
     validateUpdateLocation,
     validateCreateUser,
@@ -41,4 +48,6 @@ module.exports = {
     validateUpdatePatient,
     validateCreateEncounter,
     validateUpdateEncounter,
+    validateCreateExamination,
+    validateUpdateExamination,
 };
