@@ -6,12 +6,13 @@ const router = require("express").Router();
 const { sequelize } = require("../utils/db");
 const { User, Secretary, Doctor } = require("../models");
 const {
+    userExtractor,
     userFinder,
     validateCreateUser,
     validateUpdateUser,
 } = require("../utils/middleware/");
 
-router.get("/", async (_req, res) => {
+router.get("/", userExtractor, async (_req, res) => {
     const users = await User.findAll({
         attributes: { exclude: ["password", "createdAt", "updatedAt"] },
         include: [

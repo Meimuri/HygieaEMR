@@ -1,6 +1,8 @@
 // Internal modules
 const unknownEndpoint = require("./api/unknown_endpoint");
 const errorHandler = require("./api/error_handler");
+const tokenExtractor = require("./api/token_extractor");
+const userExtractor = require("./api/user_extractor");
 const laboratoryFinder = require("./miscellaneous/laboratory/laboratory_finder");
 const locationFinder = require("./miscellaneous/location/location_finder");
 const userFinder = require("./user/user_finder");
@@ -43,6 +45,8 @@ const {
 module.exports = {
     unknownEndpoint,
     errorHandler,
+    tokenExtractor,
+    userExtractor,
     laboratoryFinder,
     locationFinder,
     userFinder,
