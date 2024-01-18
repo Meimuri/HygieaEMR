@@ -12,12 +12,13 @@ const {
 } = require("../models");
 
 const {
+    userExtractor,
     encounterFinder,
     validateCreateEncounter,
     validateUpdateEncounter,
 } = require("../utils/middleware/");
 
-router.get("/", async (_req, res) => {
+router.get("/", userExtractor, async (_req, res) => {
     const encounters = await Encounter.findAll({
         attributes: {
             exclude: [
@@ -66,16 +67,16 @@ router.get("/", async (_req, res) => {
     res.json(encounters);
 });
 
-router.post("/", validateCreateEncounter, async (req, res) => {
+router.post("/", userExtractor, validateCreateEncounter, async (req, res) => {
     const encounter = await Encounter.create(req.body);
     res.status(201).json(encounter);
 });
 
-router.get("/:id", encounterFinder, async (req, res) => {
+router.get("/:id", userExtractor, encounterFinder, async (req, res) => {
     res.json(req.encounter);
 });
 
-router.put("/:id", validateUpdateEncounter, async (req, res) => {
+router.put("/:id", userExtractor, validateUpdateEncounter, async (req, res) => {
     const [rowsUpdate, [updatedEncounter]] = await Encounter.update(req.body, {
         where: { id: req.params.id },
         returning: true,

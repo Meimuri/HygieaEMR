@@ -10,7 +10,7 @@ const usersInDb = async () => {
 
 const truncateAndCascadeUsers = async () => {
     try {
-        await sequelize.query("TRUNCATE users CASCADE");
+        await sequelize.query("TRUNCATE users RESTART IDENTITY CASCADE");
     } catch (error) {
         console.error("An error occurred:", error);
     }
