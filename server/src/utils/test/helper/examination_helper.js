@@ -1,3 +1,4 @@
+const { sequelize } = require("../../db");
 const { Examination } = require("../../../models");
 
 const examinationsInDb = async () => {
@@ -5,6 +6,15 @@ const examinationsInDb = async () => {
     return examination;
 };
 
+const truncateAndCascadePatients = async () => {
+    try {
+        await sequelize.query("TRUNCATE patients RESTART IDENTITY CASCADE");
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+};
+
 module.exports = {
     examinationsInDb,
+    truncateAndCascadePatients,
 };

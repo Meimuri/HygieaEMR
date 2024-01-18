@@ -11,12 +11,13 @@ const {
 } = require("../models");
 
 const {
+    userExtractor,
     examinationFinder,
     validateCreateExamination,
     validateUpdateExamination,
 } = require("../utils/middleware/");
 
-router.get("/", async (_req, res) => {
+router.get("/", userExtractor, async (_req, res) => {
     const examinations = await Examination.findAll({
         attributes: {
             exclude: ["createdAt", "updatedAt", "encounterId", "locationId"],
@@ -38,7 +39,7 @@ router.get("/", async (_req, res) => {
     res.json(examinations);
 });
 
-router.post("/", validateCreateExamination, async (req, res) => {
+router.post("/", userExtractor, validateCreateExamination, async (req, res) => {
     const { laboratory, ...examinationData } = req.body;
 
     const result = await sequelize.transaction(async (t) => {
@@ -63,52 +64,57 @@ router.post("/", validateCreateExamination, async (req, res) => {
     res.status(201).json(result);
 });
 
-router.get("/:id", examinationFinder, async (req, res) => {
+router.get("/:id", userExtractor, examinationFinder, async (req, res) => {
     res.json(req.examination);
 });
 
-router.put("/:id", validateUpdateExamination, async (req, res) => {
-    const { laboratory, ...examinationData } = req.body;
+router.put(
+    "/:id",
+    userExtractor,
+    validateUpdateExamination,
+    async (req, res) => {
+        const { laboratory, ...examinationData } = req.body;
 
-    const result = await sequelize.transaction(async (t) => {
-        const [rowsUpdate, [updatedExamination]] = await Examination.update(
-            examinationData,
-            {
-                where: { id: req.params.id },
-                returning: true,
-                transaction: t,
-            }
-        );
-
-        if (rowsUpdate > 0) {
-            await ExaminationLaboratory.destroy({
-                where: { examinationId: req.params.id },
-                transaction: t,
-            });
-
-            if (laboratory) {
-                for (let i = 0; i < laboratory.length; i++) {
-                    await ExaminationLaboratory.create(
-                        {
-                            examinationId: req.params.id,
-                            laboratoryId: laboratory[i],
-                        },
-                        { transaction: t }
-                    );
+        const result = await sequelize.transaction(async (t) => {
+            const [rowsUpdate, [updatedExamination]] = await Examination.update(
+                examinationData,
+                {
+                    where: { id: req.params.id },
+                    returning: true,
+                    transaction: t,
                 }
-            }
+            );
 
-            return updatedExamination;
+            if (rowsUpdate > 0) {
+                await ExaminationLaboratory.destroy({
+                    where: { examinationId: req.params.id },
+                    transaction: t,
+                });
+
+                if (laboratory) {
+                    for (let i = 0; i < laboratory.length; i++) {
+                        await ExaminationLaboratory.create(
+                            {
+                                examinationId: req.params.id,
+                                laboratoryId: laboratory[i],
+                            },
+                            { transaction: t }
+                        );
+                    }
+                }
+
+                return updatedExamination;
+            } else {
+                return res.status(404).json({ error: "Examination not found" });
+            }
+        });
+
+        if (result) {
+            return res.json(result);
         } else {
             return res.status(404).json({ error: "Examination not found" });
         }
-    });
-
-    if (result) {
-        return res.json(result);
-    } else {
-        return res.status(404).json({ error: "Examination not found" });
     }
-});
+);
 
 module.exports = router;
