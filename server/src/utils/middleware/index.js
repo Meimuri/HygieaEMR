@@ -8,6 +8,8 @@ const patientFinder = require("./patient/patient_finder");
 const encounterFinder = require("./encounter/encounter_finder");
 const examinationFinder = require("./examination/examination_finder");
 
+const { validateLogin } = require("./user/login_validator");
+
 const {
     validateCreateLaboratory,
     validateUpdateLaboratory,
@@ -47,6 +49,7 @@ module.exports = {
     patientFinder,
     encounterFinder,
     examinationFinder,
+    validateLogin,
     validateCreateLaboratory,
     validateUpdateLaboratory,
     validateCreateLocation,

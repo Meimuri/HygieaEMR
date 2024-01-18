@@ -1,4 +1,6 @@
 // Internal modules
+const { loginSchema } = require("./user/login");
+
 const {
     createLaboratorySchema,
     updateLaboratorySchema,
@@ -35,6 +37,7 @@ const {
 } = require("./examination/examination");
 
 module.exports = {
+    loginSchema,
     createLaboratorySchema,
     updateLaboratorySchema,
     createLocationSchema,
