@@ -6,28 +6,29 @@ const { sequelize } = require("../utils/db");
 const { Location } = require("../models");
 
 const {
+    userExtractor,
     locationFinder,
     validateCreateLocation,
     validateUpdateLocation,
 } = require("../utils/middleware/");
 
-router.get("/", async (_req, res) => {
+router.get("/", userExtractor, async (_req, res) => {
     const locations = await Location.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     res.json(locations);
 });
 
-router.post("/", validateCreateLocation, async (req, res) => {
+router.post("/", userExtractor, validateCreateLocation, async (req, res) => {
     const location = await Location.create(req.body);
     res.status(201).json(location);
 });
 
-router.get("/:id", locationFinder, async (req, res) => {
+router.get("/:id", userExtractor, locationFinder, async (req, res) => {
     res.json(req.location);
 });
 
-router.put("/:id", validateUpdateLocation, async (req, res) => {
+router.put("/:id", userExtractor, validateUpdateLocation, async (req, res) => {
     const [rowsUpdate, [updatedLocation]] = await Location.update(req.body, {
         where: { id: req.params.id },
         returning: true,
