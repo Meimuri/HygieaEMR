@@ -4,9 +4,26 @@ const api = supertest(app);
 const helper = require("../../utils/test/helper/user_helper");
 const data = require("../../utils/test/data");
 
+let token = "";
+
+beforeAll(async () => {
+    await helper.truncateAndCascadeUsers();
+    await helper.createUserDoctor();
+
+    const user = {
+        username: "userforlogin",
+        password: "Qweasd!2",
+    };
+
+    const response = await api.post("/api/login").send(user);
+    token = response.body.token;
+}, 100000);
+
 describe("GET /api/users", () => {
     test("should return a 200 status and users as json", async () => {
-        const response = await api.get("/api/users");
+        const response = await api
+            .get("/api/users")
+            .set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(200);
         expect(response.headers["content-type"]).toEqual(
@@ -15,7 +32,9 @@ describe("GET /api/users", () => {
     });
 
     test("should return a 404 status for non-existent user", async () => {
-        const response = await api.get(`/api/users/${data.nonExistentUserId}`);
+        const response = await api
+            .get(`/api/users/${data.nonExistentUserId}`)
+            .set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(404);
         expect(response.body.error).toContain("User not found");
@@ -24,9 +43,13 @@ describe("GET /api/users", () => {
 
 describe("POST /api/users", () => {
     const testUserCreation = async (userData) => {
+        await helper.deleteSelectedUsers();
         const usersAtStart = await helper.usersInDb();
 
-        const response = await api.post("/api/users").send(userData);
+        const response = await api
+            .post("/api/users")
+            .set("Authorization", `Bearer ${token}`)
+            .send(userData);
 
         expect(response.status).toBe(201);
         expect(response.headers["content-type"]).toEqual(
@@ -43,10 +66,15 @@ describe("POST /api/users", () => {
         await testUserCreation(data.validDoctorUser);
     });
 
+    test("should return a 201 status and create a new secretary type user", async () => {
+        await testUserCreation(data.validSecretaryUser);
+    });
+
     test("should return a 400 status if username is already existing", async () => {
         const response = await api
             .post("/api/users")
-            .send(data.validDoctorUser);
+            .set("Authorization", `Bearer ${token}`)
+            .send(data.userForLogin);
 
         expect(response.status).toBe(400);
         expect(response.headers["content-type"]).toEqual(
@@ -61,7 +89,9 @@ describe("GET /api/users/:id", () => {
         const usersAtStart = await helper.usersInDb();
         const userToView = usersAtStart[0];
 
-        const response = await api.get(`/api/users/${userToView.id}`);
+        const response = await api
+            .get(`/api/users/${userToView.id}`)
+            .set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(200);
         expect(response.headers["content-type"]).toEqual(
@@ -72,30 +102,32 @@ describe("GET /api/users/:id", () => {
 });
 
 describe("PUT /api/users/:id ", () => {
-    const testUserUpdate = async (userCreateData, userData) => {
-        const userToUpdate = await api.post("/api/users").send(userCreateData);
+    const testUserUpdate = async (userCreateData, userUpdateData) => {
+        await helper.deleteSelectedUsers();
+        const userToUpdate = await api
+            .post("/api/users")
+            .set("Authorization", `Bearer ${token}`)
+            .send(userCreateData);
 
         const response = await api
             .put(`/api/users/${userToUpdate.body.id}`)
-            .send(userData);
+            .set("Authorization", `Bearer ${token}`)
+            .send(userUpdateData);
 
         expect(response.status).toBe(200);
         expect(response.headers["content-type"]).toEqual(
             expect.stringContaining("json")
         );
-        expect(response.body.firstName).toBe(userData.firstName);
+        expect(response.body.firstName).toBe(userUpdateData.firstName);
     };
 
     test("should return a 200 status and update the doctor's data", async () => {
-        await testUserUpdate(
-            data.validDoctorUserForUpdate,
-            data.validDoctorUserUpdate
-        );
+        await testUserUpdate(data.validDoctorUser, data.validDoctorUserUpdate);
     });
 
     test("should return a 200 status and update the secretary's data", async () => {
         await testUserUpdate(
-            data.validSecretaryUserForUpdate,
+            data.validSecretaryUser,
             data.validSecretaryUserUpdate
         );
     });

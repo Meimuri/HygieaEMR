@@ -46,7 +46,7 @@ router.get("/", userExtractor, async (_req, res) => {
     res.json(usersWithDetails);
 });
 
-router.post("/", validateCreateUser, async (req, res) => {
+router.post("/", userExtractor, validateCreateUser, async (req, res) => {
     const { username, password, userType, ...otherDetails } = req.body;
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
@@ -89,11 +89,11 @@ router.post("/", validateCreateUser, async (req, res) => {
     res.status(201).json(result);
 });
 
-router.get("/:id", userFinder, async (req, res) => {
+router.get("/:id", userExtractor, userFinder, async (req, res) => {
     res.json(req.user);
 });
 
-router.put("/:id", validateUpdateUser, async (req, res) => {
+router.put("/:id", userExtractor, validateUpdateUser, async (req, res) => {
     const { userType, ...otherDetails } = req.body;
 
     let Model;
@@ -124,18 +124,6 @@ router.put("/:id", validateUpdateUser, async (req, res) => {
     } else {
         return res.status(404).json({ error: "User not found" });
     }
-});
-
-router.delete("/:id", async (req, res) => {
-    const user = await User.findByPk(req.params.id);
-
-    if (!user) {
-        return res.status(404).json({ error: "User not found" });
-    }
-
-    await user.destroy();
-
-    res.status(200).json({ message: "User deleted successfully" });
 });
 
 module.exports = router;

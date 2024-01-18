@@ -13,11 +13,9 @@ const {
 } = require("./location/location_data");
 
 const {
+    userForLogin,
     validSecretaryUser,
-    validSecretaryUserForUpdate,
     validDoctorUser,
-    validDoctorUserForUpdate,
-    validDoctorUserForEncounter,
     validSecretaryUserUpdate,
     validDoctorUserUpdate,
     invalidSecretaryUsers,
@@ -55,11 +53,9 @@ module.exports = {
     validLocationUpdate,
     invalidLocation,
     nonExistentLocationId,
+    userForLogin,
     validSecretaryUser,
-    validSecretaryUserForUpdate,
     validDoctorUser,
-    validDoctorUserForUpdate,
-    validDoctorUserForEncounter,
     validSecretaryUserUpdate,
     validDoctorUserUpdate,
     invalidSecretaryUsers,
