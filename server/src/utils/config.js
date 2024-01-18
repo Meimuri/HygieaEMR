@@ -11,6 +11,6 @@ if (process.env.NODE_ENV === "test") {
 
 module.exports = {
     DATABASE_URL: DATABASE,
-    PORT: process.env.PORT,
+    PORT: process.env.PORT || 3000,
     SECRET: process.env.SECRET,
 };

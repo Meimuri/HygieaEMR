@@ -33,6 +33,7 @@
         "umzug": "^3.5.0"
     },
     "devDependencies": {
+        "@flydotio/dockerfile": "^0.5.0",
         "jest": "^29.7.0",
         "nodemon": "^3.0.2",
         "supertest": "^6.3.3"
