@@ -16,12 +16,13 @@ const {
 } = require("../models");
 
 const {
+    userExtractor,
     patientFinder,
     validateCreatePatient,
     validateUpdatePatient,
 } = require("../utils/middleware/");
 
-router.get("/", async (_req, res) => {
+router.get("/", userExtractor, async (_req, res) => {
     const patients = await Patient.findAll({
         attributes: { exclude: ["createdAt", "updatedAt"] },
         include: [
@@ -100,7 +101,7 @@ router.get("/", async (_req, res) => {
     res.json(patients);
 });
 
-router.post("/", validateCreatePatient, async (req, res) => {
+router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
     const { patientInfo, addressInfo, contactInfo, emergencyContactInfo } =
         req.body;
 
@@ -148,17 +149,17 @@ router.post("/", validateCreatePatient, async (req, res) => {
             patientPlain.emergencyContact = patientEmergencyContact.toJSON();
         }
 
-        return { patient: patientPlain };
+        return patientPlain;
     });
 
     res.status(201).json(result);
 });
 
-router.get("/:id", patientFinder, async (req, res) => {
+router.get("/:id", userExtractor, patientFinder, async (req, res) => {
     res.json(req.patient);
 });
 
-router.put("/:id", validateUpdatePatient, async (req, res) => {
+router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
     const { patientInfo, addressInfo, contactInfo, emergencyContactInfo } =
         req.body;
 
@@ -280,7 +281,7 @@ router.put("/:id", validateUpdatePatient, async (req, res) => {
             }
         }
 
-        return { patient: updatedPatientPlain };
+        return updatedPatientPlain;
     });
 
     res.status(200).json(result);
