@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-function App() {
-    const [count, setCount] = useState(0);
+import { handleLocalStorageLogin } from "./store/reducers/login";
+import LoginForm from "./modules/Login/components/LoginForm";
+import Home from "./modules/Home/Home";
+
+const App = () => {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.login);
+
+    useEffect(() => {
+        dispatch(handleLocalStorageLogin());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
-        <>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.jsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
+        <div>
+            {!user && <LoginForm />}
+            {user && <Home />}
+        </div>
     );
-}
+};
 
 export default App;
