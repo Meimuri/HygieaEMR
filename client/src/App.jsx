@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { handleLocalStorageLogin } from "./store/reducers/login";
+
+import Notification from "./common/components/Notification";
 import LoginForm from "./modules/Login/components/LoginForm";
 import Home from "./modules/Home/Home";
 
@@ -16,6 +18,7 @@ const App = () => {
 
     return (
         <div>
+            <Notification />
             {!user && <LoginForm />}
             {user && <Home />}
         </div>

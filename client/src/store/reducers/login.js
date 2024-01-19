@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import loginService from "../../common/services/login";
+import { setNotification } from "./notification";
 
 const loginSlice = createSlice({
     name: "login",
@@ -33,8 +35,8 @@ export const handleLogin = ({ username, password }) => {
             dispatch(setUser(user));
             window.localStorage.setItem("loggedEMRUser", JSON.stringify(user));
         } catch (error) {
-            // dispatch(setNotification("Wrong credentials", "error", 5));
-            console.log(error.response.data);
+            dispatch(setNotification(error.response.data.error, 5));
+            // console.log(error.response.data);
         }
     };
 };
