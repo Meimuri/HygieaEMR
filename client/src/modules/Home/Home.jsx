@@ -1,10 +1,11 @@
-const LoginForm = () => {
+import Header from "../../common/components/Header";
+
+const Home = () => {
     return (
         <>
-            <h1>Welcome to user!</h1>
-            <h3>You are logged in</h3>
+            <Header text="Welcome to HygieaEMR" />
         </>
     );
 };
 
-export default LoginForm;
+export default Home;

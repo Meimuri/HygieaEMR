@@ -1,26 +1,12 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
-import { handleLocalStorageLogin } from "./store/reducers/login";
-
 import Notification from "./common/components/Notification";
 import LoginForm from "./modules/Login/components/LoginForm";
-import Home from "./modules/Home/Home";
+// import Main from "./modules/Main/Main";
 
 const App = () => {
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.login);
-
-    useEffect(() => {
-        dispatch(handleLocalStorageLogin());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <div>
             <Notification />
-            {!user && <LoginForm />}
-            {user && <Home />}
+            <LoginForm />
         </div>
     );
 };

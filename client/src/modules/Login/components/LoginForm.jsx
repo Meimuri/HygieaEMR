@@ -1,12 +1,9 @@
-import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
-import { handleLogin } from "../../../store/reducers/login";
 import schema from "../schema/";
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -15,8 +12,8 @@ const LoginForm = () => {
         resolver: joiResolver(schema),
     });
 
-    const onSubmit = async (credentials) => {
-        dispatch(handleLogin(credentials));
+    const onSubmit = async (data) => {
+        console.log(data);
     };
 
     return (
