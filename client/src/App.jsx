@@ -1,5 +1,5 @@
 import Notification from "./common/components/Notification";
-import LoginForm from "./modules/Login/components/LoginForm";
+import LoginForm from "./features/login/components/LoginForm";
 
 const App = () => {
     return (
