@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Menu from "../../common/components/Menu";
-import Home from "../Home/Home";
+import Menu from "../../../common/components/Menu";
+import Home from "../../Home/components/Home";
 import PatientList from "../Patient/PatientList";
 import Patient from "../Patient/Patient";
 
