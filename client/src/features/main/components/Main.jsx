@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
 import Menu from "../../../common/components/Menu";
-import Home from "../../Home/components/Home";
-import PatientList from "../Patient/PatientList";
-import Patient from "../Patient/Patient";
+import Home from "../../home/components/Home";
+import PatientList from "../../patient/components/PatientList";
+import Patient from "../../patient/components/Patient";
 
 const Main = () => {
     return (

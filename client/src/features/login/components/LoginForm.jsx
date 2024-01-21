@@ -1,9 +1,12 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
+import { handleLogin } from "../../../redux/reducers/login";
 import schema from "../schema/";
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -13,7 +16,7 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data) => {
-        console.log(data);
+        dispatch(handleLogin(data));
     };
 
     return (
@@ -30,7 +33,7 @@ const LoginForm = () => {
                 <div>
                     <label>Password</label>
                     <br />
-                    <input {...register("password")} />
+                    <input type="password" {...register("password")} />
                     <p>{errors.password?.message}</p>
                 </div>
 

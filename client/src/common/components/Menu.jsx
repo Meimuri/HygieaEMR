@@ -1,8 +1,13 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { handleLogout } from "../../redux/reducers/login";
+
 const Menu = () => {
-    const onClickLogout = async (event) => {
-        console.log(event);
+    const dispatch = useDispatch();
+
+    const onClickLogout = async () => {
+        dispatch(handleLogout());
     };
 
     const padding = {
@@ -13,9 +18,6 @@ const Menu = () => {
         <div>
             <Link style={padding} to="/">
                 Home
-            </Link>
-            <Link style={padding} to="/patients">
-                Patient
             </Link>
             <Link style={padding} to="/patients">
                 Patient
