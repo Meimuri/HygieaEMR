@@ -1,5 +1,6 @@
 // External modules
 const express = require("express");
+const cors = require("cors");
 require("express-async-errors");
 
 // Internal modules
@@ -17,6 +18,7 @@ const middleware = require("./utils/middleware/");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 app.use(middleware.tokenExtractor);
 
 app.use("/api/login", loginRouter);
