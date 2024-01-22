@@ -4,6 +4,7 @@ import Menu from "../../../common/components/Menu";
 import Home from "../../home/components/Home";
 import PatientList from "../../patient/components/PatientList";
 import Patient from "../../patient/components/Patient";
+import PatientCreateForm from "../../patient/components/PatientCreateForm";
 
 const Main = () => {
     return (
@@ -11,8 +12,9 @@ const Main = () => {
             <Menu />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/patients" element={<PatientList />} />
-                <Route path="/patients/:id" element={<Patient />} />
+                <Route path="/patient" element={<PatientList />} />
+                <Route path="/patient/:id" element={<Patient />} />
+                <Route path="/patient/create" element={<PatientCreateForm />} />
             </Routes>
         </div>
     );

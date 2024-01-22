@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
-import { handleLogin } from "../../../redux/reducers/login";
 import schema from "../schema/";
+import { handleLogin } from "../../../redux/reducers/login";
 
 const LoginForm = () => {
     const dispatch = useDispatch();

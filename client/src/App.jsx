@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { handleLocalStorageLogin } from "./redux/reducers/login";
@@ -9,23 +9,22 @@ import Main from "./features/main/components/Main";
 
 const App = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.login);
-    const [isLoading, setIsLoading] = useState(true);
+    const { user, isLoading } = useSelector((state) => state.login);
 
     useEffect(() => {
         dispatch(handleLocalStorageLogin());
-        setIsLoading(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    }, [dispatch]);
 
     return (
         <div>
             <Notification />
-            {!user ? <LoginForm /> : <Main />}
+            {isLoading ? (
+                <div>Loading...</div>
+            ) : !user ? (
+                <LoginForm />
+            ) : (
+                <Main />
+            )}
         </div>
     );
 };

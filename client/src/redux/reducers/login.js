@@ -5,15 +5,19 @@ import { setNotification } from "./notification";
 
 const loginSlice = createSlice({
     name: "login",
-    initialState: null,
+    initialState: { user: null, isLoading: true },
     reducers: {
         setUser(state, action) {
-            return action.payload;
+            state.user = action.payload;
+            state.isLoading = false; // Set loading to false when user is set
+        },
+        setLoading(state, action) {
+            state.isLoading = action.payload;
         },
     },
 });
 
-export const { setUser } = loginSlice.actions;
+export const { setUser, setLoading } = loginSlice.actions;
 
 export const handleLocalStorageLogin = () => {
     return async (dispatch) => {
@@ -21,6 +25,8 @@ export const handleLocalStorageLogin = () => {
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON);
             dispatch(setUser(user));
+        } else {
+            dispatch(setLoading(false));
         }
     };
 };

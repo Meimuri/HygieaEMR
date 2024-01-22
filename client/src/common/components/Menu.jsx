@@ -19,7 +19,7 @@ const Menu = () => {
             <Link style={padding} to="/">
                 Home
             </Link>
-            <Link style={padding} to="/patients">
+            <Link style={padding} to="/patient">
                 Patient
             </Link>
             <Link onClick={onClickLogout}>Sign out</Link>
