@@ -8,11 +8,6 @@ const {
     PatientAddress,
     PatientContactInfo,
     PatientEmergencyContact,
-    Encounter,
-    Location,
-    Laboratory,
-    Doctor,
-    Examination,
 } = require("../models");
 
 const {
@@ -21,6 +16,11 @@ const {
     validateCreatePatient,
     validateUpdatePatient,
 } = require("../utils/middleware/");
+
+const {
+    removeTimestamps,
+    removeTimestampsAndPatientID,
+} = require("../utils/removeTimestamps");
 
 router.get("/", userExtractor, async (_req, res) => {
     const patients = await Patient.findAll({
@@ -35,7 +35,7 @@ router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
 
     const result = await sequelize.transaction(async (t) => {
         const patient = await Patient.create(patientInfo, { transaction: t });
-        let patientPlain = patient.toJSON();
+        let patientPlain = removeTimestamps(patient.toJSON());
 
         if (addressInfo && Object.values(addressInfo).some(Boolean)) {
             const patientAddress = await PatientAddress.create(
@@ -46,7 +46,11 @@ router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
                 { transaction: t }
             );
 
-            patientPlain.address = patientAddress.toJSON();
+            patientPlain.patient_address = removeTimestampsAndPatientID(
+                patientAddress.toJSON()
+            );
+        } else {
+            patientPlain.patient_address = null;
         }
 
         if (contactInfo && Object.values(contactInfo).some(Boolean)) {
@@ -58,7 +62,11 @@ router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
                 { transaction: t }
             );
 
-            patientPlain.contact = patientContactInfo.toJSON();
+            patientPlain.patient_contact_info = removeTimestampsAndPatientID(
+                patientContactInfo.toJSON()
+            );
+        } else {
+            patientPlain.patient_contact_info = null;
         }
 
         if (
@@ -74,9 +82,13 @@ router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
                     { transaction: t }
                 );
 
-            patientPlain.emergencyContact = patientEmergencyContact.toJSON();
+            patientPlain.patient_emergency_contact =
+                removeTimestampsAndPatientID(patientEmergencyContact.toJSON());
+        } else {
+            patientPlain.patient_emergency_contact = null;
         }
 
+        patientPlain.encounters = [];
         return patientPlain;
     });
 
