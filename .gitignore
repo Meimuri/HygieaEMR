@@ -3,7 +3,8 @@
 /server/node_modules/
 
 # Build Files
-/server/build/
+/client/dist/
+/server/dist/
 
 # Env Files
 /server/.env

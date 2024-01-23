@@ -17,6 +17,7 @@ const examinationsRouter = require("./controllers/examinations");
 const middleware = require("./utils/middleware/");
 
 const app = express();
+app.use(express.static("dist"));
 app.use(express.json());
 app.use(cors());
 app.use(middleware.tokenExtractor);

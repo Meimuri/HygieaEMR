@@ -8,7 +8,9 @@
         "start": "cross-env NODE_ENV=production node src/index.js",
         "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
         "start:test": "cross-env NODE_ENV=test node src/index.js",
-        "deploy": "flyctl deploy"
+        "build:ui": "rm -rf dist && cd ../client/ && npm run build && cp -r dist ../server",
+        "deploy": "flyctl deploy",
+        "deploy:full": "npm run build:ui && npm run deploy"
     },
     "repository": {
         "type": "git",

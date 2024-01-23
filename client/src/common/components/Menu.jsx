@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { handleLogout } from "../../redux/reducers/login";
 
 const Menu = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const onClickLogout = async () => {
-        dispatch(handleLogout());
+        dispatch(handleLogout()).then(async () => {
+            navigate("/");
+        });
     };
 
     const padding = {

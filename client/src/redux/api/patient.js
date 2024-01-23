@@ -4,7 +4,7 @@ import { setNotification } from "../reducers/notification";
 export const patientApi = createApi({
     reducerPath: "patientApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:3000/api/patients",
+        baseUrl: "/api/patients",
         prepareHeaders: (headers, { getState }) => {
             const token = getState().login.user.token;
             if (token) {
