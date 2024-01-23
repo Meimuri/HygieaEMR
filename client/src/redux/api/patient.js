@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setNotification } from "../reducers/notification";
 
 export const patientApi = createApi({
     reducerPath: "patientApi",
@@ -25,27 +26,42 @@ export const patientApi = createApi({
                 method: "POST",
                 body: newPatient,
             }),
-            // onSuccess: (result, queryApi, extra) => {
-            //     // Update the cache for getPatients
-            //     queryApi.update("getPatients", (data) => {
-            //         // Add the new patient to the list
+            onQueryStarted: async (
+                newPatient,
+                { dispatch, queryFulfilled }
+            ) => {
+                queryFulfilled
+                    .then(({ data }) => {
+                        const getPatientsNewData = {
+                            id: data.id,
+                            firstName: data.firstName,
+                            lastName: data.lastName,
+                            birthDate: data.birthDate,
+                        };
 
-            //         console.log("Result Data: ");
-            //         console.log(result);
-            //         console.log("----------");
-            //         console.log("Cache Data: ");
-            //         console.log(data);
-            //         console.log("----------");
-            //         console.log("Combined Data: ");
-            //         console.log([...data, result]);
-            //         console.log("----------");
+                        dispatch(
+                            patientApi.util.updateQueryData(
+                                "getPatients",
+                                undefined,
+                                (patients) => {
+                                    patients.push(getPatientsNewData);
+                                }
+                            )
+                        );
 
-            //         return [...data, result];
-            //     });
-
-            //     // Update the cache for getOnePatient
-            //     // queryApi.patch(`getOnePatient/${result.id}`, () => result);
-            // },
+                        dispatch(
+                            patientApi.util.upsertQueryData(
+                                "getOnePatient",
+                                data.id.toString(),
+                                data
+                            )
+                        );
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        dispatch(setNotification(error, "error", 5));
+                    });
+            },
         }),
     }),
 });

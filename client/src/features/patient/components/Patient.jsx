@@ -9,7 +9,7 @@ const Patient = () => {
     const { data: patient, isFetching, error } = useGetOnePatientQuery(id);
 
     const goBack = () => {
-        navigate(-1);
+        navigate("/patient");
     };
 
     if (isFetching) return <div>Loading...</div>;

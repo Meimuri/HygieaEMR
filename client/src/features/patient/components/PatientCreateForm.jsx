@@ -1,9 +1,11 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
 import schema from "../schema/";
 import { useAddPatientMutation } from "../../../redux/api/patient";
+import { setNotification } from "../../../redux/reducers/notification";
 import Header from "../../../common/components/Header";
 import {
     GENDER,
@@ -12,9 +14,9 @@ import {
 } from "../../../common/data/constants";
 
 const PatientCreateForm = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [addPatient] = useAddPatientMutation();
-    // const [addPatient, { isLoading }] = useAddPatientMutation();
 
     const {
         register,
@@ -43,18 +45,20 @@ const PatientCreateForm = () => {
             .toISOString()
             .substr(0, 10);
         data = cleanData(data);
+
         addPatient(data)
             .unwrap()
             .then((payload) => {
                 console.log(payload);
+                navigate(`/patient/${payload.id}`);
             })
             .catch((error) => {
-                console.log(error);
+                dispatch(setNotification(error, "error", 5));
             });
     };
 
     const goBack = () => {
-        navigate(-1);
+        navigate("/patient");
     };
 
     return (
