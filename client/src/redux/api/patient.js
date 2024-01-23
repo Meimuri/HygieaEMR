@@ -63,11 +63,51 @@ export const patientApi = createApi({
                     });
             },
         }),
+        updatePatient: builder.mutation({
+            query: ({ id, updatedPatient }) => ({
+                url: `/${id}`,
+                method: "PUT",
+                body: updatedPatient,
+            }),
+            onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
+                queryFulfilled
+                    .then(({ data }) => {
+                        dispatch(
+                            patientApi.util.updateQueryData(
+                                "getPatients",
+                                undefined,
+                                (patients) => {
+                                    const patientIndex = patients.findIndex(
+                                        (patient) => patient.id === id
+                                    );
+                                    if (patientIndex !== -1) {
+                                        patients[patientIndex] = data;
+                                    }
+                                }
+                            )
+                        );
+
+                        dispatch(
+                            patientApi.util.upsertQueryData(
+                                "getOnePatient",
+                                id.toString(),
+                                data
+                            )
+                        );
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        dispatch(setNotification(error, "error", 5));
+                    });
+            },
+        }),
     }),
+    keepUnusedDataFor: 240, // Cache time
 });
 
 export const {
     useGetPatientsQuery,
     useGetOnePatientQuery,
     useAddPatientMutation,
+    useUpdatePatientMutation,
 } = patientApi;

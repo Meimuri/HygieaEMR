@@ -12,6 +12,10 @@ const Patient = () => {
         navigate("/patient");
     };
 
+    const editPatient = () => {
+        navigate(`/patient/${id}/edit`);
+    };
+
     if (isFetching) return <div>Loading...</div>;
     if (error) return <div>An error has occurred: {error.data.error}</div>;
     if (!patient) return <div>No patient data</div>;
@@ -19,6 +23,7 @@ const Patient = () => {
     return (
         <>
             <Header text={`${patient.firstName} ${patient.lastName}`} />
+            <button onClick={editPatient}>Edit</button>
             <button onClick={goBack}>Back</button>
             <pre>{JSON.stringify(patient, null, 2)}</pre>
         </>
