@@ -22,6 +22,8 @@ const {
     removeTimestampsAndPatientID,
 } = require("../utils/removeTimestamps");
 
+const { returnUpdatedPatient } = require("../utils/helper/patient_helper");
+
 router.get("/", userExtractor, async (_req, res) => {
     const patients = await Patient.findAll({
         attributes: ["id", "firstName", "lastName", "birthDate"],
@@ -99,6 +101,7 @@ router.get("/:id", userExtractor, patientFinder, async (req, res) => {
     res.json(req.patient);
 });
 
+// Change update query to remove data if it's missing from the req.body
 router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
     const { patientInfo, addressInfo, contactInfo, emergencyContactInfo } =
         req.body;
@@ -113,38 +116,28 @@ router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
             }
         );
 
-        let updatedPatientPlain = updatedPatient.toJSON();
-
         if (addressInfo && Object.values(addressInfo).some(Boolean)) {
             const address = await PatientAddress.findOne({
                 where: { patientId: updatedPatient.id },
                 transaction: t,
             });
             if (address === null) {
-                const patientAddress = await PatientAddress.create(
+                await PatientAddress.create(
                     {
                         ...addressInfo,
                         patientId: updatedPatient.id,
                     },
                     { transaction: t }
                 );
-
-                updatedPatientPlain.address = patientAddress.toJSON();
             } else {
-                const [rowsUpdateAddress, [updatedPatientAddress]] =
-                    await PatientAddress.update(
-                        { ...addressInfo, patientId: updatedPatient.id },
-                        {
-                            where: { patientId: updatedPatient.id },
-                            returning: true,
-                            transaction: t,
-                        }
-                    );
-
-                if (rowsUpdateAddress > 0) {
-                    updatedPatientPlain.address =
-                        updatedPatientAddress.toJSON();
-                }
+                await PatientAddress.update(
+                    { ...addressInfo, patientId: updatedPatient.id },
+                    {
+                        where: { patientId: updatedPatient.id },
+                        returning: true,
+                        transaction: t,
+                    }
+                );
             }
         }
 
@@ -154,30 +147,22 @@ router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
                 transaction: t,
             });
             if (contact === null) {
-                const patientContactInfo = await PatientContactInfo.create(
+                await PatientContactInfo.create(
                     {
                         ...contactInfo,
                         patientId: updatedPatient.id,
                     },
                     { transaction: t }
                 );
-
-                updatedPatientPlain.contact = patientContactInfo.toJSON();
             } else {
-                const [rowsUpdateContactInfo, [updatedPatientContactInfo]] =
-                    await PatientContactInfo.update(
-                        { ...contactInfo, patientId: updatedPatient.id },
-                        {
-                            where: { patientId: updatedPatient.id },
-                            returning: true,
-                            transaction: t,
-                        }
-                    );
-
-                if (rowsUpdateContactInfo > 0) {
-                    updatedPatientPlain.contact =
-                        updatedPatientContactInfo.toJSON();
-                }
+                await PatientContactInfo.update(
+                    { ...contactInfo, patientId: updatedPatient.id },
+                    {
+                        where: { patientId: updatedPatient.id },
+                        returning: true,
+                        transaction: t,
+                    }
+                );
             }
         }
 
@@ -190,22 +175,15 @@ router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
                 transaction: t,
             });
             if (emergency === null) {
-                const patientEmergencyContact =
-                    await PatientEmergencyContact.create(
-                        {
-                            ...emergencyContactInfo,
-                            patientId: updatedPatient.id,
-                        },
-                        { transaction: t }
-                    );
-
-                updatedPatientPlain.emergencyContact =
-                    patientEmergencyContact.toJSON();
+                await PatientEmergencyContact.create(
+                    {
+                        ...emergencyContactInfo,
+                        patientId: updatedPatient.id,
+                    },
+                    { transaction: t }
+                );
             } else {
-                const [
-                    rowsUpdateEmergencyContact,
-                    [updatedPatientEmergencyContact],
-                ] = await PatientEmergencyContact.update(
+                await PatientEmergencyContact.update(
                     { ...emergencyContactInfo, patientId: updatedPatient.id },
                     {
                         where: { patientId: updatedPatient.id },
@@ -213,15 +191,12 @@ router.put("/:id", userExtractor, validateUpdatePatient, async (req, res) => {
                         transaction: t,
                     }
                 );
-
-                if (rowsUpdateEmergencyContact > 0) {
-                    updatedPatientPlain.emergencyContact =
-                        updatedPatientEmergencyContact.toJSON();
-                }
             }
         }
 
-        return updatedPatientPlain;
+        const returnPatient = await returnUpdatedPatient(req.params.id);
+
+        return returnPatient;
     });
 
     res.status(200).json(result);
