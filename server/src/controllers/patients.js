@@ -90,7 +90,6 @@ router.post("/", userExtractor, validateCreatePatient, async (req, res) => {
             patientPlain.patient_emergency_contact = null;
         }
 
-        patientPlain.encounters = [];
         return patientPlain;
     });
 

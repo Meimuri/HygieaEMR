@@ -18,8 +18,15 @@ const {
     validateUpdateEncounter,
 } = require("../utils/middleware/");
 
-router.get("/", userExtractor, async (_req, res) => {
+router.get("/", userExtractor, async (req, res) => {
+    const patientId = req.query.patientId;
+
+    if (!patientId) {
+        return res.status(400).json({ error: "Patient Id is required" });
+    }
+
     const encounters = await Encounter.findAll({
+        where: { patientId },
         attributes: {
             exclude: [
                 "createdAt",
