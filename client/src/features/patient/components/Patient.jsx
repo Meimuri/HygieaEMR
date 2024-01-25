@@ -5,20 +5,24 @@ import Header from "../../../common/components/Header";
 import Button from "../../../common/components/Button";
 
 const Patient = () => {
-    const { id } = useParams();
+    const { patientId } = useParams();
     const navigate = useNavigate();
-    const { data: patient, isFetching, error } = useGetOnePatientQuery(id);
+    const {
+        data: patient,
+        isFetching,
+        error,
+    } = useGetOnePatientQuery(patientId);
 
     const goBack = () => {
         navigate("/patient");
     };
 
     const editPatient = () => {
-        navigate(`/patient/${id}/edit`);
+        navigate(`/patient/${patientId}/edit`);
     };
 
     const viewEncounters = () => {
-        navigate(`/patient/${id}/encounters`);
+        navigate(`/patient/${patientId}/encounters`);
     };
 
     if (isFetching) return <div>Loading...</div>;
@@ -28,7 +32,7 @@ const Patient = () => {
     return (
         <>
             <Header text={`${patient.firstName} ${patient.lastName}`} />
-            <Button text="View Encounter" clickEvent={viewEncounters} />
+            <Button text="View Encounters" clickEvent={viewEncounters} />
             <Button text="Edit" clickEvent={editPatient} />
             <Button text="Back" clickEvent={goBack} />
 

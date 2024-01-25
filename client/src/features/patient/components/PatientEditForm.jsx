@@ -18,11 +18,11 @@ import {
 } from "../../../common/data/constants";
 
 const PatientEditForm = () => {
-    const { id } = useParams();
+    const { patientId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [updatePatient] = useUpdatePatientMutation();
-    const { data: patient } = useGetOnePatientQuery(id);
+    const { data: patient } = useGetOnePatientQuery(patientId);
 
     const {
         register,
@@ -41,7 +41,7 @@ const PatientEditForm = () => {
     }, [patient, reset]);
 
     const goBack = () => {
-        navigate(`/patient/${id}`);
+        navigate(`/patient/${patientId}`);
     };
 
     const cleanData = (data) => {
@@ -64,11 +64,11 @@ const PatientEditForm = () => {
             .substr(0, 10);
         data = cleanData(data);
 
-        updatePatient({ id, updatedPatient: data })
+        updatePatient({ patientId, updatedPatient: data })
             .unwrap()
             .then((payload) => {
                 console.log(payload);
-                navigate(`/patient/${id}`);
+                navigate(`/patient/${patientId}`);
             })
             .catch((error) => {
                 dispatch(setNotification(error, "error", 5));
