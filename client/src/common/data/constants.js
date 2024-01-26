@@ -22,3 +22,22 @@ export const BLOOD_TYPE = [
     "O+",
     "O-",
 ];
+
+export const ENCOUNTER_CLASS = [
+    "Inpatient",
+    "Outpatient",
+    "Ambulatory",
+    "Emergency",
+    "Home Visit",
+    "Field Visit",
+    "Virtual",
+    "Others",
+];
+
+export const ENCOUNTER_STATUS = [
+    "Planned",
+    "Arrived",
+    "In Progress",
+    "Finished",
+    "Cancelled",
+];

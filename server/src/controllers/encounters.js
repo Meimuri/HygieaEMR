@@ -3,13 +3,7 @@ const router = require("express").Router();
 
 // Internal modules
 const { sequelize } = require("../utils/db");
-const {
-    Encounter,
-    Location,
-    Doctor,
-    Examination,
-    Laboratory,
-} = require("../models");
+const { Encounter, Location, Doctor } = require("../models");
 
 const {
     userExtractor,
@@ -17,6 +11,7 @@ const {
     validateCreateEncounter,
     validateUpdateEncounter,
 } = require("../utils/middleware/");
+const { returnCreatedEncounter } = require("../utils/helper/encounter_helper");
 
 router.get("/", userExtractor, async (req, res) => {
     const patientId = req.query.patientId;
@@ -51,8 +46,11 @@ router.get("/", userExtractor, async (req, res) => {
 });
 
 router.post("/", userExtractor, validateCreateEncounter, async (req, res) => {
-    const encounter = await Encounter.create(req.body);
-    res.status(201).json(encounter);
+    const createdEncounter = await Encounter.create(req.body);
+
+    const returnEncounter = await returnCreatedEncounter(createdEncounter.id);
+
+    res.status(201).json(returnEncounter);
 });
 
 router.get("/:id", userExtractor, encounterFinder, async (req, res) => {

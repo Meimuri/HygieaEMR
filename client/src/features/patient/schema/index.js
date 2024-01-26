@@ -1,7 +1,3 @@
-// import JoiBase from "joi";
-// import JoiDate from "@joi/date";
-// const Joi = JoiBase.extend(JoiDate);
-
 import Joi from "joi";
 
 const schema = Joi.object({
@@ -13,10 +9,7 @@ const schema = Joi.object({
             .optional()
             .label("Middle Name"),
         lastName: Joi.string().trim().required().label("Last Name"),
-        birthDate: Joi.date()
-            // .format("YYYY-MM-DD")
-            .required()
-            .label("Birth Date"),
+        birthDate: Joi.date().required().label("Birth Date"),
         gender: Joi.string()
             .trim()
             .valid("Male", "Female")

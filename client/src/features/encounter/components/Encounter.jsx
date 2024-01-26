@@ -14,7 +14,7 @@ const Encounter = () => {
     } = useGetOneEncounterQuery(encounterId);
 
     const goBack = () => {
-        navigate(`/patient/${patientId}/encounters`);
+        navigate(`/patient/${patientId}/encounter`);
     };
 
     if (isFetching) return <div>Loading...</div>;

@@ -14,9 +14,14 @@ const EncounterList = () => {
         navigate(`/patient/${patientId}`);
     };
 
+    const createEncounter = () => {
+        navigate(`/patient/${patientId}/encounter/create`);
+    };
+
     return (
         <>
             <Header text="View All Encounters" />
+            <Button text="Create Encounter" clickEvent={createEncounter} />
             <Button text="Back" clickEvent={goBack} />
             <br />
             <br />
@@ -26,7 +31,7 @@ const EncounterList = () => {
                     : data.map((encounter) => (
                           <li key={encounter.id}>
                               <Link
-                                  to={`/patient/${patientId}/encounters/${encounter.id}`}
+                                  to={`/patient/${patientId}/encounter/${encounter.id}`}
                               >
                                   {encounter.date}
                               </Link>

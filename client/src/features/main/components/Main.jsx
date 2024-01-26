@@ -9,6 +9,7 @@ import PatientEditForm from "../../patient/components/PatientEditForm";
 
 import EncounterList from "../../encounter/components/EncounterList";
 import Encounter from "../../encounter/components/Encounter";
+import EncounterCreateForm from "../../encounter/components/EncounterCreateForm";
 
 const Main = () => {
     return (
@@ -24,11 +25,15 @@ const Main = () => {
                     element={<PatientEditForm />}
                 />
                 <Route
-                    path="/patient/:patientId/encounters"
+                    path="/patient/:patientId/encounter"
                     element={<EncounterList />}
                 />
                 <Route
-                    path="/patient/:patientId/encounters/:encounterId"
+                    path="/patient/:patientId/encounter/create"
+                    element={<EncounterCreateForm />}
+                />
+                <Route
+                    path="/patient/:patientId/encounter/:encounterId"
                     element={<Encounter />}
                 />
             </Routes>

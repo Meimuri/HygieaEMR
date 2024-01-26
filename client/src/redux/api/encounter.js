@@ -38,9 +38,9 @@ export const encounterApi = createApi({
                         dispatch(
                             encounterApi.util.updateQueryData(
                                 "getEncounters",
-                                undefined,
-                                (patients) => {
-                                    patients.push(data);
+                                { patientId: data.patientId.toString() },
+                                (encounters) => {
+                                    encounters.push(data);
                                 }
                             )
                         );
@@ -63,4 +63,8 @@ export const encounterApi = createApi({
     keepUnusedDataFor: 240, // Cache time
 });
 
-export const { useGetEncountersQuery, useGetOneEncounterQuery } = encounterApi;
+export const {
+    useGetEncountersQuery,
+    useGetOneEncounterQuery,
+    useAddEncounterMutation,
+} = encounterApi;
