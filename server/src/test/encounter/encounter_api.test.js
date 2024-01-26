@@ -22,8 +22,9 @@ beforeAll(async () => {
 
 describe("GET /api/encounters", () => {
     test("should return a 200 status and encounters as json", async () => {
+        const patientId = 1;
         const response = await api
-            .get("/api/encounters")
+            .get(`/api/encounters?patientId=${patientId}`)
             .set("Authorization", `Bearer ${token}`);
 
         expect(response.status).toBe(200);
