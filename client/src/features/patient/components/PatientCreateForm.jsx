@@ -7,6 +7,7 @@ import schema from "../schema/";
 import { useAddPatientMutation } from "../../../redux/api/patient";
 import { setNotification } from "../../../redux/reducers/notification";
 import Header from "../../../common/components/Header";
+import Button from "../../../common/components/Button";
 import {
     GENDER,
     MARITAL_STATUS,
@@ -64,7 +65,7 @@ const PatientCreateForm = () => {
     return (
         <>
             <Header text="Create Patient" />
-            <button onClick={goBack}>Back</button>
+            <Button text="Back" clickEvent={goBack} />
             <br />
             <br />
             <form onSubmit={handleSubmit(onSubmit)}>
