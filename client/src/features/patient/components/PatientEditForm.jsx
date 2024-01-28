@@ -11,6 +11,7 @@ import { useGetOnePatientQuery } from "../../../redux/api/patient";
 import { adjustResponse } from "../../../common/utils/adjustResponse";
 
 import Header from "../../../common/components/Header";
+import Button from "../../../common/components/Button";
 import {
     GENDER,
     MARITAL_STATUS,
@@ -78,7 +79,7 @@ const PatientEditForm = () => {
     return (
         <>
             <Header text="Update Patient" />
-            <button onClick={goBack}>Back</button>
+            <Button text="Back" clickEvent={goBack} />
             <br />
             <br />
             <form onSubmit={handleSubmit(onSubmit)}>
