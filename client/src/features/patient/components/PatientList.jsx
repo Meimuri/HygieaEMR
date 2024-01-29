@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useGetPatientsQuery } from "../../../redux/api/patient";
 
 import Header from "../../../common/components/Header";
+import Button from "../../../common/components/Button";
 
 const PatientList = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const PatientList = () => {
         <>
             <Header text="View All Patients" />
             <div>
-                <button onClick={createPatient}>Create Patient</button>
+                <Button text="Create Patient" clickEvent={createPatient} />
             </div>
             <br />
             <div>
