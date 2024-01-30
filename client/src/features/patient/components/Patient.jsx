@@ -32,7 +32,7 @@ const Patient = () => {
     return (
         <>
             <Header text={`${patient.firstName} ${patient.lastName}`} />
-            <Button text="View Encounters" clickEvent={viewEncounters} />
+            <Button text="View All Encounters" clickEvent={viewEncounters} />
             <Button text="Edit" clickEvent={editPatient} />
             <Button text="Back" clickEvent={goBack} />
 
