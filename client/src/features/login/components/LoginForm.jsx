@@ -5,6 +5,8 @@ import { joiResolver } from "@hookform/resolvers/joi";
 import schema from "../schema/";
 import { handleLogin } from "../../../redux/reducers/login";
 
+import Header from "../../../common/components/Header";
+
 const LoginForm = () => {
     const dispatch = useDispatch();
     const {
@@ -21,7 +23,7 @@ const LoginForm = () => {
 
     return (
         <>
-            <h1>HygieaEMR</h1>
+            <Header text="HygieaEMR" />
             <h3>Sign in to start your session</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
