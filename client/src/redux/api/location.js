@@ -17,7 +17,7 @@ export const locationApi = createApi({
             query: () => "/",
         }),
     }),
-    keepUnusedDataFor: 240, // Cache time
+    keepUnusedDataFor: 240,
 });
 
 export const { useGetLocationsQuery } = locationApi;
