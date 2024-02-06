@@ -2,8 +2,6 @@ name: Server Deployment Pipeline
 
 on:
     push:
-        paths:
-            - "server/**"
         branches:
             - main
 
