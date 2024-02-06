@@ -32,3 +32,4 @@ jobs:
                   PORT: ${{ secrets.PORT }}
                   TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
                   DATABASE_URL: ${{ secrets.DATABASE_URL }}
+                  SECRET: ${{ secrets.SECRET }}
