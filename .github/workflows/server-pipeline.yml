@@ -19,11 +19,17 @@ jobs:
               run: cd server && npm install
 
             - name: Proxy to Postgres
-              run: cd server && flyctl proxy 5432 -a hygiea-emr-db-test
+              run: |
+                  cd server
+                  flyctl proxy 5432 -a hygiea-emr-db-test &
+                  sleep 10
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
             - name: Connect to Postgres
-              run: cd server && flyctl postgres connect -a hygiea-emr-db-test
+              run: |
+                  cd server
+                  flyctl postgres connect -a hygiea-emr-db-test
+                  sleep 10
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
