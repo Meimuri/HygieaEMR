@@ -5,6 +5,9 @@ on:
         branches:
             - main
 
+permissions:
+    checks: write
+
 jobs:
     server_deployment_pipeline:
         runs-on: ubuntu-20.04
