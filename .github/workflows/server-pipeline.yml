@@ -28,3 +28,7 @@ jobs:
 
             - name: Test
               run: cd server && npm run test
+              env:
+                  PORT: ${{ secrets.PORT }}
+                  TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+                  DATABASE_URL: ${{ secrets.DATABASE_URL }}
