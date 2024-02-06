@@ -18,7 +18,7 @@ jobs:
             - name: Install dependencies
               run: cd server && npm install
 
-            - name: Proxy and connect to test database
+            - name: Connect to database
               run: |
                   cd server
                   flyctl proxy 5432 -a hygiea-emr-db-test &
@@ -26,7 +26,7 @@ jobs:
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
-            - name: Test
+            - name: Jest Test
               run: |
                   cd server
                   npm run test
@@ -35,3 +35,9 @@ jobs:
                   TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
                   DATABASE_URL: ${{ secrets.DATABASE_URL }}
                   #   SECRET: ${{ secrets.SECRET }}
+
+            - name: Publish Test Results
+              uses: mikepenz/action-junit-report@v4
+              if: success() || failure()
+              with:
+                  report_paths: "server/src/test/result"
