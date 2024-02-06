@@ -4,5 +4,5 @@ const sequelize = new Sequelize(DATABASE_URL);
 
 module.exports = async () => {
     await sequelize.close();
-    process.exit(0);
+    // process.exit(0);
 };
