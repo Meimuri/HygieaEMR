@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="307" failures="0" errors="0" time="59.611">
+  <testsuite name="GET /api/examinations" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:09" time="13.54" tests="5">
+    <testcase classname="GET /api/examinations should return a 200 status and examinations as json" name="GET /api/examinations should return a 200 status and examinations as json" time="0.301">
+    </testcase>
+    <testcase classname="GET /api/examinations should return a 404 status for non-existent examinations" name="GET /api/examinations should return a 404 status for non-existent examinations" time="0.306">
+    </testcase>
+    <testcase classname="POST /api/examinations should return a 201 status and create a new examinations" name="POST /api/examinations should return a 201 status and create a new examinations" time="4.286">
+    </testcase>
+    <testcase classname="GET /api/examinations/:id should return a 200 status and the selected examinations" name="GET /api/examinations/:id should return a 200 status and the selected examinations" time="0.456">
+    </testcase>
+    <testcase classname="PUT /api/examinations/:id  should return a 200 status and update the examination&apos;s data" name="PUT /api/examinations/:id  should return a 200 status and update the examination&apos;s data" time="3.632">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/users" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:23" time="10.259" tests="8">
+    <testcase classname="GET /api/users should return a 200 status and users as json" name="GET /api/users should return a 200 status and users as json" time="0.315">
+    </testcase>
+    <testcase classname="GET /api/users should return a 404 status for non-existent user" name="GET /api/users should return a 404 status for non-existent user" time="0.31">
+    </testcase>
+    <testcase classname="POST /api/users should return a 201 status and create a new doctor type user" name="POST /api/users should return a 201 status and create a new doctor type user" time="1.29">
+    </testcase>
+    <testcase classname="POST /api/users should return a 201 status and create a new secretary type user" name="POST /api/users should return a 201 status and create a new secretary type user" time="1.244">
+    </testcase>
+    <testcase classname="POST /api/users should return a 400 status if username is already existing" name="POST /api/users should return a 400 status if username is already existing" time="0.695">
+    </testcase>
+    <testcase classname="GET /api/users/:id should return a 200 status and the selected user" name="GET /api/users/:id should return a 200 status and the selected user" time="0.453">
+    </testcase>
+    <testcase classname="PUT /api/users/:id  should return a 200 status and update the doctor&apos;s data" name="PUT /api/users/:id  should return a 200 status and update the doctor&apos;s data" time="1.247">
+    </testcase>
+    <testcase classname="PUT /api/users/:id  should return a 200 status and update the secretary&apos;s data" name="PUT /api/users/:id  should return a 200 status and update the secretary&apos;s data" time="1.264">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/encounters" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:33" time="9.161" tests="5">
+    <testcase classname="GET /api/encounters should return a 200 status and encounters as json" name="GET /api/encounters should return a 200 status and encounters as json" time="0.304">
+    </testcase>
+    <testcase classname="GET /api/encounters should return a 404 status for non-existent encounters" name="GET /api/encounters should return a 404 status for non-existent encounters" time="0.346">
+    </testcase>
+    <testcase classname="POST /api/encounters should return a 201 status and create a new encounters" name="POST /api/encounters should return a 201 status and create a new encounters" time="2.221">
+    </testcase>
+    <testcase classname="GET /api/encounters/:id should return a 200 status and the selected encounters" name="GET /api/encounters/:id should return a 200 status and the selected encounters" time="0.471">
+    </testcase>
+    <testcase classname="PUT /api/encounters/:id  should return a 200 status and update the encounter&apos;s data" name="PUT /api/encounters/:id  should return a 200 status and update the encounter&apos;s data" time="2.456">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/patients" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:42" time="8.952" tests="5">
+    <testcase classname="GET /api/patients should return a 200 status and patients as json" name="GET /api/patients should return a 200 status and patients as json" time="0.315">
+    </testcase>
+    <testcase classname="GET /api/patients should return a 404 status for non-existent patients" name="GET /api/patients should return a 404 status for non-existent patients" time="0.31">
+    </testcase>
+    <testcase classname="POST /api/patients should return a 201 status and create a new patient" name="POST /api/patients should return a 201 status and create a new patient" time="1.481">
+    </testcase>
+    <testcase classname="GET /api/patients/:id should return a 200 status and the selected patient" name="GET /api/patients/:id should return a 200 status and the selected patient" time="0.462">
+    </testcase>
+    <testcase classname="PUT /api/patients/:id  should return a 200 status and update the patients&apos;s data" name="PUT /api/patients/:id  should return a 200 status and update the patients&apos;s data" time="2.94">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/locations" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:51" time="5.914" tests="5">
+    <testcase classname="GET /api/locations should return a 200 status and locations as json" name="GET /api/locations should return a 200 status and locations as json" time="0.32">
+    </testcase>
+    <testcase classname="GET /api/locations should return a 404 status for non-existent locations" name="GET /api/locations should return a 404 status for non-existent locations" time="0.306">
+    </testcase>
+    <testcase classname="POST /api/locations should return a 201 status and create a new location" name="POST /api/locations should return a 201 status and create a new location" time="0.745">
+    </testcase>
+    <testcase classname="GET /api/locations/:id should return a 200 status and the selected locations" name="GET /api/locations/:id should return a 200 status and the selected locations" time="0.447">
+    </testcase>
+    <testcase classname="PUT /api/locations/:id  should return a 200 status and update the location&apos;s data" name="PUT /api/locations/:id  should return a 200 status and update the location&apos;s data" time="0.751">
+    </testcase>
+  </testsuite>
+  <testsuite name="GET /api/laboratories" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:08:57" time="6.427" tests="5">
+    <testcase classname="GET /api/laboratories should return a 200 status and laboratories as json" name="GET /api/laboratories should return a 200 status and laboratories as json" time="0.477">
+    </testcase>
+    <testcase classname="GET /api/laboratories should return a 404 status for non-existent laboratories" name="GET /api/laboratories should return a 404 status for non-existent laboratories" time="0.306">
+    </testcase>
+    <testcase classname="POST /api/laboratories should return a 201 status and create a new laboratory" name="POST /api/laboratories should return a 201 status and create a new laboratory" time="0.728">
+    </testcase>
+    <testcase classname="GET /api/laboratories/:id should return a 200 status and the selected laboratories" name="GET /api/laboratories/:id should return a 200 status and the selected laboratories" time="0.439">
+    </testcase>
+    <testcase classname="PUT /api/laboratories/:id  should return a 200 status and update the laboratory&apos;s data" name="PUT /api/laboratories/:id  should return a 200 status and update the laboratory&apos;s data" time="0.808">
+    </testcase>
+  </testsuite>
+  <testsuite name="Accessing unknown endpoints" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:04" time="4.152" tests="2">
+    <testcase classname="Accessing unknown endpoints should return a 404 error with &apos;Unknown endpoint&apos; message" name="Accessing unknown endpoints should return a 404 error with &apos;Unknown endpoint&apos; message" time="0.009">
+    </testcase>
+    <testcase classname="Accessing endpoints with malformatted id should return a 400 error with &apos;Malformatted id&apos; message" name="Accessing endpoints with malformatted id should return a 400 error with &apos;Malformatted id&apos; message" time="0.733">
+    </testcase>
+  </testsuite>
+  <testsuite name="Secretary User Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:08" time="0.182" tests="48">
+    <testcase classname="Secretary User Schema Create Secretary User Schema should validate a correct user" name="Secretary User Schema Create Secretary User Schema should validate a correct user" time="0.004">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid username" name="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid username" time="0.002">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid password" name="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid password" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid userType" name="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid userType" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid firstName" name="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid firstName" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid lastName" name="Secretary User Schema Create Secretary User Schema should invalidate a user with an invalid lastName" time="0">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing username" name="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing username" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing password" name="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing password" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing userType" name="Secretary User Schema Create Secretary User Schema should invalidate a user with a missing userType" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should validate a correct user" name="Secretary User Schema Update Secretary User Schema should validate a correct user" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid username" name="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid username" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid password" name="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid password" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid userType" name="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid userType" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid firstName" name="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid firstName" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid lastName" name="Secretary User Schema Update Secretary User Schema should invalidate a user with an invalid lastName" time="0.001">
+    </testcase>
+    <testcase classname="Secretary User Schema Update Secretary User Schema should invalidate a user with a missing userType" name="Secretary User Schema Update Secretary User Schema should invalidate a user with a missing userType" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should validate a correct user" name="Doctor User Schema Create Doctor User Schema should validate a correct user" time="0.004">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid username" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid username" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid password" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid password" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid userType" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid userType" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid firstName" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid firstName" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid middleName" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid middleName" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid lastName" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid lastName" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid gender" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid gender" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid specialization" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid specialization" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid licenseNo" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid licenseNo" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid ptrNo" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid ptrNo" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid s2No" name="Doctor User Schema Create Doctor User Schema should invalidate a user with an invalid s2No" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing username" name="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing username" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing password" name="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing password" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing userType" name="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing userType" time="0.002">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing gender" name="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing gender" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing firstName" name="Doctor User Schema Create Doctor User Schema should invalidate a user with a missing firstName" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should validate a correct user" name="Doctor User Schema Update Doctor User Schema should validate a correct user" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid username" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid username" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid password" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid password" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid userType" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid userType" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid firstName" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid firstName" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid middleName" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid middleName" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid lastName" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid lastName" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid gender" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid gender" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid specialization" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid specialization" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid licenseNo" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid licenseNo" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid ptrNo" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid ptrNo" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid s2No" name="Doctor User Schema Update Doctor User Schema should invalidate a user with an invalid s2No" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing userType" name="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing userType" time="0">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing gender" name="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing gender" time="0.001">
+    </testcase>
+    <testcase classname="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing firstName" name="Doctor User Schema Update Doctor User Schema should invalidate a user with a missing firstName" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Examination Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:08" time="0.189" tests="48">
+    <testcase classname="Examination Schema Create Examination Schema should validate a correct examination" name="Examination Schema Create Examination Schema should validate a correct examination" time="0.004">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid encounterId.encounterId1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid encounterId.encounterId1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid encounterId.encounterId2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid encounterId.encounterId2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid date.date1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid date.date1" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid date.date2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid date.date2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid locationId.locationId1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid locationId.locationId1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid locationId.locationId2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid locationId.locationId2" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid subjective.subjective1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid subjective.subjective1" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid subjective.subjective2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid subjective.subjective2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid objective.objective1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid objective.objective1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid objective.objective2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid objective.objective2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid assessment.assessment1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid assessment.assessment1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid assessment.assessment2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid assessment.assessment2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid plan.plan1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid plan.plan1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid plan.plan2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid plan.plan2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis2" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid notes.notes1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid notes.notes1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid notes.notes2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid notes.notes2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid laboratory.laboratory1" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid laboratory.laboratory1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with an invalid laboratory.laboratory2" name="Examination Schema Create Examination Schema should invalidate a examination with an invalid laboratory.laboratory2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with a missing encounterId" name="Examination Schema Create Examination Schema should invalidate a examination with a missing encounterId" time="0.005">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with a missing locationId" name="Examination Schema Create Examination Schema should invalidate a examination with a missing locationId" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Create Examination Schema should invalidate a examination with a missing date" name="Examination Schema Create Examination Schema should invalidate a examination with a missing date" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should validate a correct examination" name="Examination Schema Update Examination Schema should validate a correct examination" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid encounterId.encounterId1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid encounterId.encounterId1" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid encounterId.encounterId2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid encounterId.encounterId2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid date.date1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid date.date1" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid date.date2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid date.date2" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid locationId.locationId1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid locationId.locationId1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid locationId.locationId2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid locationId.locationId2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid subjective.subjective1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid subjective.subjective1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid subjective.subjective2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid subjective.subjective2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid objective.objective1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid objective.objective1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid objective.objective2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid objective.objective2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid assessment.assessment1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid assessment.assessment1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid assessment.assessment2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid assessment.assessment2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid plan.plan1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid plan.plan1" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid plan.plan2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid plan.plan2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid diagnosis.diagnosis2" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid notes.notes1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid notes.notes1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid notes.notes2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid notes.notes2" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid laboratory.laboratory1" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid laboratory.laboratory1" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with an invalid laboratory.laboratory2" name="Examination Schema Update Examination Schema should invalidate a examination with an invalid laboratory.laboratory2" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with a missing encounterId" name="Examination Schema Update Examination Schema should invalidate a examination with a missing encounterId" time="0">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with a missing locationId" name="Examination Schema Update Examination Schema should invalidate a examination with a missing locationId" time="0.001">
+    </testcase>
+    <testcase classname="Examination Schema Update Examination Schema should invalidate a examination with a missing date" name="Examination Schema Update Examination Schema should invalidate a examination with a missing date" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Patient Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:08" time="0.192" tests="64">
+    <testcase classname="Patient Schema Create Patient Schema should validate a correct patient" name="Patient Schema Create Patient Schema should validate a correct patient" time="0.003">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.firstName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.firstName" time="0.002">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.middleName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.middleName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.lastName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.lastName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.birthDate" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.birthDate" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.gender" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.gender" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.maritalStatus" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.maritalStatus" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.bloodType" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.bloodType" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.referrerName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.referrerName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.notes" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid patientInfo.notes" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.address" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.address" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.address2" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.address2" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.city" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.city" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.province" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.province" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.zipCode" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid addressInfo.zipCode" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.homePhone" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.homePhone" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.workPhone" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.workPhone" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhonePrimary" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhonePrimary" time="0.002">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhoneSecondary" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhoneSecondary" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.emailAddress" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid contactInfo.emailAddress" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.firstName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.firstName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.lastName" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.lastName" time="0.004">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.homePhone" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.homePhone" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.mobilePrimary" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.mobilePrimary" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.relationship" name="Patient Schema Create Patient Schema should invalidate a patient with an invalid emergencyContactInfo.relationship" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.firstName" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.firstName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.lastName" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.lastName" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.birthDate" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.birthDate" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.gender" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.gender" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.maritalStatus" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.maritalStatus" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.bloodType" name="Patient Schema Create Patient Schema should invalidate a patient with a missing patientInfo.bloodType" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Create Patient Schema should invalidate a patient with a missing addressInfo.zipCode" name="Patient Schema Create Patient Schema should invalidate a patient with a missing addressInfo.zipCode" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should validate a correct patient" name="Patient Schema Update Patient Schema should validate a correct patient" time="0.002">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.firstName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.firstName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.middleName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.middleName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.lastName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.lastName" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.birthDate" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.birthDate" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.gender" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.gender" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.maritalStatus" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.maritalStatus" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.bloodType" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.bloodType" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.referrerName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.referrerName" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.notes" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid patientInfo.notes" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.address" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.address" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.address2" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.address2" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.city" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.city" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.province" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.province" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.zipCode" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid addressInfo.zipCode" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.homePhone" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.homePhone" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.workPhone" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.workPhone" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhonePrimary" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhonePrimary" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhoneSecondary" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.mobilePhoneSecondary" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.emailAddress" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid contactInfo.emailAddress" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.firstName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.firstName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.lastName" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.lastName" time="0.005">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.homePhone" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.homePhone" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.mobilePrimary" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.mobilePrimary" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.relationship" name="Patient Schema Update Patient Schema should invalidate a patient with an invalid emergencyContactInfo.relationship" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.firstName" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.firstName" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.lastName" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.lastName" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.birthDate" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.birthDate" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.gender" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.gender" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.maritalStatus" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.maritalStatus" time="0.001">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.bloodType" name="Patient Schema Update Patient Schema should invalidate a patient with a missing patientInfo.bloodType" time="0">
+    </testcase>
+    <testcase classname="Patient Schema Update Patient Schema should invalidate a patient with a missing addressInfo.zipCode" name="Patient Schema Update Patient Schema should invalidate a patient with a missing addressInfo.zipCode" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Encounter Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:08" time="0.217" tests="54">
+    <testcase classname="Encounter Schema Create Encounter Schema should validate a correct encounter" name="Encounter Schema Create Encounter Schema should validate a correct encounter" time="0.002">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid patientId.patientId1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid patientId.patientId1" time="0.006">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid patientId.patientId2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid patientId.patientId2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid date.date1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid date.date1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid date.date2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid date.date2" time="0.002">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class3" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid class.class3" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status3" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid status.status3" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint2" time="0.002">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid notes.notes1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid notes.notes1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid notes.notes2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid notes.notes2" time="0.002">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid locationId.locationId1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid locationId.locationId1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid locationId.locationId2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid locationId.locationId2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId1" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId2" name="Encounter Schema Create Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing patientId" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing patientId" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing date" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing date" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing class" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing class" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing status" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing status" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing locationId" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing locationId" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing doctorId" name="Encounter Schema Create Encounter Schema should invalidate a encounter with a missing doctorId" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should validate a correct encounter" name="Encounter Schema Update Encounter Schema should validate a correct encounter" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid patientId.patientId1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid patientId.patientId1" time="0.005">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid patientId.patientId2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid patientId.patientId2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid date.date1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid date.date1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid date.date2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid date.date2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class1" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class3" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid class.class3" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status3" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid status.status3" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid reasonForVisit.reasonForVisit2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint1" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid chiefComplaint.chiefComplaint2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid notes.notes1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid notes.notes1" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid notes.notes2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid notes.notes2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid locationId.locationId1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid locationId.locationId1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid locationId.locationId2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid locationId.locationId2" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId1" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId1" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId2" name="Encounter Schema Update Encounter Schema should invalidate a encounter with an invalid doctorId.doctorId2" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing patientId" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing patientId" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing date" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing date" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing class" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing class" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing status" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing status" time="0">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing locationId" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing locationId" time="0.001">
+    </testcase>
+    <testcase classname="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing doctorId" name="Encounter Schema Update Encounter Schema should invalidate a encounter with a missing doctorId" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Location Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:09" time="0.163" tests="42">
+    <testcase classname="Location Schema Create Location Schema should validate a correct location" name="Location Schema Create Location Schema should validate a correct location" time="0.003">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid code.code1" name="Location Schema Create Location Schema should invalidate a location with an invalid code.code1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid code.code2" name="Location Schema Create Location Schema should invalidate a location with an invalid code.code2" time="0">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid code.code3" name="Location Schema Create Location Schema should invalidate a location with an invalid code.code3" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid code.code4" name="Location Schema Create Location Schema should invalidate a location with an invalid code.code4" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid name.name1" name="Location Schema Create Location Schema should invalidate a location with an invalid name.name1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid name.name2" name="Location Schema Create Location Schema should invalidate a location with an invalid name.name2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid name.name3" name="Location Schema Create Location Schema should invalidate a location with an invalid name.name3" time="0">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid name.name4" name="Location Schema Create Location Schema should invalidate a location with an invalid name.name4" time="0">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid address1.address1_1" name="Location Schema Create Location Schema should invalidate a location with an invalid address1.address1_1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid address1.address1_2" name="Location Schema Create Location Schema should invalidate a location with an invalid address1.address1_2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid address2.address2_1" name="Location Schema Create Location Schema should invalidate a location with an invalid address2.address2_1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid address2.address2_2" name="Location Schema Create Location Schema should invalidate a location with an invalid address2.address2_2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid city.city1" name="Location Schema Create Location Schema should invalidate a location with an invalid city.city1" time="0.002">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid city.city2" name="Location Schema Create Location Schema should invalidate a location with an invalid city.city2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid province.province1" name="Location Schema Create Location Schema should invalidate a location with an invalid province.province1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid province.province2" name="Location Schema Create Location Schema should invalidate a location with an invalid province.province2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid zipCode.zipCode1" name="Location Schema Create Location Schema should invalidate a location with an invalid zipCode.zipCode1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with an invalid zipCode.zipCode2" name="Location Schema Create Location Schema should invalidate a location with an invalid zipCode.zipCode2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with a missing code" name="Location Schema Create Location Schema should invalidate a location with a missing code" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Create Location Schema should invalidate a location with a missing name" name="Location Schema Create Location Schema should invalidate a location with a missing name" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should validate a correct location" name="Location Schema Update Location Schema should validate a correct location" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid code.code1" name="Location Schema Update Location Schema should invalidate a location with an invalid code.code1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid code.code2" name="Location Schema Update Location Schema should invalidate a location with an invalid code.code2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid code.code3" name="Location Schema Update Location Schema should invalidate a location with an invalid code.code3" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid code.code4" name="Location Schema Update Location Schema should invalidate a location with an invalid code.code4" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid name.name1" name="Location Schema Update Location Schema should invalidate a location with an invalid name.name1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid name.name2" name="Location Schema Update Location Schema should invalidate a location with an invalid name.name2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid name.name3" name="Location Schema Update Location Schema should invalidate a location with an invalid name.name3" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid name.name4" name="Location Schema Update Location Schema should invalidate a location with an invalid name.name4" time="0.002">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid address1.address1_1" name="Location Schema Update Location Schema should invalidate a location with an invalid address1.address1_1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid address1.address1_2" name="Location Schema Update Location Schema should invalidate a location with an invalid address1.address1_2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid address2.address2_1" name="Location Schema Update Location Schema should invalidate a location with an invalid address2.address2_1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid address2.address2_2" name="Location Schema Update Location Schema should invalidate a location with an invalid address2.address2_2" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid city.city1" name="Location Schema Update Location Schema should invalidate a location with an invalid city.city1" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid city.city2" name="Location Schema Update Location Schema should invalidate a location with an invalid city.city2" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid province.province1" name="Location Schema Update Location Schema should invalidate a location with an invalid province.province1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid province.province2" name="Location Schema Update Location Schema should invalidate a location with an invalid province.province2" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid zipCode.zipCode1" name="Location Schema Update Location Schema should invalidate a location with an invalid zipCode.zipCode1" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with an invalid zipCode.zipCode2" name="Location Schema Update Location Schema should invalidate a location with an invalid zipCode.zipCode2" time="0">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with a missing code" name="Location Schema Update Location Schema should invalidate a location with a missing code" time="0.001">
+    </testcase>
+    <testcase classname="Location Schema Update Location Schema should invalidate a location with a missing name" name="Location Schema Update Location Schema should invalidate a location with a missing name" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Laboratory Schema" errors="0" failures="0" skipped="0" timestamp="2024-02-06T07:09:09" time="0.15" tests="16">
+    <testcase classname="Laboratory Schema Create Laboratory Schema should validate a correct laboratory" name="Laboratory Schema Create Laboratory Schema should validate a correct laboratory" time="0.002">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name1" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name1" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name2" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name2" time="0">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name3" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name3" time="0">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name4" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid name.name4" time="0">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid category.category1" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid category.category1" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid category.category2" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with an invalid category.category2" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with a missing name" name="Laboratory Schema Create Laboratory Schema should invalidate a laboratory with a missing name" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should validate a correct laboratory" name="Laboratory Schema Update Laboratory Schema should validate a correct laboratory" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name1" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name1" time="0.005">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name2" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name2" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name3" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name3" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name4" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid name.name4" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid category.category1" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid category.category1" time="0">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid category.category2" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with an invalid category.category2" time="0.001">
+    </testcase>
+    <testcase classname="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with a missing name" name="Laboratory Schema Update Laboratory Schema should invalidate a laboratory with a missing name" time="0.001">
+    </testcase>
+  </testsuite>
+</testsuites>

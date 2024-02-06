@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon src/index.js",
         "start": "cross-env NODE_ENV=production node src/index.js",
-        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+        "test": "cross-env NODE_ENV=test jest --runInBand",
         "start:test": "cross-env NODE_ENV=test node src/index.js",
         "build:ui": "rm -rf dist && cd ../client/ && npm run build && cp -r dist ../server",
         "deploy": "flyctl deploy",
@@ -38,6 +38,7 @@
     "devDependencies": {
         "@flydotio/dockerfile": "^0.5.0",
         "jest": "^29.7.0",
+        "jest-junit": "^16.0.0",
         "nodemon": "^3.0.2",
         "supertest": "^6.3.3"
     },
@@ -45,6 +46,16 @@
         "testEnvironment": "node",
         "globalSetup": "./src/utils/test/setup.js",
         "globalTeardown": "./src/utils/test/teardown.js",
-        "testTimeout": 100000
+        "testTimeout": 100000,
+        "reporters": [
+            "default",
+            [
+                "jest-junit",
+                {
+                    "outputDirectory": "./src/test/_result/",
+                    "outputName": "results.xml"
+                }
+            ]
+        ]
     }
 }
