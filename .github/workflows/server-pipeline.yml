@@ -44,4 +44,4 @@ jobs:
               uses: mikepenz/action-junit-report@v4
               if: success() || failure()
               with:
-                  report_paths: "server/src/test/result"
+                  report_paths: "server/src/test/_result/"
