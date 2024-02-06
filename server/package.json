@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon src/index.js",
         "start": "cross-env NODE_ENV=production node src/index.js",
-        "test": "cross-env NODE_ENV=test jest --ci",
+        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
         "start:test": "cross-env NODE_ENV=test node src/index.js",
         "build:ui": "rm -rf dist && cd ../client/ && npm run build && cp -r dist ../server",
         "deploy": "flyctl deploy",
