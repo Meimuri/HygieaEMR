@@ -20,3 +20,5 @@ jobs:
 
             - name: Connect to Postgres
               run: flyctl proxy 5432 -a hygiea-emr-db-test && flyctl postgres connect -a hygiea-emr-db-test
+              env:
+                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
