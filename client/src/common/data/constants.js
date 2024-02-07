@@ -41,3 +41,16 @@ export const ENCOUNTER_STATUS = [
     "Finished",
     "Cancelled",
 ];
+
+export const NAVIGATION_MENU = [
+    { name: "Home", path: "/" },
+    { name: "Patient", path: "/patient" },
+];
+
+export const NAVIGATION_SUB_MENU = [{ name: "Sign out", href: "#" }];
+
+export const APP_USER = {
+    name: "John Doe",
+    email: "john@doe.com",
+    imageUrl: "/profile-photo.jpg",
+};
