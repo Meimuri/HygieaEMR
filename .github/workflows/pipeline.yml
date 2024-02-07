@@ -13,9 +13,10 @@ permissions:
     checks: write
 
 jobs:
-    client_deployment_pipeline:
+    deployment_pipeline:
         runs-on: ubuntu-20.04
         steps:
+            - uses: superfly/flyctl-actions/setup-flyctl@master
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
               with:
@@ -25,17 +26,10 @@ jobs:
               run: cd client && npm install
 
             - name: Build client app
-              run: cd client && npm run build
-
-    server_deployment_pipeline:
-        needs: [client_deployment_pipeline]
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: superfly/flyctl-actions/setup-flyctl@master
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v4
-              with:
-                  node-version: "20"
+              run: |
+                  cd client
+                  npm run build
+                  ls
 
             - name: Install server dependencies
               run: cd server && npm install
@@ -67,12 +61,14 @@ jobs:
             - name: Remove old build
               run: |
                   cd server
+                  ls
                   rm -rf dist
                   ls
 
             - name: Copy new build
               run: |
                   cd client
+                  ls
                   cp -r dist ../server
                   cd ../server
                   ls
@@ -84,7 +80,7 @@ jobs:
             #       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
     # tag_release:
-    #     needs: [server_deployment_pipeline]
+    #     needs: [deployment_pipeline]
     #     runs-on: ubuntu-20.04
     #     steps:
     #         - uses: actions/checkout@v4
