@@ -49,9 +49,16 @@ jobs:
               with:
                   report_paths: "server/src/test/_result/results.xml"
 
+            - name: Build App
+              run: |
+                  cd server
+                  npm run build:ui
+
             - name: Deploy App
               if: ${{ github.event_name == 'push' }}
-              run: flyctl deploy --remote-only
+              run: |
+                  cd server
+                  flyctl deploy --remote-only
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
