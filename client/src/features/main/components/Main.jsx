@@ -4,8 +4,8 @@ import Menubar from "../../../common/components/Menubar";
 
 import Home from "../../home/components/Home";
 import PatientList from "../../patient/components/PatientList";
-// import Patient from "../../patient/components/Patient";
-// import PatientCreateForm from "../../patient/components/PatientCreateForm";
+import Patient from "../../patient/components/Patient";
+import PatientCreateForm from "../../patient/components/PatientCreateForm";
 // import PatientEditForm from "../../patient/components/PatientEditForm";
 
 // import EncounterList from "../../encounter/components/EncounterList";
@@ -21,12 +21,12 @@ const Main = () => {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/patient" element={<PatientList />} />
-                    {/* <Route path="/patient/:patientId" element={<Patient />} />
+                    <Route path="/patient/:patientId" element={<Patient />} />
                     <Route
                         path="/patient/create"
                         element={<PatientCreateForm />}
                     />
-                    <Route
+                    {/* <Route
                         path="/patient/:patientId/edit"
                         element={<PatientEditForm />}
                     />

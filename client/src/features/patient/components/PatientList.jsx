@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useGetPatientsQuery } from "../../../redux/api/patient";
 
 import Header from "../../../common/components/Header";
@@ -32,7 +31,7 @@ const PatientList = () => {
                             </button>
                         </div>
                         <table className="w-full text-sm text-left text-gray-500">
-                            <thead className="text-sm text-gray-700 uppercase bg-gray-200">
+                            <thead className="text-sm text-gray-700 uppercase bg-gray-50">
                                 <tr>
                                     <th
                                         scope="col"
@@ -61,42 +60,70 @@ const PatientList = () => {
                                     data.map((patient) => (
                                         <tr
                                             key={patient.id}
-                                            className="bg-white border-b"
+                                            className="bg-white border-b cursor-pointer hover:bg-gray-50"
+                                            onClick={() => {
+                                                navigate(
+                                                    `/patient/${patient.id}`
+                                                );
+                                            }}
                                         >
                                             <td
                                                 scope="row"
                                                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                                             >
-                                                <Link
-                                                    to={`/patient/${patient.id}`}
-                                                >
-                                                    {patient.lastName}
-                                                </Link>
+                                                {patient.lastName}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <Link
-                                                    to={`/patient/${patient.id}`}
-                                                >
-                                                    {patient.firstName}
-                                                </Link>
+                                                {patient.firstName}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <Link
-                                                    to={`/patient/${patient.id}`}
-                                                >
-                                                    {new Date(
-                                                        patient.birthDate
-                                                    ).toLocaleDateString(
-                                                        "en-US",
-                                                        {
-                                                            year: "numeric",
-                                                            month: "long",
-                                                            day: "numeric",
-                                                        }
-                                                    )}
-                                                </Link>
+                                                {new Date(
+                                                    patient.birthDate
+                                                ).toLocaleDateString("en-US", {
+                                                    year: "numeric",
+                                                    month: "long",
+                                                    day: "numeric",
+                                                })}
                                             </td>
                                         </tr>
+                                        // <tr
+                                        //     key={patient.id}
+                                        //     className="bg-white border-b"
+                                        // >
+                                        //     <td
+                                        //         scope="row"
+                                        //         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                                        //     >
+                                        //         <Link
+                                        //             to={`/patient/${patient.id}`}
+                                        //         >
+                                        //             {patient.lastName}
+                                        //         </Link>
+                                        //     </td>
+                                        //     <td className="px-6 py-4 whitespace-nowrap">
+                                        //         <Link
+                                        //             to={`/patient/${patient.id}`}
+                                        //         >
+                                        //             {patient.firstName}
+                                        //         </Link>
+                                        //     </td>
+                                        //     <td className="px-6 py-4 whitespace-nowrap">
+                                        //         <Link
+                                        //             to={`/patient/${patient.id}`}
+                                        //         >
+                                        //             {new Date(
+                                        //                 patient.birthDate
+                                        //             ).toLocaleDateString(
+                                        //                 "en-US",
+                                        //                 {
+                                        //                     year: "numeric",
+                                        //                     month: "long",
+                                        //                     day: "numeric",
+                                        //                 }
+                                        //             )}
+                                        //         </Link>
+                                        //     </td>
+                                        // </tr>
                                     ))
                                 )}
                             </tbody>
