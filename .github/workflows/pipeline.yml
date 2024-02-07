@@ -81,6 +81,6 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Bump version and push tag
-              uses: anothrNick/github-tag-action@a2c70ae13a881faf2b4953baaa9e49731997ab36
+              uses: anothrNick/github-tag-action@1.64.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
