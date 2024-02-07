@@ -67,12 +67,12 @@ jobs:
                   cd client
                   cp -r dist ../server
                   cd ../server
-            # - name: Build and deploy
-            #   #   if: ${{ github.event_name == 'push' }}
-            #   run: |
-            #       cd server
-            #   env:
-            #       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+            - name: Deploy
+              #   if: ${{ github.event_name == 'push' }}
+              run: flyctl deploy --remote-only
+              env:
+                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
     # tag_release:
     #     needs: [deployment_pipeline]
