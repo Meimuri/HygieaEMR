@@ -24,6 +24,9 @@ jobs:
             - name: Install client dependencies
               run: cd client && npm install
 
+            - name: Build client app
+              run: cd client && npm run build
+
     server_deployment_pipeline:
         needs: [client_deployment_pipeline]
         runs-on: ubuntu-20.04
@@ -61,28 +64,20 @@ jobs:
             #   with:
             #       report_paths: "server/src/test/_result/results.xml"
 
-            - name: Install Vite
-              run: npm install -g create-vite
+            # - name: Build and deploy
+            #   #   if: ${{ github.event_name == 'push' }}
+            #   run: |
+            #       cd server
+            #   env:
+            #       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
-            - name: Build and deploy
-              #   if: ${{ github.event_name == 'push' }}
-              run: |
-                  cd server
-                  rm -rf dist
-                  cd ../client
-                  npm run build
-                  cp -r dist ../server
-                  flyctl deploy --remote-only
-              env:
-                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-    tag_release:
-        needs: [server_deployment_pipeline]
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v4
-            - name: Bump version and push tag
-              if: ${{ github.event_name == 'push' }}
-              uses: anothrNick/github-tag-action@1.64.0
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # tag_release:
+    #     needs: [server_deployment_pipeline]
+    #     runs-on: ubuntu-20.04
+    #     steps:
+    #         - uses: actions/checkout@v4
+    #         - name: Bump version and push tag
+    #           if: ${{ github.event_name == 'push' }}
+    #           uses: anothrNick/github-tag-action@1.64.0
+    #           env:
+    #               GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
