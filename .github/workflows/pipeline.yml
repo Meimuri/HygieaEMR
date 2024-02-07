@@ -24,7 +24,14 @@ jobs:
             - name: Install client dependencies
               run: cd client && npm install
 
+            - name: Build App
+              run: |
+                  cd client
+                  npm run build 
+                  cp -r dist ../server
+
     server_deployment_pipeline:
+        needs: [client_deployment_pipeline]
         runs-on: ubuntu-20.04
         steps:
             - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -59,11 +66,6 @@ jobs:
               if: success() || failure()
               with:
                   report_paths: "server/src/test/_result/results.xml"
-
-            - name: Build App
-              run: |
-                  cd server
-                  npm run build:ui
 
             - name: Deploy App
               if: ${{ github.event_name == 'push' }}
