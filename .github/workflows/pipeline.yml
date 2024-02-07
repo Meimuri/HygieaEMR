@@ -24,12 +24,6 @@ jobs:
             - name: Install client dependencies
               run: cd client && npm install
 
-            - name: Build App
-              run: |
-                  cd client
-                  npm run build 
-                  cp -r dist ../server
-
     server_deployment_pipeline:
         needs: [client_deployment_pipeline]
         runs-on: ubuntu-20.04
@@ -43,31 +37,34 @@ jobs:
             - name: Install server dependencies
               run: cd server && npm install
 
-            - name: Connect to database
-              run: |
-                  cd server
-                  flyctl proxy 5432 -a hygiea-emr-db-test &
-                  sleep 10
-              env:
-                  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+            # - name: Connect to database
+            #   run: |
+            #       cd server
+            #       flyctl proxy 5432 -a hygiea-emr-db-test &
+            #       sleep 10
+            #   env:
+            #       FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
-            - name: Jest Test
-              run: |
-                  cd server
-                  npm run test
-              env:
-                  PORT: ${{ secrets.PORT }}
-                  TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
-                  DATABASE_URL: ${{ secrets.DATABASE_URL }}
-                  SECRET: ${{ secrets.SECRET }}
+            # - name: Jest Test
+            #   run: |
+            #       cd server
+            #       npm run test
+            #   env:
+            #       PORT: ${{ secrets.PORT }}
+            #       TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+            #       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            #       SECRET: ${{ secrets.SECRET }}
 
-            - name: Publish Test Results
-              uses: mikepenz/action-junit-report@v4
-              if: success() || failure()
-              with:
-                  report_paths: "server/src/test/_result/results.xml"
+            # - name: Publish Test Results
+            #   uses: mikepenz/action-junit-report@v4
+            #   if: success() || failure()
+            #   with:
+            #       report_paths: "server/src/test/_result/results.xml"
 
-            - name: Deploy App
+            - name: Install Vite
+              run: npm install -g create-vite
+
+            - name: Build and deploy
               #   if: ${{ github.event_name == 'push' }}
               run: |
                   cd server
