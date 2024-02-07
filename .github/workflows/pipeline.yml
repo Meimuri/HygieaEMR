@@ -68,7 +68,10 @@ jobs:
               #   if: ${{ github.event_name == 'push' }}
               run: |
                   cd server
-                  npm run build:ui
+                  rn -rf dist
+                  cd ../client
+                  npm run build
+                  cp -r dist ../server
                   flyctl deploy --remote-only
               env:
                   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
