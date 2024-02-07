@@ -29,7 +29,6 @@ jobs:
               run: |
                   cd client
                   npm run build
-                  ls
 
             - name: Install server dependencies
               run: cd server && npm install
@@ -61,17 +60,13 @@ jobs:
             - name: Remove old build
               run: |
                   cd server
-                  ls
                   rm -rf dist
-                  ls
 
             - name: Copy new build
               run: |
                   cd client
-                  ls
                   cp -r dist ../server
                   cd ../server
-                  ls
             # - name: Build and deploy
             #   #   if: ${{ github.event_name == 'push' }}
             #   run: |
