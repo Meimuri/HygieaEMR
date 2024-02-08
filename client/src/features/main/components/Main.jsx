@@ -8,7 +8,7 @@ import Patient from "../../patient/components/Patient";
 import PatientCreateForm from "../../patient/components/PatientCreateForm";
 // import PatientEditForm from "../../patient/components/PatientEditForm";
 
-// import EncounterList from "../../encounter/components/EncounterList";
+import EncounterList from "../../encounter/components/EncounterList";
 // import Encounter from "../../encounter/components/Encounter";
 // import EncounterCreateForm from "../../encounter/components/EncounterCreateForm";
 // import EncounterEditForm from "../../encounter/components/EncounterEditForm";
@@ -29,12 +29,12 @@ const Main = () => {
                     {/* <Route
                         path="/patient/:patientId/edit"
                         element={<PatientEditForm />}
-                    />
+                    /> */}
                     <Route
                         path="/patient/:patientId/encounter"
                         element={<EncounterList />}
                     />
-                    <Route
+                    {/* <Route
                         path="/patient/:patientId/encounter/:encounterId"
                         element={<Encounter />}
                     />

@@ -3,6 +3,7 @@ import { useGetPatientsQuery } from "../../../redux/api/patient";
 
 import Header from "../../../common/components/Header";
 import PatientListBodySkeleton from "../../../common/skeleton/PatientListBodySkeleton";
+import Breadcrumb from "../../../common/components/Breadcrumb";
 
 const PatientList = () => {
     const navigate = useNavigate();
@@ -12,11 +13,10 @@ const PatientList = () => {
         navigate("/patient/create");
     };
 
-    console.log(data);
-
     return (
         <>
             <Header text="View All Patients" />
+            <Breadcrumb breadcrumbs={[{ path: "/patient", name: "Patient" }]} />
 
             <main>
                 <div className="mx-auto max-w-full px-4 py-6 sm:px-6 lg:px-8">
@@ -86,44 +86,6 @@ const PatientList = () => {
                                                 })}
                                             </td>
                                         </tr>
-                                        // <tr
-                                        //     key={patient.id}
-                                        //     className="bg-white border-b"
-                                        // >
-                                        //     <td
-                                        //         scope="row"
-                                        //         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                                        //     >
-                                        //         <Link
-                                        //             to={`/patient/${patient.id}`}
-                                        //         >
-                                        //             {patient.lastName}
-                                        //         </Link>
-                                        //     </td>
-                                        //     <td className="px-6 py-4 whitespace-nowrap">
-                                        //         <Link
-                                        //             to={`/patient/${patient.id}`}
-                                        //         >
-                                        //             {patient.firstName}
-                                        //         </Link>
-                                        //     </td>
-                                        //     <td className="px-6 py-4 whitespace-nowrap">
-                                        //         <Link
-                                        //             to={`/patient/${patient.id}`}
-                                        //         >
-                                        //             {new Date(
-                                        //                 patient.birthDate
-                                        //             ).toLocaleDateString(
-                                        //                 "en-US",
-                                        //                 {
-                                        //                     year: "numeric",
-                                        //                     month: "long",
-                                        //                     day: "numeric",
-                                        //                 }
-                                        //             )}
-                                        //         </Link>
-                                        //     </td>
-                                        // </tr>
                                     ))
                                 )}
                             </tbody>

@@ -5,6 +5,7 @@ import Header from "../../../common/components/Header";
 import PatientViewSkeleton from "../../../common/skeleton/PatientViewSkeleton";
 import DescriptionDetails from "../../../common/components/DescriptionDetails";
 import DescriptionHeader from "../../../common/components/DescriptionHeader";
+import Breadcrumb from "../../../common/components/Breadcrumb";
 // import Button from "../../../common/components/Button";
 
 const Patient = () => {
@@ -24,22 +25,23 @@ const Patient = () => {
     //     navigate(`/patient/${patientId}/edit`);
     // };
 
-    // const viewEncounters = () => {
-    //     navigate(`/patient/${patientId}/encounter`);
-    // };
-
-    console.log(patient);
+    const viewEncounters = () => {
+        navigate(`/patient/${patientId}/encounter`);
+    };
 
     if (error) return <div>An error has occurred: {error.data.error}</div>;
 
     return (
         <>
             <Header text="View Patient" />
+            <Breadcrumb
+                breadcrumbs={[
+                    { path: "/patient", name: "Patient" },
+                    { path: "", name: "View Patient" },
+                ]}
+            />
             {/* <Button text="View All Encounters" clickEvent={viewEncounters} />
-            <Button text="Edit" clickEvent={editPatient} />
-            <Button text="Back" clickEvent={goBack} /> */}
-
-            {/* <pre>{JSON.stringify(patient, null, 2)}</pre> */}
+            <Button text="Edit" clickEvent={editPatient} /> */}
 
             {isFetching ? (
                 <PatientViewSkeleton />
@@ -233,12 +235,13 @@ const Patient = () => {
                                 >
                                     Back
                                 </button>
-                                {/* <button
+                                <button
                                     type="button"
                                     className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    onClick={viewEncounters}
                                 >
-                                    Save
-                                </button> */}
+                                    View Encounters
+                                </button>
                             </div>
                         </div>
                     </div>

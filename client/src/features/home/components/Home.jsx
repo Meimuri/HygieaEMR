@@ -1,9 +1,11 @@
+import Breadcrumb from "../../../common/components/Breadcrumb";
 import Header from "../../../common/components/Header";
 
 const Home = () => {
     return (
         <>
             <Header text="Dashboard" />
+            <Breadcrumb />
             <main>
                 <div className="mx-auto max-w-full py-6 sm:px-6 lg:px-8">
                     <x-placeholder>
