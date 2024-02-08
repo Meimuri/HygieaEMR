@@ -1,12 +1,15 @@
+// External Libraries
 import { useParams, useNavigate } from "react-router-dom";
+
+// Internal Libraries
 import { useGetOnePatientQuery } from "../../../redux/api/patient";
 
+// Components
 import Header from "../../../common/components/Header";
 import PatientViewSkeleton from "../../../common/skeleton/PatientViewSkeleton";
 import DescriptionDetails from "../../../common/components/DescriptionDetails";
 import DescriptionHeader from "../../../common/components/DescriptionHeader";
 import Breadcrumb from "../../../common/components/Breadcrumb";
-// import Button from "../../../common/components/Button";
 
 const Patient = () => {
     const { patientId } = useParams();
@@ -51,8 +54,8 @@ const Patient = () => {
                         <div className="px-1 sm:px-10 py-4 relative min-h-96 overflow-hidden rounded-xl shadow bg-white">
                             <div className="py-6">
                                 <DescriptionHeader
-                                    header="Patient Information"
-                                    subheader="Basic details about the patient."
+                                    header="Basic Information"
+                                    subheader="Basic details about the patient"
                                 />
                                 <div className="mt-6 border-t border-gray-100">
                                     <dl className="divide-y divide-gray-100">
@@ -96,9 +99,9 @@ const Patient = () => {
                             {patient.patient_address && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Address"
+                                        header="Address"
                                         subheader="Current residential details of the
-                                        patient."
+                                        patient"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">
@@ -143,8 +146,8 @@ const Patient = () => {
                             {patient.patient_contact_info && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Contact"
-                                        subheader="Primary contact details of the patient."
+                                        header="Contact Information"
+                                        subheader="Primary contact details of the patient"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">
@@ -190,8 +193,8 @@ const Patient = () => {
                             {patient.patient_emergency_contact && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Emergency Contact"
-                                        subheader="Contact details to be used in case of an emergency."
+                                        header="Emergency Contact"
+                                        subheader="Contact details to be used in case of an emergency"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">

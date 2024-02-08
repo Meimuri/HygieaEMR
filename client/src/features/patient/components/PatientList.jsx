@@ -1,6 +1,10 @@
+// External Libraries
 import { useNavigate } from "react-router-dom";
+
+// Internal Libraries
 import { useGetPatientsQuery } from "../../../redux/api/patient";
 
+// Components
 import Header from "../../../common/components/Header";
 import PatientListBodySkeleton from "../../../common/skeleton/PatientListBodySkeleton";
 import Breadcrumb from "../../../common/components/Breadcrumb";
