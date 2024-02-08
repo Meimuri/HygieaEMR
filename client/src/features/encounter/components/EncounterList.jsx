@@ -21,7 +21,7 @@ const EncounterList = () => {
 
     return (
         <>
-            <Header text="View Encounters" />
+            <Header text="View All Encounters" />
             <Breadcrumb
                 breadcrumbs={[
                     { path: "/patient", name: "Patients" },

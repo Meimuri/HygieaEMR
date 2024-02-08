@@ -21,7 +21,7 @@ const PatientList = () => {
             />
 
             <main>
-                <div className="mx-auto max-w-full px-4 py-6 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                     <div className="relative overflow-x-auto ">
                         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                             <button
