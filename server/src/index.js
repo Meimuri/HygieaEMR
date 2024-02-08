@@ -1,6 +1,7 @@
 // External modules
 const express = require("express");
 const cors = require("cors");
+const path = require("path"); // Don't forget to import the 'path' module
 require("express-async-errors");
 
 // Internal modules
@@ -32,6 +33,14 @@ app.use("/api/patients", patientsRouter);
 app.use("/api/encounters", encountersRouter);
 app.use("/api/examinations", examinationsRouter);
 
+// Catch-all route handler
+app.get("*", (_req, res) => {
+    res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+});
+
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
+
 const start = async () => {
     await connectToDatabase();
     app.listen(PORT, () => {
@@ -45,8 +54,5 @@ if (process.env.NODE_ENV !== "test") {
         process.exit(1);
     });
 }
-
-app.use(middleware.unknownEndpoint);
-app.use(middleware.errorHandler);
 
 module.exports = app;
