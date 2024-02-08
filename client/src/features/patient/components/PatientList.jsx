@@ -1,6 +1,10 @@
+// External Libraries
 import { useNavigate } from "react-router-dom";
+
+// Internal Libraries
 import { useGetPatientsQuery } from "../../../redux/api/patient";
 
+// Components
 import Header from "../../../common/components/Header";
 import PatientListBodySkeleton from "../../../common/skeleton/PatientListBodySkeleton";
 import Breadcrumb from "../../../common/components/Breadcrumb";
@@ -26,7 +30,7 @@ const PatientList = () => {
                         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                             <button
                                 type="button"
-                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="rounded-md bg-emerald-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
                                 onClick={createPatient}
                             >
                                 Create Patient

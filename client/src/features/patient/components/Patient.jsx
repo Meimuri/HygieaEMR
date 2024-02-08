@@ -1,12 +1,15 @@
+// External Libraries
 import { useParams, useNavigate } from "react-router-dom";
+
+// Internal Libraries
 import { useGetOnePatientQuery } from "../../../redux/api/patient";
 
+// Components
 import Header from "../../../common/components/Header";
 import PatientViewSkeleton from "../../../common/skeleton/PatientViewSkeleton";
 import DescriptionDetails from "../../../common/components/DescriptionDetails";
 import DescriptionHeader from "../../../common/components/DescriptionHeader";
 import Breadcrumb from "../../../common/components/Breadcrumb";
-// import Button from "../../../common/components/Button";
 
 const Patient = () => {
     const { patientId } = useParams();
@@ -21,9 +24,9 @@ const Patient = () => {
         navigate("/patient");
     };
 
-    // const editPatient = () => {
-    //     navigate(`/patient/${patientId}/edit`);
-    // };
+    const editPatient = () => {
+        navigate(`/patient/${patientId}/edit`);
+    };
 
     const viewEncounters = () => {
         navigate(`/patient/${patientId}/encounter`);
@@ -40,8 +43,6 @@ const Patient = () => {
                     { path: "", name: "View Patient" },
                 ]}
             />
-            {/* <Button text="View All Encounters" clickEvent={viewEncounters} />
-            <Button text="Edit" clickEvent={editPatient} /> */}
 
             {isFetching ? (
                 <PatientViewSkeleton />
@@ -51,8 +52,8 @@ const Patient = () => {
                         <div className="px-1 sm:px-10 py-4 relative min-h-96 overflow-hidden rounded-xl shadow bg-white">
                             <div className="py-6">
                                 <DescriptionHeader
-                                    header="Patient Information"
-                                    subheader="Basic details about the patient."
+                                    header="Basic Information"
+                                    subheader="Basic details about the patient"
                                 />
                                 <div className="mt-6 border-t border-gray-100">
                                     <dl className="divide-y divide-gray-100">
@@ -96,9 +97,9 @@ const Patient = () => {
                             {patient.patient_address && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Address"
+                                        header="Address"
                                         subheader="Current residential details of the
-                                        patient."
+                                        patient"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">
@@ -143,8 +144,8 @@ const Patient = () => {
                             {patient.patient_contact_info && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Contact"
-                                        subheader="Primary contact details of the patient."
+                                        header="Contact Information"
+                                        subheader="Primary contact details of the patient"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">
@@ -190,8 +191,8 @@ const Patient = () => {
                             {patient.patient_emergency_contact && (
                                 <div className="py-6">
                                     <DescriptionHeader
-                                        header="Patient Emergency Contact"
-                                        subheader="Contact details to be used in case of an emergency."
+                                        header="Emergency Contact"
+                                        subheader="Contact details to be used in case of an emergency"
                                     />
                                     <div className="mt-6 border-t border-gray-100">
                                         <dl className="divide-y divide-gray-100">
@@ -230,14 +231,21 @@ const Patient = () => {
                             <div className="flex items-center justify-end gap-x-3">
                                 <button
                                     type="button"
-                                    className="rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                    className="rounded-md bg-gray-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
                                     onClick={goBack}
                                 >
                                     Back
                                 </button>
                                 <button
                                     type="button"
-                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    className="rounded-md bg-cyan-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                                    onClick={editPatient}
+                                >
+                                    Edit Patient
+                                </button>
+                                <button
+                                    type="button"
+                                    className="rounded-md bg-emerald-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
                                     onClick={viewEncounters}
                                 >
                                     View Encounters

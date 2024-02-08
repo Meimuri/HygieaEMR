@@ -7,8 +7,8 @@ const PatientViewSkeleton = () => {
                 <div className="px-1 sm:px-10 py-4 relative min-h-96 overflow-hidden rounded-xl shadow bg-white">
                     <div className="py-6">
                         <DescriptionHeader
-                            header="Patient Information"
-                            subheader="Basic details about the patient."
+                            header="Basic Information"
+                            subheader="Basic details about the patient"
                         />
                         <div className="mt-6 border-t border-gray-100">
                             <dl className="divide-y divide-gray-100">
@@ -73,9 +73,9 @@ const PatientViewSkeleton = () => {
                     </div>
                     <div className="py-6">
                         <DescriptionHeader
-                            header="Patient Address"
+                            header="Address"
                             subheader="Current residential details of the
-                                        patient."
+                                        patient"
                         />
                         <div className="mt-6 border-t border-gray-100">
                             <dl className="divide-y divide-gray-100">
