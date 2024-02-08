@@ -64,12 +64,15 @@ export const patientApi = createApi({
             },
         }),
         updatePatient: builder.mutation({
-            query: ({ id, updatedPatient }) => ({
-                url: `/${id}`,
+            query: ({ patientId, updatedPatient }) => ({
+                url: `/${patientId}`,
                 method: "PUT",
                 body: updatedPatient,
             }),
-            onQueryStarted: async ({ id }, { dispatch, queryFulfilled }) => {
+            onQueryStarted: async (
+                { patientId },
+                { dispatch, queryFulfilled }
+            ) => {
                 queryFulfilled
                     .then(({ data }) => {
                         dispatch(
@@ -78,7 +81,7 @@ export const patientApi = createApi({
                                 undefined,
                                 (patients) => {
                                     const patientIndex = patients.findIndex(
-                                        (patient) => patient.id === id
+                                        (patient) => patient.id === patientId
                                     );
                                     if (patientIndex !== -1) {
                                         patients[patientIndex] = data;
@@ -90,7 +93,7 @@ export const patientApi = createApi({
                         dispatch(
                             patientApi.util.upsertQueryData(
                                 "getOnePatient",
-                                id.toString(),
+                                patientId.toString(),
                                 data
                             )
                         );

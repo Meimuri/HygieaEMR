@@ -24,9 +24,9 @@ const Patient = () => {
         navigate("/patient");
     };
 
-    // const editPatient = () => {
-    //     navigate(`/patient/${patientId}/edit`);
-    // };
+    const editPatient = () => {
+        navigate(`/patient/${patientId}/edit`);
+    };
 
     const viewEncounters = () => {
         navigate(`/patient/${patientId}/encounter`);
@@ -43,8 +43,6 @@ const Patient = () => {
                     { path: "", name: "View Patient" },
                 ]}
             />
-            {/* <Button text="View All Encounters" clickEvent={viewEncounters} />
-            <Button text="Edit" clickEvent={editPatient} /> */}
 
             {isFetching ? (
                 <PatientViewSkeleton />
@@ -241,7 +239,7 @@ const Patient = () => {
                                 <button
                                     type="button"
                                     className="rounded-md bg-cyan-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-                                    onClick={viewEncounters}
+                                    onClick={editPatient}
                                 >
                                     Edit Patient
                                 </button>
