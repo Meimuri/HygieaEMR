@@ -24,7 +24,7 @@ const Breadcrumb = ({ breadcrumbs = [] }) => {
 
     return (
         <nav
-            className="flex px-5 py-3 text-gray-700 border border-gray-200 bg-white"
+            className="flex px-5 py-3 text-gray-700 border border-gray-200 bg-white overflow-auto"
             aria-label="Breadcrumb"
         >
             <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -35,7 +35,7 @@ const Breadcrumb = ({ breadcrumbs = [] }) => {
                     >
                         <Link
                             to={breadcrumb.path}
-                            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-400"
+                            className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-400 whitespace-nowrap"
                         >
                             {breadcrumb.name}
                         </Link>
