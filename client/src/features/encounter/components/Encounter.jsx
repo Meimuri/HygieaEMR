@@ -1,8 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetOneEncounterQuery } from "../../../redux/api/encounter";
 
+import Breadcrumb from "../../../common/components/Breadcrumb";
 import Header from "../../../common/components/Header";
-import Button from "../../../common/components/Button";
+import DescriptionDetails from "../../../common/components/DescriptionDetails";
+import DescriptionHeader from "../../../common/components/DescriptionHeader";
+import EncounterViewSkeleton from "../../../common/skeleton/EncounterViewSkeleton";
+// import Button from "../../../common/components/Button";
 
 const Encounter = () => {
     const { patientId, encounterId } = useParams();
@@ -17,21 +21,108 @@ const Encounter = () => {
         navigate(`/patient/${patientId}/encounter`);
     };
 
-    const editEncounter = () => {
-        navigate(`/patient/${patientId}/encounter/${encounter.id}/edit`);
-    };
+    // const editEncounter = () => {
+    //     navigate(`/patient/${patientId}/encounter/${encounter.id}/edit`);
+    // };
 
-    if (isFetching) return <div>Loading...</div>;
     if (error) return <div>An error has occurred: {error.data.error}</div>;
-    if (!encounter) return <div>No encounter data</div>;
 
     return (
         <>
             <Header text="View Encounter" />
-            <Button text="Edit" clickEvent={editEncounter} />
-            <Button text="Back" clickEvent={goBack} />
+            <Breadcrumb
+                breadcrumbs={[
+                    { path: "/patient", name: "Patients" },
+                    { path: `/patient/${patientId}`, name: "View Patient" },
+                    {
+                        path: `/patient/${patientId}/encounter`,
+                        name: "Encounters",
+                    },
+                    {
+                        path: "",
+                        name: "View Encounter",
+                    },
+                ]}
+            />
+            {/* <Button text="Edit" clickEvent={editEncounter} /> */}
 
-            <pre>{JSON.stringify(encounter, null, 2)}</pre>
+            {isFetching ? (
+                <EncounterViewSkeleton />
+            ) : (
+                <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                    <div className="px-4 py-6 sm:px-0">
+                        <div className="px-1 sm:px-10 py-4 relative min-h-96 overflow-hidden rounded-xl shadow bg-white">
+                            <div className="py-6">
+                                <DescriptionHeader
+                                    header="Encounter Information"
+                                    subheader="Detailed record of the patient's visit or interaction with healthcare services."
+                                />
+                                <div className="mt-6 border-t border-gray-100">
+                                    <dl className="divide-y divide-gray-100">
+                                        <DescriptionDetails
+                                            fieldName="Date"
+                                            fieldValue={new Date(
+                                                encounter.date
+                                            ).toLocaleDateString("en-US", {
+                                                year: "numeric",
+                                                month: "long",
+                                                day: "numeric",
+                                            })}
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Class"
+                                            fieldValue={encounter.class}
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Status"
+                                            fieldValue={encounter.status}
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Physician"
+                                            fieldValue={`${encounter.doctor.firstName} ${encounter.doctor.lastName}`}
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Location"
+                                            fieldValue={encounter.location.name}
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Reason for Visit"
+                                            fieldValue={
+                                                encounter.reasonForVisit
+                                            }
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Chief Complaint"
+                                            fieldValue={
+                                                encounter.chiefComplaint
+                                            }
+                                        />
+                                        <DescriptionDetails
+                                            fieldName="Notes"
+                                            fieldValue={encounter.notes}
+                                        />
+                                    </dl>
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-end gap-x-3">
+                                <button
+                                    type="button"
+                                    className="rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                    onClick={goBack}
+                                >
+                                    Back
+                                </button>
+                                <button
+                                    type="button"
+                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                    View Examination
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };
