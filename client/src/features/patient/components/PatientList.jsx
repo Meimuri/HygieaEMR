@@ -16,15 +16,17 @@ const PatientList = () => {
     return (
         <>
             <Header text="View All Patients" />
-            <Breadcrumb breadcrumbs={[{ path: "/patient", name: "Patient" }]} />
+            <Breadcrumb
+                breadcrumbs={[{ path: "/patient", name: "Patients" }]}
+            />
 
             <main>
                 <div className="mx-auto max-w-full px-4 py-6 sm:px-6 lg:px-8">
                     <div className="relative overflow-x-auto ">
                         <div className="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                             <button
-                                className="inline-flex items-center text-gray-700 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5"
                                 type="button"
+                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                 onClick={createPatient}
                             >
                                 Create Patient

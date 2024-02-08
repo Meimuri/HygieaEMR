@@ -36,7 +36,7 @@ const Patient = () => {
             <Header text="View Patient" />
             <Breadcrumb
                 breadcrumbs={[
-                    { path: "/patient", name: "Patient" },
+                    { path: "/patient", name: "Patients" },
                     { path: "", name: "View Patient" },
                 ]}
             />
@@ -227,10 +227,10 @@ const Patient = () => {
                                     </div>
                                 </div>
                             )}
-                            <div className="flex items-center justify-end gap-x-6">
+                            <div className="flex items-center justify-end gap-x-3">
                                 <button
                                     type="button"
-                                    className="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+                                    className="rounded-md bg-gray-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
                                     onClick={goBack}
                                 >
                                     Back
