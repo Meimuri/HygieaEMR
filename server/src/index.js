@@ -33,11 +33,11 @@ app.use("/api/patients", patientsRouter);
 app.use("/api/encounters", encountersRouter);
 app.use("/api/examinations", examinationsRouter);
 
-app.use(middleware.unknownEndpoint);
+app.use("/api/*", middleware.unknownEndpoint);
 
 // Catch-all route handler
 app.get("*", (_req, res) => {
-    res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+    res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
 });
 
 app.use(middleware.errorHandler);
