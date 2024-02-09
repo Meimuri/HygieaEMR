@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // Components
 import ScrollToTop from "../../../common/components/ScrollToTop";
+import JWTDecode from "../../../common/components/JWTDecode";
 import Menubar from "../../../common/components/Menubar";
 
 // Home
@@ -22,12 +23,14 @@ import EncounterEditForm from "../../encounter/components/EncounterEditForm";
 
 // Examination
 import Examination from "../../examination/components/Examination";
+import ExaminationCreateForm from "../../examination/components/ExaminationCreateForm";
 
 const Main = () => {
     return (
         <>
             <div className="min-h-full">
                 <Menubar />
+                <JWTDecode />
                 <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Home />} />
@@ -60,6 +63,10 @@ const Main = () => {
                     <Route
                         path="/patient/:patientId/encounter/:encounterId/examination"
                         element={<Examination />}
+                    />
+                    <Route
+                        path="/patient/:patientId/encounter/:encounterId/examination/create"
+                        element={<ExaminationCreateForm />}
                     />
                 </Routes>
             </div>
