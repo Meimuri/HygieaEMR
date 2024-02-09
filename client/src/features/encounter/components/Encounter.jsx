@@ -32,6 +32,12 @@ const Encounter = () => {
         navigate(`/patient/${patientId}/encounter/${encounter.id}/examination`);
     };
 
+    const createExamination = () => {
+        navigate(
+            `/patient/${patientId}/encounter/${encounter.id}/examination/create`
+        );
+    };
+
     if (error) return <div>An error has occurred: {error.data.error}</div>;
 
     return (
@@ -137,6 +143,7 @@ const Encounter = () => {
                                     <button
                                         type="button"
                                         className="rounded-md bg-teal-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                                        onClick={createExamination}
                                     >
                                         Create Examination
                                     </button>

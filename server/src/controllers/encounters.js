@@ -11,6 +11,7 @@ const {
     validateCreateEncounter,
     validateUpdateEncounter,
 } = require("../utils/middleware/");
+
 const {
     returnCreatedEncounter,
     returnUpdatedEncounter,

@@ -61,6 +61,7 @@ router.post("/", userExtractor, validateCreateExamination, async (req, res) => {
 
         return examination;
     });
+
     res.status(201).json(result);
 });
 

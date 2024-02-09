@@ -6,6 +6,7 @@ import Breadcrumb from "../../../common/components/Breadcrumb";
 import Header from "../../../common/components/Header";
 import DescriptionDetails from "../../../common/components/DescriptionDetails";
 import DescriptionHeader from "../../../common/components/DescriptionHeader";
+import ExaminationViewSkeleton from "../../../common/skeleton/ExaminationViewSkeleton";
 
 // Redux API
 import { useGetOneExaminationQuery } from "../../../redux/api/examination";
@@ -42,13 +43,17 @@ const Examination = () => {
                         name: "View Encounter",
                     },
                     {
-                        path: "",
+                        path: `/patient/${patientId}/encounter/${encounterId}/examination`,
                         name: "Examination",
+                    },
+                    {
+                        path: "",
+                        name: "View Examination",
                     },
                 ]}
             />
             {isFetching ? (
-                <div>Loading...</div>
+                <ExaminationViewSkeleton />
             ) : (
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">
