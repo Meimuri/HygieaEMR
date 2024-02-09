@@ -11,7 +11,10 @@ const {
     validateCreateEncounter,
     validateUpdateEncounter,
 } = require("../utils/middleware/");
-const { returnCreatedEncounter } = require("../utils/helper/encounter_helper");
+const {
+    returnCreatedEncounter,
+    returnUpdatedEncounter,
+} = require("../utils/helper/encounter_helper");
 
 router.get("/", userExtractor, async (req, res) => {
     const patientId = req.query.patientId;
@@ -64,7 +67,10 @@ router.put("/:id", userExtractor, validateUpdateEncounter, async (req, res) => {
     });
 
     if (rowsUpdate > 0) {
-        return res.json(updatedEncounter);
+        const returnEncounter = await returnUpdatedEncounter(
+            updatedEncounter.id
+        );
+        return res.json(returnEncounter);
     } else {
         return res.status(404).json({ error: "Encounter not found" });
     }

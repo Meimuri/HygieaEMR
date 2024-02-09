@@ -1,12 +1,15 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useGetOneEncounterQuery } from "../../../redux/api/encounter";
+// External Libraries
+import { useNavigate, useParams } from "react-router-dom";
 
+// Components
 import Breadcrumb from "../../../common/components/Breadcrumb";
-import Header from "../../../common/components/Header";
 import DescriptionDetails from "../../../common/components/DescriptionDetails";
 import DescriptionHeader from "../../../common/components/DescriptionHeader";
 import EncounterViewSkeleton from "../../../common/skeleton/EncounterViewSkeleton";
-// import Button from "../../../common/components/Button";
+import Header from "../../../common/components/Header";
+
+// Redux API
+import { useGetOneEncounterQuery } from "../../../redux/api/encounter";
 
 const Encounter = () => {
     const { patientId, encounterId } = useParams();
@@ -21,9 +24,9 @@ const Encounter = () => {
         navigate(`/patient/${patientId}/encounter`);
     };
 
-    // const editEncounter = () => {
-    //     navigate(`/patient/${patientId}/encounter/${encounter.id}/edit`);
-    // };
+    const editEncounter = () => {
+        navigate(`/patient/${patientId}/encounter/${encounter.id}/edit`);
+    };
 
     if (error) return <div>An error has occurred: {error.data.error}</div>;
 
@@ -44,7 +47,6 @@ const Encounter = () => {
                     },
                 ]}
             />
-            {/* <Button text="Edit" clickEvent={editEncounter} /> */}
 
             {isFetching ? (
                 <EncounterViewSkeleton />
@@ -115,8 +117,9 @@ const Encounter = () => {
                                 <button
                                     type="button"
                                     className="rounded-md bg-cyan-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                                    onClick={editEncounter}
                                 >
-                                    View Examination
+                                    Edit Encounter
                                 </button>
                             </div>
                         </div>
