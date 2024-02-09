@@ -1,10 +1,11 @@
+// External Libraries
 import { useParams, useNavigate } from "react-router-dom";
 import { useGetEncountersQuery } from "../../../redux/api/encounter";
 
+// Common Components
 import EncounterListBodySkeleton from "../../../common/skeleton/EncounterListBodySkeleton";
 import Breadcrumb from "../../../common/components/Breadcrumb";
 import Header from "../../../common/components/Header";
-// import Button from "../../../common/components/Button";
 
 const EncounterList = () => {
     const { patientId } = useParams();
@@ -15,9 +16,9 @@ const EncounterList = () => {
         navigate(`/patient/${patientId}`);
     };
 
-    // const createEncounter = () => {
-    //     navigate(`/patient/${patientId}/encounter/create`);
-    // };
+    const createEncounter = () => {
+        navigate(`/patient/${patientId}/encounter/create`);
+    };
 
     return (
         <>
@@ -44,6 +45,7 @@ const EncounterList = () => {
                                 <button
                                     type="button"
                                     className="rounded-md bg-emerald-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+                                    onClick={createEncounter}
                                 >
                                     Create Encounter
                                 </button>
@@ -132,24 +134,6 @@ const EncounterList = () => {
                     </div>
                 </div>
             </main>
-            {/* <Button text="Create Encounter" clickEvent={createEncounter} />
-            <Button text="Back" clickEvent={goBack} /> */}
-            {/* <br />
-            <br />
-            <div>
-                {isFetching
-                    ? "Loading..."
-                    : data.map((encounter) => (
-                          <li key={encounter.id}>
-                              <Link
-                                  to={`/patient/${patientId}/encounter/${encounter.id}`}
-                              >
-                                  {encounter.date}
-                              </Link>
-                              <pre>{JSON.stringify(encounter, null, 2)}</pre>
-                          </li>
-                      ))}
-            </div> */}
         </>
     );
 };
