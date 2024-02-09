@@ -1,4 +1,4 @@
-const { Encounter, Location, Doctor } = require("../../models/");
+const { Encounter, Location, Doctor, Examination } = require("../../models/");
 
 const returnCreatedEncounter = async (id) => {
     const encounters = await Encounter.findByPk(id, {
@@ -32,6 +32,17 @@ const returnUpdatedEncounter = async (id) => {
             {
                 model: Doctor,
                 attributes: { exclude: ["createdAt", "updatedAt", "userId"] },
+            },
+            {
+                model: Examination,
+                attributes: {
+                    exclude: [
+                        "createdAt",
+                        "updatedAt",
+                        "encounterId",
+                        "locationId",
+                    ],
+                },
             },
         ],
     });
