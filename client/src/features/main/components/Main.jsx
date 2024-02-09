@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 
 // Components
+import ScrollToTop from "../../../common/components/ScrollToTop";
 import Menubar from "../../../common/components/Menubar";
 
 // Home
@@ -25,6 +26,7 @@ const Main = () => {
         <>
             <div className="min-h-full">
                 <Menubar />
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/patient" element={<PatientList />} />
