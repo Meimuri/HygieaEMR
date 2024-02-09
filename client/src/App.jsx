@@ -18,13 +18,7 @@ const App = () => {
     return (
         <div>
             <Notification />
-            {isLoading ? (
-                <div>Loading...</div>
-            ) : !user ? (
-                <LoginForm />
-            ) : (
-                <Main />
-            )}
+            {isLoading ? <div></div> : !user ? <LoginForm /> : <Main />}
         </div>
     );
 };

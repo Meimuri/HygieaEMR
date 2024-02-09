@@ -2,7 +2,8 @@
 const { Examination, Location, Laboratory } = require("../../../models");
 
 const examinationFinder = async (req, res, next) => {
-    const examination = await Examination.findByPk(req.params.id, {
+    const examination = await Examination.findOne({
+        where: { encounterId: req.params.id },
         attributes: {
             exclude: ["createdAt", "updatedAt", "encounterId", "locationId"],
         },
