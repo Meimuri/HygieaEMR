@@ -30,7 +30,7 @@ router.post("/", validateLogin, async (request, response) => {
         username: user.username,
     };
 
-    const token = jwt.sign(userForToken, SECRET, { expiresIn: "8h" });
+    const token = jwt.sign(userForToken, SECRET, { expiresIn: "60s" });
 
     response
         .status(200)

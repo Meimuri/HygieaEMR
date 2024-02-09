@@ -21,7 +21,6 @@ const JWTDecode = () => {
                     navigate("/");
                 });
             }
-            console.log("checking access");
         }
     });
 };
