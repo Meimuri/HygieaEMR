@@ -9,7 +9,7 @@ import Main from "./features/main/components/Main";
 
 const App = () => {
     const dispatch = useDispatch();
-    const { user, isLoading } = useSelector((state) => state.login);
+    const { user } = useSelector((state) => state.login);
 
     useEffect(() => {
         dispatch(handleLocalStorageLogin());
@@ -18,13 +18,7 @@ const App = () => {
     return (
         <div>
             <Notification />
-            {isLoading ? (
-                <div>Loading...</div>
-            ) : !user ? (
-                <LoginForm />
-            ) : (
-                <Main />
-            )}
+            {!user ? <LoginForm /> : <Main />}
         </div>
     );
 };
