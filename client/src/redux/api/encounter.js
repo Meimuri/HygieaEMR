@@ -59,6 +59,49 @@ export const encounterApi = createApi({
                     });
             },
         }),
+        updateEncounter: builder.mutation({
+            query: ({ encounterId, updatedEncounter }) => ({
+                url: `/${encounterId}`,
+                method: "PUT",
+                body: updatedEncounter,
+            }),
+            onQueryStarted: async (
+                { encounterId },
+                { dispatch, queryFulfilled }
+            ) => {
+                queryFulfilled
+                    .then(({ data }) => {
+                        console.log(data);
+                        dispatch(
+                            encounterApi.util.updateQueryData(
+                                "getEncounters",
+                                { patientId: data.patientId.toString() },
+                                (encounters = []) => {
+                                    const encounterIndex = encounters.findIndex(
+                                        (encounter) =>
+                                            encounter.id === Number(encounterId)
+                                    );
+                                    if (encounterIndex !== -1) {
+                                        encounters[encounterIndex] = data;
+                                    }
+                                }
+                            )
+                        );
+
+                        dispatch(
+                            encounterApi.util.upsertQueryData(
+                                "getOneEncounter",
+                                encounterId.toString(),
+                                data
+                            )
+                        );
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        dispatch(setNotification(error, "error", 5));
+                    });
+            },
+        }),
     }),
     keepUnusedDataFor: 240,
 });
@@ -67,4 +110,5 @@ export const {
     useGetEncountersQuery,
     useGetOneEncounterQuery,
     useAddEncounterMutation,
+    useUpdateEncounterMutation,
 } = encounterApi;

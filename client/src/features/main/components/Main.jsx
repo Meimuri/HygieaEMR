@@ -2,6 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 
 // Components
+import ScrollToTop from "../../../common/components/ScrollToTop";
 import Menubar from "../../../common/components/Menubar";
 
 // Home
@@ -16,15 +17,15 @@ import PatientEditForm from "../../patient/components/PatientEditForm";
 // Encounter
 import EncounterList from "../../encounter/components/EncounterList";
 import Encounter from "../../encounter/components/Encounter";
-
-// import EncounterCreateForm from "../../encounter/components/EncounterCreateForm";
-// import EncounterEditForm from "../../encounter/components/EncounterEditForm";
+import EncounterCreateForm from "../../encounter/components/EncounterCreateForm";
+import EncounterEditForm from "../../encounter/components/EncounterEditForm";
 
 const Main = () => {
     return (
         <>
             <div className="min-h-full">
                 <Menubar />
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/patient" element={<PatientList />} />
@@ -45,14 +46,14 @@ const Main = () => {
                         path="/patient/:patientId/encounter/:encounterId"
                         element={<Encounter />}
                     />
-                    {/* <Route
+                    <Route
                         path="/patient/:patientId/encounter/create"
                         element={<EncounterCreateForm />}
                     />
                     <Route
                         path="/patient/:patientId/encounter/:encounterId/edit"
                         element={<EncounterEditForm />}
-                    /> */}
+                    />
                 </Routes>
             </div>
         </>
