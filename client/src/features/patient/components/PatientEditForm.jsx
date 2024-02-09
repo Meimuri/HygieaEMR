@@ -1,22 +1,33 @@
+// External Libraries
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
+// Schema
 import schema from "../schema/";
-import { useUpdatePatientMutation } from "../../../redux/api/patient";
+
+// Redux API
+import {
+    useUpdatePatientMutation,
+    useGetOnePatientQuery,
+} from "../../../redux/api/patient";
 import { setNotification } from "../../../redux/reducers/notification";
-import { useGetOnePatientQuery } from "../../../redux/api/patient";
+
+// Utils
 import { adjustResponse } from "../../../common/utils/adjustResponse";
 
+// Components
 import Header from "../../../common/components/Header";
+import Breadcrumb from "../../../common/components/Breadcrumb";
+
+// Constants
 import {
     GENDER,
     MARITAL_STATUS,
     BLOOD_TYPE,
 } from "../../../common/data/constants";
-import Breadcrumb from "../../../common/components/Breadcrumb";
 
 const PatientEditForm = () => {
     const { patientId } = useParams();
