@@ -20,6 +20,9 @@ import Encounter from "../../encounter/components/Encounter";
 import EncounterCreateForm from "../../encounter/components/EncounterCreateForm";
 import EncounterEditForm from "../../encounter/components/EncounterEditForm";
 
+// Examination
+import Examination from "../../examination/components/Examination";
+
 const Main = () => {
     return (
         <>
@@ -53,6 +56,10 @@ const Main = () => {
                     <Route
                         path="/patient/:patientId/encounter/:encounterId/edit"
                         element={<EncounterEditForm />}
+                    />
+                    <Route
+                        path="/patient/:patientId/encounter/:encounterId/examination"
+                        element={<Examination />}
                     />
                 </Routes>
             </div>
