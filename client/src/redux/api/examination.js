@@ -62,7 +62,7 @@ export const examinationApi = createApi({
                 body: updatedExamination,
             }),
             onQueryStarted: async (
-                updatedExamination,
+                { updatedExamination },
                 { dispatch, queryFulfilled }
             ) => {
                 queryFulfilled
@@ -70,7 +70,7 @@ export const examinationApi = createApi({
                         dispatch(
                             examinationApi.util.upsertQueryData(
                                 "getOneExamination",
-                                data.id.toString(),
+                                updatedExamination.encounterId.toString(),
                                 data
                             )
                         );

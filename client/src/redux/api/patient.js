@@ -81,7 +81,8 @@ export const patientApi = createApi({
                                 undefined,
                                 (patients) => {
                                     const patientIndex = patients.findIndex(
-                                        (patient) => patient.id === patientId
+                                        (patient) =>
+                                            patient.id === Number(patientId)
                                     );
                                     if (patientIndex !== -1) {
                                         patients[patientIndex] = data;
