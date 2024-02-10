@@ -25,6 +25,12 @@ const Examination = () => {
         navigate(`/patient/${patientId}/encounter/${encounterId}`);
     };
 
+    const editExamination = () => {
+        navigate(
+            `/patient/${patientId}/encounter/${encounterId}/examination/edit`
+        );
+    };
+
     if (error) return <div>An error has occurred: {error.data.error}</div>;
 
     return (
@@ -119,6 +125,7 @@ const Examination = () => {
                                 <button
                                     type="button"
                                     className="rounded-md bg-cyan-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                                    onClick={editExamination}
                                 >
                                     Edit Examination
                                 </button>

@@ -23,7 +23,7 @@ import { adjustEncounterResponse } from "../../../common/utils/adjustEncounterRe
 // Components
 import Header from "../../../common/components/Header";
 import Breadcrumb from "../../../common/components/Breadcrumb";
-import EncounterCreateSkeleton from "../../../common/skeleton/EncounterCreateSkeleton";
+import EncounterEditSkeleton from "../../../common/skeleton/EncounterEditSkeleton";
 
 // Constants
 import {
@@ -39,8 +39,10 @@ const EncounterEditForm = () => {
 
     const { data: encounter, isLoading: encounterIsLoading } =
         useGetOneEncounterQuery(encounterId);
+
     const { data: locations, isLoading: locationIsLoading } =
         useGetLocationsQuery();
+
     const { data: doctors, isLoading: doctorIsLoading } = useGetDoctorsQuery();
 
     const {
@@ -111,7 +113,7 @@ const EncounterEditForm = () => {
                 ]}
             />
             {encounterIsLoading || locationIsLoading || doctorIsLoading ? (
-                <EncounterCreateSkeleton />
+                <EncounterEditSkeleton />
             ) : (
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">

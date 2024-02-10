@@ -71,7 +71,6 @@ export const encounterApi = createApi({
             ) => {
                 queryFulfilled
                     .then(({ data }) => {
-                        console.log(data);
                         dispatch(
                             encounterApi.util.updateQueryData(
                                 "getEncounters",

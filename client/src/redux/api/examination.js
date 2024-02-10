@@ -55,9 +55,37 @@ export const examinationApi = createApi({
                     });
             },
         }),
+        updateExamination: builder.mutation({
+            query: ({ examinationId, updatedExamination }) => ({
+                url: `/${examinationId}`,
+                method: "PUT",
+                body: updatedExamination,
+            }),
+            onQueryStarted: async (
+                updatedExamination,
+                { dispatch, queryFulfilled }
+            ) => {
+                queryFulfilled
+                    .then(({ data }) => {
+                        dispatch(
+                            examinationApi.util.upsertQueryData(
+                                "getOneExamination",
+                                data.id.toString(),
+                                data
+                            )
+                        );
+                    })
+                    .catch((error) => {
+                        dispatch(setNotification(error, "error", 5));
+                    });
+            },
+        }),
     }),
     keepUnusedDataFor: 240,
 });
 
-export const { useGetOneExaminationQuery, useAddExaminationMutation } =
-    examinationApi;
+export const {
+    useGetOneExaminationQuery,
+    useAddExaminationMutation,
+    useUpdateExaminationMutation,
+} = examinationApi;

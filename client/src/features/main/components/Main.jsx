@@ -24,6 +24,7 @@ import EncounterEditForm from "../../encounter/components/EncounterEditForm";
 // Examination
 import Examination from "../../examination/components/Examination";
 import ExaminationCreateForm from "../../examination/components/ExaminationCreateForm";
+import ExaminationEditForm from "../../examination/components/ExaminationEditForm";
 
 const Main = () => {
     return (
@@ -67,6 +68,10 @@ const Main = () => {
                     <Route
                         path="/patient/:patientId/encounter/:encounterId/examination/create"
                         element={<ExaminationCreateForm />}
+                    />
+                    <Route
+                        path="/patient/:patientId/encounter/:encounterId/examination/edit"
+                        element={<ExaminationEditForm />}
                     />
                 </Routes>
             </div>
