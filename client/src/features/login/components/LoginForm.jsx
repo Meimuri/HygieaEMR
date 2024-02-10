@@ -4,8 +4,7 @@ import { joiResolver } from "@hookform/resolvers/joi";
 
 import schema from "../schema/";
 import { handleLogin } from "../../../redux/reducers/login";
-
-// import Header from "../../../common/components/Header";
+import { APP_USER } from "../../../common/data/constants";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
@@ -45,6 +44,7 @@ const LoginForm = () => {
                             <div className="mt-2">
                                 <input
                                     {...register("username")}
+                                    value={APP_USER.username}
                                     className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -65,6 +65,7 @@ const LoginForm = () => {
                                 <input
                                     type="password"
                                     {...register("password")}
+                                    value={APP_USER.password}
                                     className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                                 <p className="mt-2 text-sm text-red-600 dark:text-red-500">

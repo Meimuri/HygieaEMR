@@ -50,6 +50,8 @@ export const NAVIGATION_MENU = [
 export const NAVIGATION_SUB_MENU = [{ name: "Sign out", href: "#" }];
 
 export const APP_USER = {
+    username: "doctor",
+    password: "Qweasd!2",
     name: "John Doe",
     email: "john@doe.com",
     imageUrl: "/profile-photo.jpg",
