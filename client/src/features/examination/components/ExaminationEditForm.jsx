@@ -1,45 +1,60 @@
 // External Libraries
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 
+// Schema
+import schema from "../schema/";
+
 // API query imports
+import {
+    useGetOneExaminationQuery,
+    useUpdateExaminationMutation,
+} from "../../../redux/api/examination";
 import { useGetLocationsQuery } from "../../../redux/api/location";
-import { useGetDoctorsQuery } from "../../../redux/api/doctor";
-import { useAddEncounterMutation } from "../../../redux/api/encounter";
 import { setNotification } from "../../../redux/reducers/notification";
 
-// Schema import
-import schema from "../../encounter/schema";
+// Utils
+import { adjustExaminationResponse } from "../../../common/utils/adjustExaminationResponse";
 
-// Common component imports
+// Components
 import Breadcrumb from "../../../common/components/Breadcrumb";
 import Header from "../../../common/components/Header";
-import EncounterCreateSkeleton from "../../../common/skeleton/EncounterCreateSkeleton";
+import ExaminationEditSkeleton from "../../../common/skeleton/ExaminationEditSkeleton";
 
-// Constants
-import {
-    ENCOUNTER_CLASS,
-    ENCOUNTER_STATUS,
-} from "../../../common/data/constants";
-
-const EncounterCreateForm = () => {
+const ExaminationEditForm = () => {
+    const { patientId, encounterId } = useParams();
     const dispatch = useDispatch();
-    const { patientId } = useParams();
     const navigate = useNavigate();
+    const [updateExamination] = useUpdateExaminationMutation();
+
+    const { data: examination, isLoading: examinationIsLoading } =
+        useGetOneExaminationQuery(encounterId);
+
     const { data: locations, isLoading: locationIsLoading } =
         useGetLocationsQuery();
-    const { data: doctors, isLoading: doctorIsLoading } = useGetDoctorsQuery();
-    const [addEncounter] = useAddEncounterMutation();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset,
     } = useForm({
         resolver: joiResolver(schema),
     });
+
+    useEffect(() => {
+        if (examination) {
+            const examinationToUpdate = adjustExaminationResponse(examination);
+            reset(examinationToUpdate);
+        }
+    }, [examination, reset]);
+
+    const goBack = () => {
+        navigate(`/patient/${patientId}/encounter/${encounterId}/examination`);
+    };
 
     const cleanData = (data) => {
         for (let field in data) {
@@ -56,27 +71,26 @@ const EncounterCreateForm = () => {
     };
 
     const onSubmit = async (data) => {
-        data.patientId = parseInt(patientId);
+        const examinationId = examination.id;
+        data.encounterId = parseInt(encounterId);
         data.date = data.date.toISOString().substr(0, 10);
         data = cleanData(data);
 
-        addEncounter(data)
+        updateExamination({ examinationId, updatedExamination: data })
             .unwrap()
-            .then((payload) => {
-                navigate(`/patient/${patientId}/encounter/${payload.id}`);
+            .then(() => {
+                navigate(
+                    `/patient/${patientId}/encounter/${encounterId}/examination`
+                );
             })
             .catch((error) => {
                 dispatch(setNotification(error, "error", 5));
             });
     };
 
-    const goBack = () => {
-        navigate(`/patient/${patientId}/encounter`);
-    };
-
     return (
         <>
-            <Header text="Create New Encounter" />
+            <Header text="Edit Examination" />
             <Breadcrumb
                 breadcrumbs={[
                     { path: "/patient", name: "Patients" },
@@ -86,13 +100,21 @@ const EncounterCreateForm = () => {
                         name: "Encounters",
                     },
                     {
+                        path: `/patient/${patientId}/encounter/${encounterId}`,
+                        name: "View Encounter",
+                    },
+                    {
+                        path: `/patient/${patientId}/encounter/${encounterId}/examination/`,
+                        name: "Examination",
+                    },
+                    {
                         path: "",
-                        name: "Create New Encounter",
+                        name: "Edit Examination",
                     },
                 ]}
             />
-            {locationIsLoading || doctorIsLoading ? (
-                <EncounterCreateSkeleton />
+            {examinationIsLoading || locationIsLoading ? (
+                <ExaminationEditSkeleton />
             ) : (
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     <div className="px-4 py-6 sm:px-0">
@@ -101,14 +123,16 @@ const EncounterCreateForm = () => {
                                 <div className="space-y-12">
                                     <div className="border-b border-gray-900/10 pb-12">
                                         <h2 className="text-base font-semibold leading-7 text-gray-900">
-                                            Encounter Details
+                                            Examination Details
                                         </h2>
                                         <p className="mt-1 text-sm leading-6 text-gray-600">
-                                            Summary of the patient&apos;s visit
+                                            Comprehensive overview of the
+                                            patient&apos;s physical examination
+                                            conducted during the visit.
                                         </p>
 
                                         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                                            <div className="sm:col-span-2 sm:col-start-1">
+                                            <div className="sm:col-span-3 sm:col-start-1">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
                                                     Date
                                                 </label>
@@ -131,121 +155,6 @@ const EncounterCreateForm = () => {
 
                                                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                                         {errors.date?.message}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div className="sm:col-span-2">
-                                                <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Class
-                                                </label>
-                                                <div className="mt-2">
-                                                    <select
-                                                        {...register("class")}
-                                                        className="block w-full h-9 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    >
-                                                        {ENCOUNTER_CLASS.map(
-                                                            (
-                                                                encounterClass,
-                                                                index
-                                                            ) => (
-                                                                <option
-                                                                    key={index}
-                                                                    value={
-                                                                        encounterClass
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        encounterClass
-                                                                    }
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-
-                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                        {errors.class?.message}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div className="sm:col-span-2">
-                                                <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Status
-                                                </label>
-                                                <div className="mt-2">
-                                                    <select
-                                                        {...register("status")}
-                                                        className="block w-full h-9 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    >
-                                                        {ENCOUNTER_STATUS.map(
-                                                            (
-                                                                encounterStatus,
-                                                                index
-                                                            ) => (
-                                                                <option
-                                                                    key={index}
-                                                                    value={
-                                                                        encounterStatus
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        encounterStatus
-                                                                    }
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-
-                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                        {errors.status?.message}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div className="sm:col-span-3">
-                                                <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Physician
-                                                </label>
-                                                <div className="mt-2">
-                                                    <select
-                                                        {...register(
-                                                            "doctorId"
-                                                        )}
-                                                        className="block w-full h-9 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    >
-                                                        {doctors.map(
-                                                            (doctor) => (
-                                                                <option
-                                                                    key={
-                                                                        doctor.id
-                                                                    }
-                                                                    value={
-                                                                        doctor.id
-                                                                    }
-                                                                >
-                                                                    Dr.{" "}
-                                                                    {
-                                                                        doctor.firstName
-                                                                    }{" "}
-                                                                    {
-                                                                        doctor.lastName
-                                                                    }{" "}
-                                                                    (
-                                                                    {
-                                                                        doctor.specialization
-                                                                    }
-                                                                    )
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-
-                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                        {
-                                                            errors.doctorId
-                                                                ?.message
-                                                        }
                                                     </p>
                                                 </div>
                                             </div>
@@ -290,20 +199,19 @@ const EncounterCreateForm = () => {
 
                                             <div className="sm:col-span-3">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Reason for visit
+                                                    Subjective
                                                 </label>
                                                 <div className="mt-2">
-                                                    <input
+                                                    <textarea
                                                         {...register(
-                                                            "reasonForVisit"
+                                                            "subjective"
                                                         )}
-                                                        className="block w-full rounded-md border-0 px-3  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    />
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
 
                                                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                                         {
-                                                            errors
-                                                                .reasonForVisit
+                                                            errors.subjective
                                                                 ?.message
                                                         }
                                                     </p>
@@ -312,20 +220,77 @@ const EncounterCreateForm = () => {
 
                                             <div className="sm:col-span-3">
                                                 <label className="block text-sm font-medium leading-6 text-gray-900">
-                                                    Chief Complaint
+                                                    Objective
                                                 </label>
                                                 <div className="mt-2">
-                                                    <input
+                                                    <textarea
                                                         {...register(
-                                                            "chiefComplaint"
+                                                            "objective"
                                                         )}
-                                                        className="block w-full rounded-md border-0 px-3  py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    />
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
 
                                                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                                         {
-                                                            errors
-                                                                .chiefComplaint
+                                                            errors.objective
+                                                                ?.message
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-3">
+                                                <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                    Assessment
+                                                </label>
+                                                <div className="mt-2">
+                                                    <textarea
+                                                        {...register(
+                                                            "assessment"
+                                                        )}
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
+
+                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                                        {
+                                                            errors.assessment
+                                                                ?.message
+                                                        }
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="sm:col-span-3">
+                                                <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                    Plan
+                                                </label>
+                                                <div className="mt-2">
+                                                    <textarea
+                                                        {...register("plan")}
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
+
+                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                                        {errors.plan?.message}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-span-full">
+                                                <label className="block text-sm font-medium leading-6 text-gray-900">
+                                                    Diagnosis
+                                                </label>
+                                                <div className="mt-2">
+                                                    <textarea
+                                                        {...register(
+                                                            "diagnosis"
+                                                        )}
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
+
+                                                    <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                                                        {
+                                                            errors.diagnosis
                                                                 ?.message
                                                         }
                                                     </p>
@@ -337,10 +302,10 @@ const EncounterCreateForm = () => {
                                                     Notes
                                                 </label>
                                                 <div className="mt-2">
-                                                    <input
+                                                    <textarea
                                                         {...register("notes")}
-                                                        className="block w-full rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                    />
+                                                        className="block w-full h-24 rounded-md border-0 px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                    ></textarea>
 
                                                     <p className="mt-2 text-sm text-red-600 dark:text-red-500">
                                                         {errors.notes?.message}
@@ -363,7 +328,7 @@ const EncounterCreateForm = () => {
                                         type="submit"
                                         className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                     >
-                                        Create Encounter
+                                        Edit Examination
                                     </button>
                                 </div>
                             </form>
@@ -375,4 +340,4 @@ const EncounterCreateForm = () => {
     );
 };
 
-export default EncounterCreateForm;
+export default ExaminationEditForm;

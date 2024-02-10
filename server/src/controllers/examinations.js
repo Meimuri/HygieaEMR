@@ -17,6 +17,10 @@ const {
     validateUpdateExamination,
 } = require("../utils/middleware/");
 
+const {
+    returnUpdatedExamination,
+} = require("../utils/helper/examination_helper");
+
 router.get("/", userExtractor, async (_req, res) => {
     const examinations = await Examination.findAll({
         attributes: {
@@ -111,7 +115,8 @@ router.put(
         });
 
         if (result) {
-            return res.json(result);
+            const returnExamination = await returnUpdatedExamination(result.id);
+            return res.json(returnExamination);
         } else {
             return res.status(404).json({ error: "Examination not found" });
         }
